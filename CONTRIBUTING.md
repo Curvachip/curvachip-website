@@ -34,8 +34,8 @@ Large design changes, branding updates, or architectural changes generally requi
 ### Getting Started
 
 ```bash
-git clone https://github.com/<your-org>/<repo>.git
-cd <repo>
+git clone https://github.com/Curvachip/curvachip-website.git
+cd curvachip-website
 npm install
 npm run dev
 ```
