@@ -1,4 +1,3 @@
-
 ---
 // src/pages/index.astro
 // HOME PAGE
@@ -8,28 +7,32 @@
 // and wrap the body content in <Layout title="..." description="...">.
 // ─────────────────────────────────────────────────────────────
 
-const title       = "Software Development for Apple Platforms | Curvachip";
-const description = "Curvachip LLC crafts exceptional, privacy-first software for Apple platforms. Built by an indie developer who believes great apps should be secure, beautiful, and honest.";
+const title = "Software Development for Apple Platforms | Curvachip";
+const description =
+  "Curvachip LLC crafts exceptional, privacy-first software for Apple platforms. Built by an indie developer who believes great apps should be secure, beautiful, and honest.";
 
 const apps = [
   {
     name: "Shadow Task",
     tagline: "Focus & Track",
-    blurb: "A Pomodoro timer with identifiable tasks, progress tracking, and personal quote prompts — all stored entirely on-device.",
+    blurb:
+      "A Pomodoro timer with identifiable tasks, progress tracking, and personal quote prompts — all stored entirely on-device.",
     href: "/shadow-task",
     emoji: "🌑",
   },
   {
     name: "TipZap",
     tagline: "Tip Calculator",
-    blurb: "Split dinner costs, round totals, and calculate tips in seconds. The number pad is built right in.",
+    blurb:
+      "Split dinner costs, round totals, and calculate tips in seconds. The number pad is built right in.",
     href: "/tipzap",
     emoji: "⚡",
   },
   {
     name: "StoneClip",
     tagline: "Rock Identifier",
-    blurb: "Point your camera at any rock and get an AI-powered identification with full geological context, instantly.",
+    blurb:
+      "Point your camera at any rock and get an AI-powered identification with full geological context, instantly.",
     href: "/stoneclip-rock-identifier",
     emoji: "🪨",
   },
@@ -54,152 +57,219 @@ const values = [
 ];
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://curvachip.com/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="canonical" href="https://curvachip.com/" />
-</head>
-<body>
-
-<!-- ── NAV ─────────────────────────────────────────────────── -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Curvachip home">
-      <span class="logo-chip" aria-hidden="true">◈</span>
-      <span class="logo-text">Curvachip</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/" class="nav-link active">Home</a></li>
-      <li><a href="/apps" class="nav-link">Apps</a></li>
-      <li><a href="/privacy" class="nav-link">Privacy</a></li>
-      <li><a href="/contact" class="nav-link">Contact</a></li>
-      <li><a href="/about" class="nav-link">About</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- ── HERO ────────────────────────────────────────────────── -->
-<section class="hero">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="container hero-content">
-    <p class="eyebrow">Apple Platforms · Est. 2024</p>
-    <h1 class="hero-title">Software built<br /><em>around&nbsp;you</em></h1>
-    <p class="hero-sub">
-      Curvachip distributes privacy-first apps on the App Store — designed for clarity,
-      built with care, and shaped by the people who use them.
-    </p>
-    <div class="hero-cta">
-      <a href="/apps" class="btn btn-primary">Explore Apps</a>
-      <a href="/about" class="btn btn-ghost">Our Story</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── VALUES ──────────────────────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title">What we stand for</h2>
-    <div class="values-grid">
-      {values.map((v) => (
-        <div class="value-card">
-          <span class="value-icon" aria-hidden="true">{v.icon}</span>
-          <h3 class="value-label">{v.label}</h3>
-          <p class="value-body">{v.body}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-<!-- ── FEATURED APPS ───────────────────────────────────────── -->
-<section class="section section-alt">
-  <div class="container">
-    <h2 class="section-title">Featured apps</h2>
-    <p class="section-sub">Every app is built for a purpose — vetted, designed, and submitted to the App Store with intention.</p>
-    <div class="apps-grid">
-      {apps.map((app) => (
-        <a href={app.href} class="app-card">
-          <span class="app-emoji" aria-hidden="true">{app.emoji}</span>
-          <div>
-            <p class="app-tagline">{app.tagline}</p>
-            <h3 class="app-name">{app.name}</h3>
-            <p class="app-blurb">{app.blurb}</p>
-          </div>
-          <span class="app-arrow" aria-hidden="true">→</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://curvachip.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="canonical" href="https://curvachip.com/" />
+  </head>
+  <body>
+    <!-- ── NAV ─────────────────────────────────────────────────── -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo" aria-label="Curvachip home">
+          <img
+            src="/graphiclogodark.svg"
+            alt="Curvachip logo"
+            class="logo-chip"
+          />
+          <span class="logo-text">Curvachip</span>
         </a>
-      ))}
-    </div>
-    <div class="cta-row">
-      <a href="/apps" class="btn btn-primary">See all apps</a>
-    </div>
-  </div>
-</section>
-
-<!-- ── TESTIMONIAL ─────────────────────────────────────────── -->
-<section class="section">
-  <div class="container testimonial-wrap">
-    <blockquote class="testimonial">
-      <p class="testimonial-quote">
-        "We all enjoyed and appreciated Michael's preparation, his earnest interest in listening,
-        and his thoughtful dialogue … he is ready to GO!"
-      </p>
-      <footer class="testimonial-footer">
-        <cite>
-          Cathy Hayes — <a href="https://www.hayesstudio.com/home" target="_blank" rel="noopener">Hayes Inc.</a>
-        </cite>
-      </footer>
-    </blockquote>
-  </div>
-</section>
-
-<!-- ── FOOTER ──────────────────────────────────────────────── -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="logo-chip" aria-hidden="true">◈</span>
-      <span class="logo-text">Curvachip</span>
-      <p class="footer-tagline">Crafting exceptional software for Apple platforms.</p>
-    </div>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="/" class="footer-link">Home</a>
-      <a href="/apps" class="footer-link">Apps</a>
-      <a href="/privacy" class="footer-link">Privacy</a>
-      <a href="/contact" class="footer-link">Contact</a>
-      <a href="/about" class="footer-link">About</a>
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link active">Home</a></li>
+          <li><a href="/apps" class="nav-link">Apps</a></li>
+          <li><a href="/privacy" class="nav-link">Privacy</a></li>
+          <li><a href="/contact" class="nav-link">Contact</a></li>
+          <li><a href="/about" class="nav-link">About</a></li>
+        </ul>
+      </div>
     </nav>
-    <div class="footer-social">
-      <a href="https://github.com/Curvachip" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">GH</a>
-      <a href="https://x.com/curvachip" class="social-link" target="_blank" rel="noopener" aria-label="X / Twitter">𝕏</a>
-      <a href="https://www.linkedin.com/company/curvachip" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-      <a href="https://www.instagram.com/curvachip/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-      <a href="https://www.youtube.com/@curvachip" class="social-link" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
-      <a href="mailto:developer@curvachip.com" class="social-link" aria-label="Email">@</a>
-    </div>
-    <p class="footer-legal">
-      Copyright © 2026 Curvachip LLC. All rights reserved.<br />
-      <small>Apple is a trademark of Apple Inc. and is not affiliated with Curvachip LLC.</small>
-    </p>
-    <div class="footer-policy-links">
-      <a href="/privacy-policy-curvachip" class="footer-link">Privacy Policy</a>
-      <span aria-hidden="true">·</span>
-      <a href="/terms-and-conditions-curvachip" class="footer-link">Terms of Use</a>
-    </div>
-  </div>
-</footer>
 
-</body>
+    <!-- ── HERO ────────────────────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-content">
+        <p class="eyebrow">Apple Platforms · Est. 2024</p>
+        <h1 class="hero-title">Software built<br /><em>around&nbsp;you</em></h1>
+        <p class="hero-sub">
+          Curvachip distributes privacy-first apps on the App Store — designed
+          for clarity, built with care, and shaped by the people who use them.
+        </p>
+        <div class="hero-cta">
+          <a href="/apps" class="btn btn-primary">Explore Apps</a>
+          <a href="/about" class="btn btn-ghost">Our Story</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VALUES ──────────────────────────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">What we stand for</h2>
+        <div class="values-grid">
+          {
+            values.map((v) => (
+              <div class="value-card">
+                <span class="value-icon" aria-hidden="true">
+                  {v.icon}
+                </span>
+                <h3 class="value-label">{v.label}</h3>
+                <p class="value-body">{v.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURED APPS ───────────────────────────────────────── -->
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Featured apps</h2>
+        <p class="section-sub">
+          Every app is built for a purpose — vetted, designed, and submitted to
+          the App Store with intention.
+        </p>
+        <div class="apps-grid">
+          {
+            apps.map((app) => (
+              <a href={app.href} class="app-card">
+                <span class="app-emoji" aria-hidden="true">
+                  {app.emoji}
+                </span>
+                <div>
+                  <p class="app-tagline">{app.tagline}</p>
+                  <h3 class="app-name">{app.name}</h3>
+                  <p class="app-blurb">{app.blurb}</p>
+                </div>
+                <span class="app-arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            ))
+          }
+        </div>
+        <div class="cta-row">
+          <a href="/apps" class="btn btn-primary">See all apps</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIAL ─────────────────────────────────────────── -->
+    <section class="section">
+      <div class="container testimonial-wrap">
+        <blockquote class="testimonial">
+          <p class="testimonial-quote">
+            "We all enjoyed and appreciated Michael's preparation, his earnest
+            interest in listening, and his thoughtful dialogue … he is ready to
+            GO!"
+          </p>
+          <footer class="testimonial-footer">
+            <cite>
+              Cathy Hayes — <a
+                href="https://www.hayesstudio.com/home"
+                target="_blank"
+                rel="noopener">Hayes Inc.</a
+              >
+            </cite>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ── FOOTER ──────────────────────────────────────────────── -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="logo-chip" aria-hidden="true">◈</span>
+          <span class="logo-text">Curvachip</span>
+          <p class="footer-tagline">
+            Crafting exceptional software for Apple platforms.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="/" class="footer-link">Home</a>
+          <a href="/apps" class="footer-link">Apps</a>
+          <a href="/privacy" class="footer-link">Privacy</a>
+          <a href="/contact" class="footer-link">Contact</a>
+          <a href="/about" class="footer-link">About</a>
+        </nav>
+        <div class="footer-social">
+          <a
+            href="https://github.com/Curvachip"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub">GH</a
+          >
+          <a
+            href="https://x.com/curvachip"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            aria-label="X / Twitter">𝕏</a
+          >
+          <a
+            href="https://www.linkedin.com/company/curvachip"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn">in</a
+          >
+          <a
+            href="https://www.instagram.com/curvachip/"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            aria-label="Instagram">IG</a
+          >
+          <a
+            href="https://www.youtube.com/@curvachip"
+            class="social-link"
+            target="_blank"
+            rel="noopener"
+            aria-label="YouTube">YT</a
+          >
+          <a
+            href="mailto:developer@curvachip.com"
+            class="social-link"
+            aria-label="Email">@</a
+          >
+        </div>
+        <p class="footer-legal">
+          Copyright © 2026 Curvachip LLC. All rights reserved.<br />
+          <small
+            >Apple is a trademark of Apple Inc. and is not affiliated with
+            Curvachip LLC.</small
+          >
+        </p>
+        <div class="footer-policy-links">
+          <a href="/privacy-policy-curvachip" class="footer-link"
+            >Privacy Policy</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="/terms-and-conditions-curvachip" class="footer-link"
+            >Terms of Use</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -212,33 +282,46 @@ const values = [
 <style is:global>
   /* ── TOKENS ── */
   :root {
-    --cc-bg:        #080810;
-    --cc-surface:   #10101E;
-    --cc-border:    #1C1C32;
-    --cc-blue:      #5B9CF6;
-    --cc-blue-dim:  rgba(91, 156, 246, 0.12);
-    --cc-violet:    #A78BFA;
-    --cc-text:      #E8E8F0;
-    --cc-muted:     #6A6A88;
-    --cc-radius:    12px;
-    --cc-max:       1120px;
+    --cc-bg: #080810;
+    --cc-surface: #10101e;
+    --cc-border: #1c1c32;
+    --cc-blue: #5b9cf6;
+    --cc-blue-dim: rgba(91, 156, 246, 0.12);
+    --cc-violet: #a78bfa;
+    --cc-text: #e8e8f0;
+    --cc-muted: #6a6a88;
+    --cc-radius: 12px;
+    --cc-max: 1120px;
   }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 
   body {
     background: var(--cc-bg);
     color: var(--cc-text);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
     font-size: 1rem;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
 
-  a { color: inherit; text-decoration: none; }
-  em { font-style: italic; }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  em {
+    font-style: italic;
+  }
 
   /* ── LAYOUT ── */
   .container {
@@ -276,10 +359,13 @@ const values = [
     letter-spacing: -0.01em;
     color: var(--cc-text);
   }
+  .logo-text {
+    font-weight: 600;
+  }
   .logo-chip {
-    color: var(--cc-blue);
-    font-size: 1.2rem;
-    line-height: 1;
+    height: 20px;
+    width: auto;
+    display: block;
   }
   .nav-links {
     display: flex;
@@ -291,14 +377,19 @@ const values = [
     border-radius: 6px;
     font-size: 0.875rem;
     color: var(--cc-muted);
-    transition: color 0.15s, background 0.15s;
+    transition:
+      color 0.15s,
+      background 0.15s;
   }
-  .nav-link:hover, .nav-link.active {
+  .nav-link:hover,
+  .nav-link.active {
     color: var(--cc-text);
-    background: rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.06);
   }
   @media (max-width: 600px) {
-    .nav-links { display: none; }
+    .nav-links {
+      display: none;
+    }
   }
 
   /* ── BUTTONS ── */
@@ -310,30 +401,44 @@ const values = [
     border-radius: 8px;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+    transition:
+      opacity 0.15s,
+      transform 0.15s,
+      box-shadow 0.15s;
     cursor: pointer;
     border: none;
   }
-  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
   .btn-primary {
     background: var(--cc-blue);
-    color: #07070F;
-    box-shadow: 0 0 20px rgba(91,156,246,0.3);
+    color: #07070f;
+    box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);
   }
-  .btn-primary:hover { box-shadow: 0 0 28px rgba(91,156,246,0.45); }
+  .btn-primary:hover {
+    box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
+  }
   .btn-ghost {
     background: transparent;
     color: var(--cc-text);
     border: 1px solid var(--cc-border);
   }
-  .btn-ghost:hover { border-color: var(--cc-blue); color: var(--cc-blue); }
+  .btn-ghost:hover {
+    border-color: var(--cc-blue);
+    color: var(--cc-blue);
+  }
   .btn-store {
     background: var(--cc-surface);
     color: var(--cc-blue);
     border: 1px solid var(--cc-border);
     font-size: 0.825rem;
   }
-  .btn-store:hover { background: var(--cc-blue-dim); border-color: var(--cc-blue); }
+  .btn-store:hover {
+    background: var(--cc-blue-dim);
+    border-color: var(--cc-blue);
+  }
 
   /* ── HERO ── */
   .hero {
@@ -346,14 +451,27 @@ const values = [
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(circle at 50% 0%, rgba(91,156,246,0.06) 0%, transparent 65%),
-      linear-gradient(rgba(91,156,246,0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(91,156,246,0.035) 1px, transparent 1px);
-    background-size: auto, 44px 44px, 44px 44px;
-    mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 40%, transparent 100%);
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(91, 156, 246, 0.06) 0%,
+        transparent 65%
+      ),
+      linear-gradient(rgba(91, 156, 246, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91, 156, 246, 0.035) 1px, transparent 1px);
+    background-size:
+      auto,
+      44px 44px,
+      44px 44px;
+    mask-image: radial-gradient(
+      ellipse 80% 70% at 50% 0%,
+      black 40%,
+      transparent 100%
+    );
     pointer-events: none;
   }
-  .hero-content { position: relative; }
+  .hero-content {
+    position: relative;
+  }
   .eyebrow {
     display: inline-block;
     font-size: 0.75rem;
@@ -363,13 +481,16 @@ const values = [
     color: var(--cc-blue);
     margin-bottom: 1.5rem;
     padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(91,156,246,0.25);
+    border: 1px solid rgba(91, 156, 246, 0.25);
     border-radius: 99px;
-    background: rgba(91,156,246,0.07);
+    background: rgba(91, 156, 246, 0.07);
   }
   .hero-title {
     font-size: clamp(2.8rem, 7vw, 5.2rem);
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-weight: 700;
     letter-spacing: -0.035em;
     line-height: 1.08;
@@ -401,9 +522,14 @@ const values = [
   .section {
     padding: clamp(4rem, 9vw, 7rem) 0;
   }
-  .section-alt { background: var(--cc-surface); }
+  .section-alt {
+    background: var(--cc-surface);
+  }
   .section-title {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-size: clamp(1.6rem, 4vw, 2.4rem);
     font-weight: 700;
     letter-spacing: -0.025em;
@@ -428,11 +554,13 @@ const values = [
     border: 1px solid var(--cc-border);
     border-radius: var(--cc-radius);
     padding: 2rem 1.75rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
   }
   .value-card:hover {
-    border-color: rgba(91,156,246,0.4);
-    box-shadow: 0 0 24px rgba(91,156,246,0.07);
+    border-color: rgba(91, 156, 246, 0.4);
+    box-shadow: 0 0 24px rgba(91, 156, 246, 0.07);
   }
   .value-icon {
     display: block;
@@ -442,13 +570,19 @@ const values = [
     line-height: 1;
   }
   .value-label {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-weight: 600;
     font-size: 1.05rem;
     margin-bottom: 0.6rem;
     letter-spacing: -0.01em;
   }
-  .value-body { color: var(--cc-muted); font-size: 0.9rem; }
+  .value-body {
+    color: var(--cc-muted);
+    font-size: 0.9rem;
+  }
 
   /* ── APPS GRID ── */
   .apps-grid {
@@ -466,12 +600,14 @@ const values = [
     border: 1px solid var(--cc-border);
     border-radius: var(--cc-radius);
     padding: 1.5rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
     cursor: pointer;
   }
   .app-card:hover {
-    border-color: rgba(91,156,246,0.4);
-    box-shadow: 0 0 20px rgba(91,156,246,0.08);
+    border-color: rgba(91, 156, 246, 0.4);
+    box-shadow: 0 0 20px rgba(91, 156, 246, 0.08);
   }
   .app-emoji {
     font-size: 1.75rem;
@@ -487,21 +623,34 @@ const values = [
     margin-bottom: 0.2rem;
   }
   .app-name {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: -0.01em;
     margin-bottom: 0.4rem;
   }
-  .app-blurb { color: var(--cc-muted); font-size: 0.85rem; }
+  .app-blurb {
+    color: var(--cc-muted);
+    font-size: 0.85rem;
+  }
   .app-arrow {
     color: var(--cc-muted);
     margin-top: 0.25rem;
-    transition: color 0.15s, transform 0.15s;
+    transition:
+      color 0.15s,
+      transform 0.15s;
   }
-  .app-card:hover .app-arrow { color: var(--cc-blue); transform: translateX(3px); }
+  .app-card:hover .app-arrow {
+    color: var(--cc-blue);
+    transform: translateX(3px);
+  }
 
-  .cta-row { text-align: center; }
+  .cta-row {
+    text-align: center;
+  }
 
   /* ── TESTIMONIAL ── */
   .testimonial-wrap {
@@ -523,7 +672,9 @@ const values = [
     font-size: 0.875rem;
     color: var(--cc-muted);
   }
-  .testimonial-footer a { color: var(--cc-blue); }
+  .testimonial-footer a {
+    color: var(--cc-blue);
+  }
 
   /* ── FOOTER ── */
   .footer {
@@ -547,7 +698,8 @@ const values = [
     width: 100%;
     margin-top: 0.25rem;
   }
-  .footer-links, .footer-social {
+  .footer-links,
+  .footer-social {
     display: flex;
     gap: 0.25rem;
     flex-wrap: wrap;
@@ -559,7 +711,9 @@ const values = [
     border-radius: 4px;
     transition: color 0.15s;
   }
-  .footer-link:hover { color: var(--cc-text); }
+  .footer-link:hover {
+    color: var(--cc-text);
+  }
   .social-link {
     display: inline-flex;
     align-items: center;
@@ -571,9 +725,14 @@ const values = [
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--cc-muted);
-    transition: color 0.15s, border-color 0.15s;
+    transition:
+      color 0.15s,
+      border-color 0.15s;
   }
-  .social-link:hover { color: var(--cc-blue); border-color: var(--cc-blue); }
+  .social-link:hover {
+    color: var(--cc-blue);
+    border-color: var(--cc-blue);
+  }
   .footer-legal {
     font-size: 0.78rem;
     color: var(--cc-muted);
@@ -589,6 +748,11 @@ const values = [
 
   /* ── REDUCED MOTION ── */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; animation: none !important; }
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
+      animation: none !important;
+    }
   }
 </style>

@@ -13,362 +13,897 @@
 //   3. Add method="POST" and remove the mailto href
 // ─────────────────────────────────────────────────────────────
 
-const title       = "Contact the Developer | Curvachip";
-const description = "Reach out to Curvachip with app feedback, bug reports, business enquiries, or technical questions. We read every email and respond promptly.";
+const title = "Contact the Developer | Curvachip";
+const description =
+    "Reach out to Curvachip with app feedback, bug reports, business enquiries, or technical questions. We read every email and respond promptly.";
 
 const socials = [
-  { label: "Email",     href: "mailto:developer@curvachip.com", abbr: "@",  display: "developer@curvachip.com" },
-  { label: "GitHub",    href: "https://github.com/Curvachip",             abbr: "GH", display: "Curvachip" },
-  { label: "LinkedIn",  href: "https://www.linkedin.com/company/curvachip", abbr: "in", display: "Curvachip LLC" },
-  { label: "X / Twitter", href: "https://x.com/curvachip",               abbr: "𝕏",  display: "@curvachip" },
-  { label: "Instagram", href: "https://www.instagram.com/curvachip/",     abbr: "IG", display: "@curvachip" },
-  { label: "YouTube",   href: "https://www.youtube.com/@curvachip",       abbr: "YT", display: "@curvachip" },
-  { label: "TikTok",    href: "https://www.tiktok.com/@curvachip",        abbr: "TK", display: "@curvachip" },
-  { label: "App Store", href: "https://apps.apple.com/developer/michael-sharman/id1774903560", abbr: "🍎", display: "Michael Sharman" },
-  { label: "Spotify",   href: "https://open.spotify.com/user/31dvsb5yckqhavs7rhxm7ow6g7ny", abbr: "♪",  display: "Curvachip" },
+    {
+        label: "Email",
+        href: "mailto:developer@curvachip.com",
+        abbr: "@",
+        display: "developer@curvachip.com",
+    },
+    {
+        label: "GitHub",
+        href: "https://github.com/Curvachip",
+        abbr: "GH",
+        display: "Curvachip",
+    },
+    {
+        label: "LinkedIn",
+        href: "https://www.linkedin.com/company/curvachip",
+        abbr: "in",
+        display: "Curvachip LLC",
+    },
+    {
+        label: "X / Twitter",
+        href: "https://x.com/curvachip",
+        abbr: "𝕏",
+        display: "@curvachip",
+    },
+    {
+        label: "Instagram",
+        href: "https://www.instagram.com/curvachip/",
+        abbr: "IG",
+        display: "@curvachip",
+    },
+    {
+        label: "YouTube",
+        href: "https://www.youtube.com/@curvachip",
+        abbr: "YT",
+        display: "@curvachip",
+    },
+    {
+        label: "TikTok",
+        href: "https://www.tiktok.com/@curvachip",
+        abbr: "TK",
+        display: "@curvachip",
+    },
+    {
+        label: "App Store",
+        href: "https://apps.apple.com/developer/michael-sharman/id1774903560",
+        abbr: "🍎",
+        display: "Michael Sharman",
+    },
+    {
+        label: "Spotify",
+        href: "https://open.spotify.com/user/31dvsb5yckqhavs7rhxm7ow6g7ny",
+        abbr: "♪",
+        display: "Curvachip",
+    },
 ];
 
 const reasons = [
-  { icon: "🐞", label: "Bug reports", body: "Found something broken in one of our apps? Tell us exactly what happened and which device you're on." },
-  { icon: "⭐", label: "App feedback", body: "A feature you'd love to see, a design detail that confused you, or just general praise — we read it all." },
-  { icon: "💼", label: "Business enquiries", body: "Partnerships, press, or collaboration opportunities — reach out and let's talk." },
-  { icon: "🛠", label: "Technical questions", body: "Questions about Swift, SwiftUI, or Apple development? We're happy to point you in the right direction." },
+    {
+        icon: "🐞",
+        label: "Bug reports",
+        body: "Found something broken in one of our apps? Tell us exactly what happened and which device you're on.",
+    },
+    {
+        icon: "⭐",
+        label: "App feedback",
+        body: "A feature you'd love to see, a design detail that confused you, or just general praise — we read it all.",
+    },
+    {
+        icon: "💼",
+        label: "Business enquiries",
+        body: "Partnerships, press, or collaboration opportunities — reach out and let's talk.",
+    },
+    {
+        icon: "🛠",
+        label: "Technical questions",
+        body: "Questions about Swift, SwiftUI, or Apple development? We're happy to point you in the right direction.",
+    },
 ];
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://curvachip.com/contact" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="canonical" href="https://curvachip.com/contact" />
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://curvachip.com/contact" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="canonical" href="https://curvachip.com/contact" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    </head>
+    <body>
+        <!-- ── NAV ── -->
+        <nav class="nav">
+            <div class="nav-inner">
+                <a href="/" class="nav-logo" aria-label="Curvachip home">
+                    <img
+                        src="/graphiclogodark.svg"
+                        alt="Curvachip logo"
+                        class="logo-chip"
+                    />
+                    <span class="logo-text">Curvachip</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/apps" class="nav-link">Apps</a></li>
+                    <li><a href="/privacy" class="nav-link">Privacy</a></li>
+                    <li>
+                        <a href="/contact" class="nav-link active">Contact</a>
+                    </li>
+                    <li><a href="/about" class="nav-link">About</a></li>
+                </ul>
+            </div>
+        </nav>
 
-<!-- ── NAV ── -->
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="/" class="nav-logo" aria-label="Curvachip home">
-      <span class="logo-chip" aria-hidden="true">◈</span>
-      <span class="logo-text">Curvachip</span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="/" class="nav-link">Home</a></li>
-      <li><a href="/apps" class="nav-link">Apps</a></li>
-      <li><a href="/privacy" class="nav-link">Privacy</a></li>
-      <li><a href="/contact" class="nav-link active">Contact</a></li>
-      <li><a href="/about" class="nav-link">About</a></li>
-    </ul>
-  </div>
-</nav>
+        <!-- ── HERO ── -->
+        <header class="hero">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <div class="container hero-content">
+                <p class="eyebrow">Get in touch</p>
+                <h1 class="hero-title">We read<br /><em>every email</em></h1>
+                <p class="hero-sub">
+                    Whether you've found a bug, have a feature idea, or just
+                    want to say hello — we're a small team and genuinely care
+                    about what you have to say.
+                </p>
+            </div>
+        </header>
 
-<!-- ── HERO ── -->
-<header class="hero">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="container hero-content">
-    <p class="eyebrow">Get in touch</p>
-    <h1 class="hero-title">We read<br /><em>every email</em></h1>
-    <p class="hero-sub">
-      Whether you've found a bug, have a feature idea, or just want to say hello —
-      we're a small team and genuinely care about what you have to say.
-    </p>
-  </div>
-</header>
+        <!-- ── MAIN CONTENT ── -->
+        <main>
+            <section class="section">
+                <div class="container contact-layout">
+                    <!-- LEFT: FORM -->
+                    <div class="contact-form-col">
+                        <h2 class="col-title">Send a message</h2>
+                        <p class="col-sub">
+                            Fill out the form below and your default mail client
+                            will open with everything pre-filled. Alternatively,
+                            email <a
+                                href="mailto:developer@curvachip.com"
+                                class="inline-link">developer@curvachip.com</a
+                            > directly.
+                        </p>
 
-<!-- ── MAIN CONTENT ── -->
-<main>
-  <section class="section">
-    <div class="container contact-layout">
-
-      <!-- LEFT: FORM -->
-      <div class="contact-form-col">
-        <h2 class="col-title">Send a message</h2>
-        <p class="col-sub">
-          Fill out the form below and your default mail client will open with everything pre-filled.
-          Alternatively, email <a href="mailto:developer@curvachip.com" class="inline-link">developer@curvachip.com</a> directly.
-        </p>
-
-        <!--
+                        <!--
           IMPORTANT: This form uses a mailto: action, which opens the user's mail client.
           To use a real backend form service, see the comment at the top of this file.
         -->
-        <div class="form-shell">
-          <div class="form-group">
-            <label for="contact-name" class="form-label">Your name</label>
-            <input
-              type="text"
-              id="contact-name"
-              name="name"
-              class="form-input"
-              placeholder="Ada Lovelace"
-              autocomplete="name"
-            />
-          </div>
-          <div class="form-group">
-            <label for="contact-email" class="form-label">Email address <span class="required" aria-hidden="true">*</span></label>
-            <input
-              type="email"
-              id="contact-email"
-              name="email"
-              class="form-input"
-              placeholder="you@example.com"
-              autocomplete="email"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="contact-subject" class="form-label">Subject</label>
-            <select id="contact-subject" name="subject" class="form-input form-select">
-              <option value="">Select a reason…</option>
-              <option value="Bug report">Bug report</option>
-              <option value="App feedback">App feedback</option>
-              <option value="Feature request">Feature request</option>
-              <option value="Business enquiry">Business enquiry</option>
-              <option value="Technical question">Technical question</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="contact-message" class="form-label">Message <span class="required" aria-hidden="true">*</span></label>
-            <textarea
-              id="contact-message"
-              name="message"
-              class="form-input form-textarea"
-              placeholder="Tell us what's on your mind…"
-              rows="6"
-              required
-            ></textarea>
-          </div>
-          <!-- mailto submit — JavaScript assembles the mailto link from the form fields -->
-          <button type="button" class="btn btn-primary btn-full" id="send-btn">
-            Send Message
-          </button>
-          <p class="form-note">
-            This button opens your mail client. Your message won't be sent until you press Send in your email app.
-          </p>
-        </div>
-      </div>
+                        <div class="form-shell">
+                            <div class="form-group">
+                                <label for="contact-name" class="form-label"
+                                    >Your name</label
+                                >
+                                <input
+                                    type="text"
+                                    id="contact-name"
+                                    name="name"
+                                    class="form-input"
+                                    placeholder="Ada Lovelace"
+                                    autocomplete="name"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-email" class="form-label"
+                                    >Email address <span
+                                        class="required"
+                                        aria-hidden="true">*</span
+                                    ></label
+                                >
+                                <input
+                                    type="email"
+                                    id="contact-email"
+                                    name="email"
+                                    class="form-input"
+                                    placeholder="you@example.com"
+                                    autocomplete="email"
+                                    required
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-subject" class="form-label"
+                                    >Subject</label
+                                >
+                                <select
+                                    id="contact-subject"
+                                    name="subject"
+                                    class="form-input form-select"
+                                >
+                                    <option value="">Select a reason…</option>
+                                    <option value="Bug report"
+                                        >Bug report</option
+                                    >
+                                    <option value="App feedback"
+                                        >App feedback</option
+                                    >
+                                    <option value="Feature request"
+                                        >Feature request</option
+                                    >
+                                    <option value="Business enquiry"
+                                        >Business enquiry</option
+                                    >
+                                    <option value="Technical question"
+                                        >Technical question</option
+                                    >
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message" class="form-label"
+                                    >Message <span
+                                        class="required"
+                                        aria-hidden="true">*</span
+                                    ></label
+                                >
+                                <textarea
+                                    id="contact-message"
+                                    name="message"
+                                    class="form-input form-textarea"
+                                    placeholder="Tell us what's on your mind…"
+                                    rows="6"
+                                    required></textarea>
+                            </div>
+                            <!-- mailto submit — JavaScript assembles the mailto link from the form fields -->
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-full"
+                                id="send-btn"
+                            >
+                                Send Message
+                            </button>
+                            <p class="form-note">
+                                This button opens your mail client. Your message
+                                won't be sent until you press Send in your email
+                                app.
+                            </p>
+                        </div>
+                    </div>
 
-      <!-- RIGHT: DIRECT CONTACT + SOCIALS -->
-      <div class="contact-info-col">
+                    <!-- RIGHT: DIRECT CONTACT + SOCIALS -->
+                    <div class="contact-info-col">
+                        <div class="direct-email-card">
+                            <p class="direct-label">Direct email</p>
+                            <a
+                                href="mailto:developer@curvachip.com"
+                                class="direct-address"
+                            >
+                                developer@curvachip.com
+                            </a>
+                            <p class="direct-note">
+                                Usually responded to within 2 business days.
+                            </p>
+                        </div>
 
-        <div class="direct-email-card">
-          <p class="direct-label">Direct email</p>
-          <a href="mailto:developer@curvachip.com" class="direct-address">
-            developer@curvachip.com
-          </a>
-          <p class="direct-note">Usually responded to within 2 business days.</p>
-        </div>
+                        <h3 class="col-title col-title--sm">
+                            What to reach out about
+                        </h3>
+                        <ul class="reasons-list" role="list">
+                            {
+                                reasons.map((r) => (
+                                    <li class="reason-item">
+                                        <span
+                                            class="reason-icon"
+                                            aria-hidden="true"
+                                        >
+                                            {r.icon}
+                                        </span>
+                                        <div>
+                                            <strong class="reason-label">
+                                                {r.label}
+                                            </strong>
+                                            <p class="reason-body">{r.body}</p>
+                                        </div>
+                                    </li>
+                                ))
+                            }
+                        </ul>
 
-        <h3 class="col-title col-title--sm">What to reach out about</h3>
-        <ul class="reasons-list" role="list">
-          {reasons.map((r) => (
-            <li class="reason-item">
-              <span class="reason-icon" aria-hidden="true">{r.icon}</span>
-              <div>
-                <strong class="reason-label">{r.label}</strong>
-                <p class="reason-body">{r.body}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <h3 class="col-title col-title--sm" style="margin-top: 2.5rem">Find us elsewhere</h3>
-        <ul class="socials-list" role="list">
-          {socials.map((s) => (
-            <li>
-              <a href={s.href} class="social-row" target={s.href.startsWith('mailto') ? '_self' : '_blank'} rel="noopener" aria-label={s.label}>
-                <span class="social-abbr" aria-hidden="true">{s.abbr}</span>
-                <div>
-                  <span class="social-label">{s.label}</span>
-                  <span class="social-display">{s.display}</span>
+                        <h3
+                            class="col-title col-title--sm"
+                            style="margin-top: 2.5rem"
+                        >
+                            Find us elsewhere
+                        </h3>
+                        <ul class="socials-list" role="list">
+                            {
+                                socials.map((s) => (
+                                    <li>
+                                        <a
+                                            href={s.href}
+                                            class="social-row"
+                                            target={
+                                                s.href.startsWith("mailto")
+                                                    ? "_self"
+                                                    : "_blank"
+                                            }
+                                            rel="noopener"
+                                            aria-label={s.label}
+                                        >
+                                            <span
+                                                class="social-abbr"
+                                                aria-hidden="true"
+                                            >
+                                                {s.abbr}
+                                            </span>
+                                            <div>
+                                                <span class="social-label">
+                                                    {s.label}
+                                                </span>
+                                                <span class="social-display">
+                                                    {s.display}
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                    </div>
                 </div>
-              </a>
-            </li>
-          ))}
-        </ul>
+            </section>
+        </main>
 
-      </div>
-    </div>
-  </section>
-</main>
+        <!-- ── FOOTER ── -->
+        <footer class="footer">
+            <div class="container footer-inner">
+                <div class="footer-brand">
+                    <span class="logo-chip" aria-hidden="true">◈</span>
+                    <span class="logo-text">Curvachip</span>
+                    <p class="footer-tagline">
+                        Crafting exceptional software for Apple platforms.
+                    </p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/apps" class="footer-link">Apps</a>
+                    <a href="/privacy" class="footer-link">Privacy</a>
+                    <a href="/contact" class="footer-link">Contact</a>
+                    <a href="/about" class="footer-link">About</a>
+                </nav>
+                <p class="footer-legal">
+                    Copyright © 2026 Curvachip LLC. All rights reserved.<br />
+                    <small
+                        >Apple is a trademark of Apple Inc. and is not
+                        affiliated with Curvachip LLC.</small
+                    >
+                </p>
+                <div class="footer-policy-links">
+                    <a href="/privacy-policy-curvachip" class="footer-link"
+                        >Privacy Policy</a
+                    >
+                    <span aria-hidden="true">·</span>
+                    <a
+                        href="/terms-and-conditions-curvachip"
+                        class="footer-link">Terms of Use</a
+                    >
+                </div>
+            </div>
+        </footer>
 
-<!-- ── FOOTER ── -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="logo-chip" aria-hidden="true">◈</span>
-      <span class="logo-text">Curvachip</span>
-      <p class="footer-tagline">Crafting exceptional software for Apple platforms.</p>
-    </div>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="/" class="footer-link">Home</a>
-      <a href="/apps" class="footer-link">Apps</a>
-      <a href="/privacy" class="footer-link">Privacy</a>
-      <a href="/contact" class="footer-link">Contact</a>
-      <a href="/about" class="footer-link">About</a>
-    </nav>
-    <p class="footer-legal">
-      Copyright © 2026 Curvachip LLC. All rights reserved.<br />
-      <small>Apple is a trademark of Apple Inc. and is not affiliated with Curvachip LLC.</small>
-    </p>
-    <div class="footer-policy-links">
-      <a href="/privacy-policy-curvachip" class="footer-link">Privacy Policy</a>
-      <span aria-hidden="true">·</span>
-      <a href="/terms-and-conditions-curvachip" class="footer-link">Terms of Use</a>
-    </div>
-  </div>
-</footer>
+        <!-- mailto form assembly script -->
+        <script>
+            const btn = document.getElementById("send-btn");
+            if (btn) {
+                btn.addEventListener("click", () => {
+                    const name =
+                        (
+                            document.getElementById(
+                                "contact-name",
+                            ) as HTMLInputElement
+                        )?.value.trim() || "";
+                    const email =
+                        (
+                            document.getElementById(
+                                "contact-email",
+                            ) as HTMLInputElement
+                        )?.value.trim() || "";
+                    const subject =
+                        (
+                            document.getElementById(
+                                "contact-subject",
+                            ) as HTMLSelectElement
+                        )?.value || "Enquiry";
+                    const message =
+                        (
+                            document.getElementById(
+                                "contact-message",
+                            ) as HTMLTextAreaElement
+                        )?.value.trim() || "";
 
-<!-- mailto form assembly script -->
-<script>
-  const btn = document.getElementById('send-btn');
-  if (btn) {
-    btn.addEventListener('click', () => {
-      const name    = (document.getElementById('contact-name') as HTMLInputElement)?.value.trim() || '';
-      const email   = (document.getElementById('contact-email') as HTMLInputElement)?.value.trim() || '';
-      const subject = (document.getElementById('contact-subject') as HTMLSelectElement)?.value || 'Enquiry';
-      const message = (document.getElementById('contact-message') as HTMLTextAreaElement)?.value.trim() || '';
+                    if (!email || !message) {
+                        alert(
+                            "Please fill in your email address and message before sending.",
+                        );
+                        return;
+                    }
 
-      if (!email || !message) {
-        alert('Please fill in your email address and message before sending.');
-        return;
-      }
-
-      const body = `From: ${name || 'Not provided'}\nEmail: ${email}\n\n${message}`;
-      const mailto = `mailto:developer@curvachip.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-    });
-  }
-</script>
-
-</body>
+                    const body = `From: ${name || "Not provided"}\nEmail: ${email}\n\n${message}`;
+                    const mailto = `mailto:developer@curvachip.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    window.location.href = mailto;
+                });
+            }
+        </script>
+    </body>
 </html>
 
 <style is:global>
-  :root {
-    --cc-bg:        #080810;
-    --cc-surface:   #10101E;
-    --cc-border:    #1C1C32;
-    --cc-blue:      #5B9CF6;
-    --cc-blue-dim:  rgba(91, 156, 246, 0.12);
-    --cc-violet:    #A78BFA;
-    --cc-text:      #E8E8F0;
-    --cc-muted:     #6A6A88;
-    --cc-radius:    12px;
-    --cc-max:       1120px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cc-bg); color: var(--cc-text); font-family: 'Inter', system-ui, sans-serif; font-size: 1rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
-  a { color: inherit; text-decoration: none; }
-  strong { font-weight: 600; }
-  .container { width: 100%; max-width: var(--cc-max); margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem); }
+    :root {
+        --cc-bg: #080810;
+        --cc-surface: #10101e;
+        --cc-border: #1c1c32;
+        --cc-blue: #5b9cf6;
+        --cc-blue-dim: rgba(91, 156, 246, 0.12);
+        --cc-violet: #a78bfa;
+        --cc-text: #e8e8f0;
+        --cc-muted: #6a6a88;
+        --cc-radius: 12px;
+        --cc-max: 1120px;
+    }
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        background: var(--cc-bg);
+        color: var(--cc-text);
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 1rem;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    strong {
+        font-weight: 600;
+    }
+    .container {
+        width: 100%;
+        max-width: var(--cc-max);
+        margin-inline: auto;
+        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    }
 
-  .nav { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--cc-border); background: rgba(8,8,16,0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-  .nav-inner { max-width: var(--cc-max); margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 2.5rem); height: 60px; display: flex; align-items: center; justify-content: space-between; }
-  .nav-logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.05rem; }
-  .logo-chip { color: var(--cc-blue); font-size: 1.2rem; }
-  .logo-text { font-weight: 600; }
-  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
-  .nav-link { padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.875rem; color: var(--cc-muted); transition: color 0.15s, background 0.15s; }
-  .nav-link:hover, .nav-link.active { color: var(--cc-text); background: rgba(255,255,255,0.06); }
-  @media (max-width: 600px) { .nav-links { display: none; } }
+    .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--cc-border);
+        background: rgba(8, 8, 16, 0.8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+        max-width: var(--cc-max);
+        margin-inline: auto;
+        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        font-size: 1.05rem;
+    }
+    .logo-chip {
+        height: 20px;
+        width: auto;
+        display: block;
+    }
+    .logo-text {
+        font-weight: 600;
+    }
+    .nav-links {
+        display: flex;
+        gap: 0.25rem;
+        list-style: none;
+    }
+    .nav-link {
+        padding: 0.35rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: var(--cc-muted);
+        transition:
+            color 0.15s,
+            background 0.15s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--cc-text);
+        background: rgba(255, 255, 255, 0.06);
+    }
+    @media (max-width: 600px) {
+        .nav-links {
+            display: none;
+        }
+    }
 
-  .hero { position: relative; overflow: hidden; padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 7vw, 5rem); }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      radial-gradient(circle at 70% 50%, rgba(91,156,246,0.06) 0%, transparent 60%),
-      linear-gradient(rgba(91,156,246,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(91,156,246,0.03) 1px, transparent 1px);
-    background-size: auto, 44px 44px, 44px 44px;
-    mask-image: radial-gradient(ellipse 80% 70% at 70% 50%, black 40%, transparent 100%);
-    pointer-events: none;
-  }
-  .hero-content { position: relative; }
-  .eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cc-blue); margin-bottom: 1.5rem; padding: 0.3rem 0.8rem; border: 1px solid rgba(91,156,246,0.25); border-radius: 99px; background: rgba(91,156,246,0.07); }
-  .hero-title { font-size: clamp(2.5rem, 6vw, 4.4rem); font-family: system-ui, -apple-system, sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1.25rem; }
-  .hero-title em { font-style: normal; background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-sub { max-width: 500px; color: var(--cc-muted); font-size: 1.05rem; }
+    .hero {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+    }
+    .hero-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            radial-gradient(
+                circle at 70% 50%,
+                rgba(91, 156, 246, 0.06) 0%,
+                transparent 60%
+            ),
+            linear-gradient(rgba(91, 156, 246, 0.03) 1px, transparent 1px),
+            linear-gradient(
+                90deg,
+                rgba(91, 156, 246, 0.03) 1px,
+                transparent 1px
+            );
+        background-size:
+            auto,
+            44px 44px,
+            44px 44px;
+        mask-image: radial-gradient(
+            ellipse 80% 70% at 70% 50%,
+            black 40%,
+            transparent 100%
+        );
+        pointer-events: none;
+    }
+    .hero-content {
+        position: relative;
+    }
+    .eyebrow {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 1.5rem;
+        padding: 0.3rem 0.8rem;
+        border: 1px solid rgba(91, 156, 246, 0.25);
+        border-radius: 99px;
+        background: rgba(91, 156, 246, 0.07);
+    }
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4.4rem);
+        font-family:
+            system-ui,
+            -apple-system,
+            sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 1.25rem;
+    }
+    .hero-title em {
+        font-style: normal;
+        background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .hero-sub {
+        max-width: 500px;
+        color: var(--cc-muted);
+        font-size: 1.05rem;
+    }
 
-  .section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
-  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  @media (max-width: 768px) { .contact-layout { grid-template-columns: 1fr; gap: 3rem; } }
+    .section {
+        padding: clamp(3.5rem, 8vw, 6rem) 0;
+    }
+    .contact-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+    @media (max-width: 768px) {
+        .contact-layout {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+    }
 
-  .col-title { font-family: system-ui, -apple-system, sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 0.6rem; }
-  .col-title--sm { font-size: 1rem; }
-  .col-sub { font-size: 0.875rem; color: var(--cc-muted); margin-bottom: 1.75rem; }
-  .inline-link { color: var(--cc-blue); }
-  .inline-link:hover { text-decoration: underline; }
+    .col-title {
+        font-family:
+            system-ui,
+            -apple-system,
+            sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        margin-bottom: 0.6rem;
+    }
+    .col-title--sm {
+        font-size: 1rem;
+    }
+    .col-sub {
+        font-size: 0.875rem;
+        color: var(--cc-muted);
+        margin-bottom: 1.75rem;
+    }
+    .inline-link {
+        color: var(--cc-blue);
+    }
+    .inline-link:hover {
+        text-decoration: underline;
+    }
 
-  /* Form */
-  .form-shell { display: flex; flex-direction: column; gap: 1.1rem; }
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-  .form-label { font-size: 0.8rem; font-weight: 500; color: var(--cc-text); }
-  .required { color: #EF4444; }
-  .form-input {
-    background: var(--cc-surface); border: 1px solid var(--cc-border); border-radius: 8px;
-    padding: 0.65rem 0.9rem; color: var(--cc-text); font-size: 0.9rem;
-    font-family: 'Inter', system-ui, sans-serif; width: 100%;
-    transition: border-color 0.15s, box-shadow 0.15s;
-    outline: none;
-  }
-  .form-input::placeholder { color: var(--cc-muted); }
-  .form-input:focus { border-color: var(--cc-blue); box-shadow: 0 0 0 3px rgba(91,156,246,0.12); }
-  .form-select { appearance: none; cursor: pointer; }
-  .form-textarea { resize: vertical; min-height: 130px; }
-  .btn-full { width: 100%; justify-content: center; margin-top: 0.25rem; }
-  .form-note { font-size: 0.78rem; color: var(--cc-muted); text-align: center; margin-top: 0.25rem; }
+    /* Form */
+    .form-shell {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .form-label {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--cc-text);
+    }
+    .required {
+        color: #ef4444;
+    }
+    .form-input {
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 8px;
+        padding: 0.65rem 0.9rem;
+        color: var(--cc-text);
+        font-size: 0.9rem;
+        font-family: "Inter", system-ui, sans-serif;
+        width: 100%;
+        transition:
+            border-color 0.15s,
+            box-shadow 0.15s;
+        outline: none;
+    }
+    .form-input::placeholder {
+        color: var(--cc-muted);
+    }
+    .form-input:focus {
+        border-color: var(--cc-blue);
+        box-shadow: 0 0 0 3px rgba(91, 156, 246, 0.12);
+    }
+    .form-select {
+        appearance: none;
+        cursor: pointer;
+    }
+    .form-textarea {
+        resize: vertical;
+        min-height: 130px;
+    }
+    .btn-full {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.25rem;
+    }
+    .form-note {
+        font-size: 0.78rem;
+        color: var(--cc-muted);
+        text-align: center;
+        margin-top: 0.25rem;
+    }
 
-  /* Buttons */
-  .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s; cursor: pointer; border: none; font-family: 'Inter', system-ui, sans-serif; }
-  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
-  .btn-primary { background: var(--cc-blue); color: #07070F; box-shadow: 0 0 20px rgba(91,156,246,0.3); }
-  .btn-primary:hover { box-shadow: 0 0 28px rgba(91,156,246,0.45); }
+    /* Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.65rem 1.4rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition:
+            opacity 0.15s,
+            transform 0.15s,
+            box-shadow 0.15s;
+        cursor: pointer;
+        border: none;
+        font-family: "Inter", system-ui, sans-serif;
+    }
+    .btn:hover {
+        opacity: 0.88;
+        transform: translateY(-1px);
+    }
+    .btn-primary {
+        background: var(--cc-blue);
+        color: #07070f;
+        box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);
+    }
+    .btn-primary:hover {
+        box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
+    }
 
-  /* Direct email */
-  .direct-email-card { background: var(--cc-surface); border: 1px solid var(--cc-border); border-radius: var(--cc-radius); padding: 1.5rem; margin-bottom: 2.5rem; }
-  .direct-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cc-muted); margin-bottom: 0.4rem; }
-  .direct-address { font-size: 1rem; font-weight: 600; color: var(--cc-blue); display: block; margin-bottom: 0.5rem; }
-  .direct-address:hover { text-decoration: underline; }
-  .direct-note { font-size: 0.8rem; color: var(--cc-muted); }
+    /* Direct email */
+    .direct-email-card {
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        padding: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
+    .direct-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-muted);
+        margin-bottom: 0.4rem;
+    }
+    .direct-address {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--cc-blue);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    .direct-address:hover {
+        text-decoration: underline;
+    }
+    .direct-note {
+        font-size: 0.8rem;
+        color: var(--cc-muted);
+    }
 
-  /* Reasons */
-  .reasons-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
-  .reason-item { display: flex; gap: 0.85rem; align-items: flex-start; }
-  .reason-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
-  .reason-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.2rem; }
-  .reason-body { font-size: 0.825rem; color: var(--cc-muted); line-height: 1.6; }
+    /* Reasons */
+    .reasons-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+    }
+    .reason-item {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+    }
+    .reason-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+    .reason-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+    }
+    .reason-body {
+        font-size: 0.825rem;
+        color: var(--cc-muted);
+        line-height: 1.6;
+    }
 
-  /* Social rows */
-  .socials-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .social-row { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid transparent; transition: background 0.15s, border-color 0.15s; }
-  .social-row:hover { background: var(--cc-surface); border-color: var(--cc-border); }
-  .social-abbr { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: var(--cc-surface); border: 1px solid var(--cc-border); border-radius: 6px; font-size: 0.7rem; font-weight: 700; color: var(--cc-blue); flex-shrink: 0; }
-  .social-row:hover .social-abbr { background: var(--cc-blue-dim); border-color: rgba(91,156,246,0.3); }
-  .social-label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--cc-text); }
-  .social-display { font-size: 0.75rem; color: var(--cc-muted); }
+    /* Social rows */
+    .socials-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .social-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 0.75rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        transition:
+            background 0.15s,
+            border-color 0.15s;
+    }
+    .social-row:hover {
+        background: var(--cc-surface);
+        border-color: var(--cc-border);
+    }
+    .social-abbr {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 6px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: var(--cc-blue);
+        flex-shrink: 0;
+    }
+    .social-row:hover .social-abbr {
+        background: var(--cc-blue-dim);
+        border-color: rgba(91, 156, 246, 0.3);
+    }
+    .social-label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--cc-text);
+    }
+    .social-display {
+        font-size: 0.75rem;
+        color: var(--cc-muted);
+    }
 
-  /* Footer */
-  .footer { border-top: 1px solid var(--cc-border); padding: 3.5rem 0 2rem; }
-  .footer-inner { display: flex; flex-direction: column; gap: 1.5rem; }
-  .footer-brand { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-  .footer-tagline { color: var(--cc-muted); font-size: 0.85rem; width: 100%; margin-top: 0.25rem; }
-  .footer-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
-  .footer-link { font-size: 0.85rem; color: var(--cc-muted); padding: 0.25rem 0.5rem; border-radius: 4px; transition: color 0.15s; }
-  .footer-link:hover { color: var(--cc-text); }
-  .footer-legal { font-size: 0.78rem; color: var(--cc-muted); line-height: 1.7; }
-  .footer-policy-links { display: flex; gap: 0.5rem; align-items: center; font-size: 0.8rem; color: var(--cc-muted); }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+    /* Footer */
+    .footer {
+        border-top: 1px solid var(--cc-border);
+        padding: 3.5rem 0 2rem;
+    }
+    .footer-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .footer-tagline {
+        color: var(--cc-muted);
+        font-size: 0.85rem;
+        width: 100%;
+        margin-top: 0.25rem;
+    }
+    .footer-links {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+    }
+    .footer-link {
+        font-size: 0.85rem;
+        color: var(--cc-muted);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: color 0.15s;
+    }
+    .footer-link:hover {
+        color: var(--cc-text);
+    }
+    .footer-legal {
+        font-size: 0.78rem;
+        color: var(--cc-muted);
+        line-height: 1.7;
+    }
+    .footer-policy-links {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 0.8rem;
+        color: var(--cc-muted);
+    }
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            transition: none !important;
+        }
+    }
 </style>
