@@ -37,7 +37,7 @@ const apps = [
         ],
         pageHref: "/shadow-task",
         appStoreUrl: DEVELOPER_PAGE, // TODO: replace with direct App Store link
-        privacyHref: "/privacy-policy-shadow-task",
+        privacyHref: "/apps/privacy-shadow-task",
     },
     {
         name: "TipZap",
@@ -190,6 +190,31 @@ const review = {
         />
         <link rel="canonical" href="https://curvachip.com/apps" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <script>
+            const hamburger = document.getElementById("hamburger");
+            const mobileMenu = document.getElementById("mobile-menu");
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener("click", () => {
+                    const open =
+                        mobileMenu.classList.toggle("mobile-menu--open");
+                    hamburger.setAttribute("aria-expanded", String(open));
+                    mobileMenu.setAttribute("aria-hidden", String(!open));
+                    hamburger.classList.toggle("hamburger--open", open);
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (
+                        e.key === "Escape" &&
+                        mobileMenu.classList.contains("mobile-menu--open")
+                    ) {
+                        mobileMenu.classList.remove("mobile-menu--open");
+                        mobileMenu.setAttribute("aria-hidden", "true");
+                        hamburger.setAttribute("aria-expanded", "false");
+                        hamburger.classList.remove("hamburger--open");
+                        hamburger.focus();
+                    }
+                });
+            }
+        </script>
     </head>
     <body>
         <!-- ── NAV ── -->
@@ -203,12 +228,35 @@ const review = {
                     />
                     <span class="logo-text">Curvachip</span>
                 </a>
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links">
                     <li><a href="/" class="nav-link">Home</a></li>
                     <li><a href="/apps" class="nav-link active">Apps</a></li>
                     <li><a href="/privacy" class="nav-link">Privacy</a></li>
                     <li><a href="/contact" class="nav-link">Contact</a></li>
                     <li><a href="/about" class="nav-link">About</a></li>
+                </ul>
+                <button
+                    class="hamburger"
+                    id="hamburger"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="nav-links"
+                >
+                    <span class="ham-bar"></span>
+                    <span class="ham-bar"></span>
+                    <span class="ham-bar"></span>
+                </button>
+            </div>
+            <!-- Mobile drawer — rendered below the bar, pushed out of flow -->
+            <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+                <ul class="mobile-links">
+                    <li><a href="/" class="mobile-link">Home</a></li>
+                    <li>
+                        <a href="/apps" class="mobile-link--active">Apps</a>
+                    </li>
+                    <li><a href="/privacy" class="mobile-link">Privacy</a></li>
+                    <li><a href="/contact" class="mobile-link">Contact</a></li>
+                    <li><a href="/about" class="mobile-link">About</a></li>
                 </ul>
             </div>
         </nav>
@@ -330,7 +378,8 @@ const review = {
                 </div>
                 <p class="review-cta-text">
                     Have feedback? <a href="/contact" class="text-link"
-                        >We'd love to hear it.</a>
+                        >We'd love to hear it.</a
+                    >
                 </p>
             </div>
         </section>
@@ -516,10 +565,91 @@ const review = {
         color: var(--cc-text);
         background: rgba(255, 255, 255, 0.06);
     }
-    @media (max-width: 600px) {
+    /* ── HAMBURGER ── */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 6px;
+    }
+    .hamburger:focus-visible {
+        outline: 2px solid var(--cc-blue);
+        outline-offset: 2px;
+    }
+    .ham-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--cc-text);
+        border-radius: 2px;
+        transition:
+            transform 0.22s ease,
+            opacity 0.18s ease;
+        transform-origin: center;
+    }
+    .hamburger--open .ham-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger--open .ham-bar:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .hamburger--open .ham-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width: 640px) {
         .nav-links {
             display: none;
         }
+        .hamburger {
+            display: flex;
+        }
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 60px; /* matches the nav height */
+        left: 0;
+        right: 0;
+        border-top: 1px solid var(--cc-border);
+        background: rgba(8, 8, 16, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        z-index: 99; /* just below the nav's z-index: 100 */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .mobile-menu--open {
+        display: block;
+    }
+    .mobile-links {
+        list-style: none;
+        padding: 0.75rem clamp(1.25rem, 5vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .mobile-link {
+        display: block;
+        padding: 0.7rem 0.75rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: var(--cc-muted);
+        transition:
+            color 0.15s,
+            background 0.15s;
+    }
+    .mobile-link:hover,
+    .mobile-link--active {
+        color: var(--cc-text);
+        background: rgba(255, 255, 255, 0.06);
     }
     .btn {
         display: inline-flex;
@@ -567,10 +697,11 @@ const review = {
         color: var(--cc-blue);
     }
 
+    /* ── HERO ── */
     .hero {
         position: relative;
         overflow: hidden;
-        padding: clamp(4rem, 10vw, 7rem) 0 clamp(3.5rem, 8vw, 6rem);
+        padding: clamp(5rem, 14vw, 9rem) 0 clamp(4rem, 10vw, 7rem);
         text-align: center;
     }
     .hero-grid {
@@ -616,31 +747,41 @@ const review = {
         background: rgba(91, 156, 246, 0.07);
     }
     .hero-title {
-        font-size: clamp(2.5rem, 6vw, 4.4rem);
+        font-size: clamp(2.8rem, 7vw, 5.2rem);
         font-family:
             system-ui,
             -apple-system,
             sans-serif;
         font-weight: 700;
-        letter-spacing: -0.03em;
-        line-height: 1.1;
-        margin-bottom: 1.25rem;
+        letter-spacing: -0.035em;
+        line-height: 1.08;
+        color: var(--cc-text);
+        margin-bottom: 1.5rem;
     }
     .hero-title em {
+        font-style: normal;
         background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
     .hero-sub {
-        max-width: 540px;
+        max-width: 560px;
         margin-inline: auto;
         color: var(--cc-muted);
         font-size: 1.05rem;
+        margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
     }
 
+    /* ── SECTIONS ── */
     .section {
-        padding: clamp(4rem, 9vw, 6.5rem) 0;
+        padding: clamp(4rem, 9vw, 7rem) 0;
     }
     .section-alt {
         background: var(--cc-surface);
@@ -650,10 +791,16 @@ const review = {
             system-ui,
             -apple-system,
             sans-serif;
-        font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+        font-size: clamp(1.6rem, 4vw, 2.4rem);
         font-weight: 700;
-        letter-spacing: -0.02em;
-        margin-bottom: 2rem;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+    }
+    .section-sub {
+        color: var(--cc-muted);
+        max-width: 520px;
+        margin-bottom: 3rem;
+        font-size: 1rem;
     }
 
     /* App list */
