@@ -1,0 +1,1509 @@
+---
+// src/pages/apps/[policy].astro
+// ═══════════════════════════════════════════════════════════════
+// DYNAMIC PRIVACY POLICY ROUTE
+// ───────────────────────────────────────────────────────────────
+// Each entry in getStaticPaths() generates one page at:
+//   /apps/<policy slug>
+//
+// TO ADD A NEW APP:
+//   1. Copy the Shadow Task object below in its entirety.
+//   2. Change every field — slug, appName, emoji, etc.
+//   3. Flip aiProcessing / icloudSync / thirdParty as needed.
+//   4. Update the dataItems array to match what that app actually stores.
+//   5. Run `astro build` — the new URL appears automatically.
+// ═══════════════════════════════════════════════════════════════
+
+// ── TYPE DEFINITIONS ───────────────────────────────────────────
+// Keeping these explicit makes every field self-documenting and
+// gives you autocomplete in VS Code / Cursor.
+
+type StoredLocation = "on-device" | "external" | "none";
+
+interface DataItem {
+    category: string; // what kind of data
+    purpose: string; // why it is collected / processed
+    stored: StoredLocation; // where it ends up
+    retained: string; // how long
+    sharedWith: string; // "nobody" or an explicit third-party name
+}
+
+interface AppPolicy {
+    // ── Identity ──
+    appName: string; // display name, e.g. "Shadow Task"
+    appTagline: string; // short descriptor, e.g. "Focus & Track"
+    iconUrl: string; // emoji used on the apps page, e.g. "🌑"
+
+    // ── URLs ──
+    appStoreUrl: string; // direct App Store link for this app
+    appPageUrl: string; // internal Astro page path, e.g. "/shadow-task"
+    canonicalUrl: string; // full public URL of THIS privacy policy page
+
+    // ── Dates / contact ──
+    lastUpdated: string; // human-readable, e.g. "June 2025"
+    contactEmail: string; // almost always "developer@curvachip.com"
+
+    // ── Feature flags (controls which sections render) ──
+    aiProcessing: boolean; // true → shows AI section + amber callout
+    icloudSync: boolean; // true → shows iCloud section
+    thirdParty: boolean; // true → shows third-party section
+
+    // ── AI details (only needed when aiProcessing = true) ──
+    aiProviderName: string; // e.g. "OpenAI", "Google Gemini"
+    aiProviderPolicyUrl: string; // link to that provider's privacy policy
+
+    // ── Data table ──
+    dataItems: DataItem[];
+}
+
+// ── ROUTE DEFINITIONS ──────────────────────────────────────────
+export function getStaticPaths() {
+    const policies: { params: { policy: string }; props: AppPolicy }[] = [
+        // ────────────────────────────────────────────────────────────
+        // SHADOW TASK
+        // Fully on-device Pomodoro timer. No data leaves the device.
+        // ────────────────────────────────────────────────────────────
+        {
+            params: { policy: "shadow-task" },
+            props: {
+                appName: "Shadow Task",
+                appTagline: "Focus & Track",
+                iconUrl: "/shadow-task.png",
+
+                appStoreUrl:
+                    "https://apps.apple.com/us/app/study-timer-shadow-task/id6737145799?itscg=30200&itsct=apps_box_link&mttnsubad=6737145799",
+                appPageUrl: "/shadow-task",
+                canonicalUrl: "https://curvachip.com/privacy/shadow-task",
+
+                lastUpdated: "July 2026",
+                contactEmail: "developer@curvachip.com",
+
+                aiProcessing: false,
+                icloudSync: false,
+                thirdParty: false,
+
+                // Not used (aiProcessing is false) — keep as empty strings
+                aiProviderName: "",
+                aiProviderPolicyUrl: "",
+
+                dataItems: [
+                    {
+                        category: "Task names",
+                        purpose: "Displaying your tasks in the timer interface",
+                        stored: "on-device",
+                        retained:
+                            "Until you delete the task or uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Timer session data",
+                        purpose:
+                            "Tracking completed Pomodoro sessions and daily progress",
+                        stored: "on-device",
+                        retained:
+                            "Until you clear history or uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Custom quotes",
+                        purpose:
+                            "Displaying your personal motivational quotes during focus sessions",
+                        stored: "on-device",
+                        retained:
+                            "Until you delete the quote or uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                ],
+            },
+        },
+
+        // ────────────────────────────────────────────────────────────
+        // TIPZAP
+        // Simple tip calculator. No data leaves the device.
+        // ────────────────────────────────────────────────────────────
+        {
+            params: { policy: "tipzap" },
+            props: {
+                appName: "TipZap",
+                appTagline: "Tip Calculator",
+                iconUrl: "/tipzap.png",
+
+                appStoreUrl:
+                    "https://apps.apple.com/us/app/tip-calculator-tipzap/id6743986322?itscg=30200&itsct=apps_box_link&mttnsubad=6743986322",
+                appPageUrl: "/tipzap",
+                canonicalUrl: "https://curvachip.com/privacy/tipzap",
+
+                lastUpdated: "July 2026",
+                contactEmail: "developer@curvachip.com",
+
+                aiProcessing: false,
+                icloudSync: false,
+                thirdParty: false,
+
+                // Not used (aiProcessing is false) — keep as empty strings
+                aiProviderName: "",
+                aiProviderPolicyUrl: "",
+
+                dataItems: [
+                    {
+                        category: "Tip and split calculations",
+                        purpose: "Performing calculations within the app",
+                        stored: "on-device",
+                        retained:
+                            "Not persisted — cleared when you close the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Tip percentage",
+                        purpose:
+                            "Tracking your preferred tip percentage for calculations",
+                        stored: "on-device",
+                        retained: "Until you uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Currency preference",
+                        purpose:
+                            "Displaying amounts in your preferred currency",
+                        stored: "on-device",
+                        retained: "Until you uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                ],
+            },
+        },
+    ];
+
+    return policies;
+}
+
+// ── DESTRUCTURE PROPS ──────────────────────────────────────────
+// Astro passes the matching props object for the current route.
+const {
+    appName,
+    appTagline,
+    iconUrl,
+    appStoreUrl,
+    appPageUrl,
+    canonicalUrl,
+    lastUpdated,
+    contactEmail,
+    aiProcessing,
+    icloudSync,
+    thirdParty,
+    aiProviderName,
+    aiProviderPolicyUrl,
+    dataItems,
+} = Astro.props as AppPolicy;
+
+// Derived meta — built from props so they're always in sync
+const title = `Privacy Policy — ${appName} | Curvachip`;
+const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly what data is collected, how it is used, and your rights as a user.`;
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Outfit:wght@600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="canonical" href={canonicalUrl} />
+    </head>
+    <body>
+        <!-- ── NAV ── -->
+        <nav class="nav">
+            <div class="nav-inner">
+                <a href="/" class="nav-logo" aria-label="Curvachip home">
+                    <span class="logo-chip" aria-hidden="true">◈</span>
+                    <span class="logo-text">Curvachip</span>
+                </a>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/apps" class="nav-link">Apps</a></li>
+                    <li>
+                        <a href="/privacy" class="nav-link active">Privacy</a>
+                    </li>
+                    <li><a href="/contact" class="nav-link">Contact</a></li>
+                    <li><a href="/about" class="nav-link">About</a></li>
+                </ul>
+                <button
+                    class="hamburger"
+                    id="hamburger"
+                    aria-label="Open menu"
+                    aria-expanded="false"
+                    aria-controls="nav-links"
+                >
+                    <span class="ham-bar"></span>
+                    <span class="ham-bar"></span>
+                    <span class="ham-bar"></span>
+                </button>
+            </div>
+            <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+                <ul class="mobile-links">
+                    <li><a href="/" class="mobile-link">Home</a></li>
+                    <li><a href="/apps" class="mobile-link">Apps</a></li>
+                    <li>
+                        <a
+                            href="/privacy"
+                            class="mobile-link mobile-link--active">Privacy</a
+                        >
+                    </li>
+                    <li><a href="/contact" class="mobile-link">Contact</a></li>
+                    <li><a href="/about" class="mobile-link">About</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- ── HEADER ── -->
+        <header class="doc-hero">
+            <div class="hero-glow" aria-hidden="true"></div>
+            <div class="container doc-hero-inner">
+                <a href="/apps" class="back-link">← Back to Apps</a>
+                <div class="app-ident">
+                    <a
+                        href={appStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            src={iconUrl}
+                            alt={appName}
+                            width="64"
+                            height="64"
+                        />
+                    </a>
+                    <div>
+                        <p class="app-ident-tagline">{appTagline}</p>
+                        <h1 class="app-ident-name">{appName}</h1>
+                    </div>
+                </div>
+                <h2 class="doc-title">Privacy Policy</h2>
+                <p class="doc-meta">
+                    Curvachip LLC · Last updated: {lastUpdated}
+                </p>
+                <p class="doc-intro">
+                    This policy explains what data {appName} collects, why it collects
+                    it, and exactly what happens to it. There is no fine print. If
+                    anything here is unclear, email us and we will explain it.
+                </p>
+            </div>
+        </header>
+
+        <!-- ── BODY ── -->
+        <main>
+            <div class="container doc-layout">
+                <!-- TABLE OF CONTENTS -->
+                <nav class="toc" aria-label="Table of contents">
+                    <p class="toc-title">On this page</p>
+                    <ol class="toc-list">
+                        <li>
+                            <a href="#overview" class="toc-link">1. Overview</a>
+                        </li>
+                        <li>
+                            <a href="#data-collected" class="toc-link"
+                                >2. What we collect</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#data-use" class="toc-link"
+                                >3. How we use it</a
+                            >
+                        </li>
+                        {
+                            aiProcessing && (
+                                <li>
+                                    <a href="#ai" class="toc-link">
+                                        4. AI processing
+                                    </a>
+                                </li>
+                            )
+                        }
+                        {
+                            icloudSync && (
+                                <li>
+                                    <a href="#icloud" class="toc-link">
+                                        5. iCloud sync
+                                    </a>
+                                </li>
+                            )
+                        }
+                        {
+                            thirdParty && (
+                                <li>
+                                    <a href="#third-party" class="toc-link">
+                                        6. Third parties
+                                    </a>
+                                </li>
+                            )
+                        }
+                        <li>
+                            <a href="#retention" class="toc-link"
+                                >7. Data retention</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#rights" class="toc-link">8. Your rights</a
+                            >
+                        </li>
+                        <li>
+                            <a href="#children" class="toc-link">9. Children</a>
+                        </li>
+                        <li>
+                            <a href="#changes" class="toc-link">10. Changes</a>
+                        </li>
+                        <li>
+                            <a href="#contact" class="toc-link">11. Contact</a>
+                        </li>
+                    </ol>
+                </nav>
+
+                <!-- DOCUMENT -->
+                <article class="doc-body">
+                    <!-- 1. OVERVIEW -->
+                    <section id="overview" class="doc-section">
+                        <h2 class="doc-h2">1. Overview</h2>
+                        <p>
+                            {appName} is published by Curvachip LLC, a single-person
+                            software company. We are committed to limiting the data
+                            we collect as much as possible, processing data on-device
+                            wherever feasible, and being completely transparent about
+                            anything we do collect.
+                        </p>
+                        {
+                            !aiProcessing && !icloudSync && !thirdParty && (
+                                <div class="callout callout--green">
+                                    <span
+                                        class="callout-icon"
+                                        aria-hidden="true"
+                                    >
+                                        ✓
+                                    </span>
+                                    <div>
+                                        <strong>
+                                            This app is fully on-device.
+                                        </strong>{" "}
+                                        {appName} does not send any data to
+                                        Curvachip or any third party. Everything
+                                        you do in the app stays on your device.
+                                    </div>
+                                </div>
+                            )
+                        }
+                        {
+                            (aiProcessing || icloudSync || thirdParty) && (
+                                <div class="callout callout--blue">
+                                    <span
+                                        class="callout-icon"
+                                        aria-hidden="true"
+                                    >
+                                        ◈
+                                    </span>
+                                    <div>
+                                        <strong>
+                                            Some data leaves your device.
+                                        </strong>{" "}
+                                        The sections below explain exactly what,
+                                        why, and where it goes.
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </section>
+
+                    <!-- 2. DATA COLLECTED -->
+                    <section id="data-collected" class="doc-section">
+                        <h2 class="doc-h2">2. What we collect</h2>
+                        <p>
+                            The table below is a complete record of every
+                            category of data that {appName}
+                            collects or processes. If a category is not listed here,
+                            we do not collect it.
+                        </p>
+                        <div
+                            class="data-table-wrapper"
+                            role="region"
+                            aria-label="Data collection table"
+                            tabindex="0"
+                        >
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Data category</th>
+                                        <th scope="col">Purpose</th>
+                                        <th scope="col">Stored</th>
+                                        <th scope="col">Retained</th>
+                                        <th scope="col">Shared with</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        dataItems.map((row) => (
+                                            <tr>
+                                                <td>{row.category}</td>
+                                                <td>{row.purpose}</td>
+                                                <td>
+                                                    <span
+                                                        class={`badge badge--${
+                                                            row.stored ===
+                                                            "on-device"
+                                                                ? "green"
+                                                                : row.stored ===
+                                                                    "external"
+                                                                  ? "amber"
+                                                                  : "muted"
+                                                        }`}
+                                                    >
+                                                        {row.stored}
+                                                    </span>
+                                                </td>
+                                                <td>{row.retained}</td>
+                                                <td>{row.sharedWith}</td>
+                                            </tr>
+                                        ))
+                                    }
+                                    {
+                                        dataItems.length === 0 && (
+                                            <tr>
+                                                <td
+                                                    colspan="5"
+                                                    class="table-empty"
+                                                >
+                                                    No data is collected.
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="table-note">
+                            We never collect: your name, email address, phone
+                            number, location, contacts, photos (beyond what you
+                            explicitly submit to a feature), or any device
+                            identifier that could be used to track you across
+                            apps.
+                        </p>
+                    </section>
+
+                    <!-- 3. HOW WE USE IT -->
+                    <section id="data-use" class="doc-section">
+                        <h2 class="doc-h2">3. How we use it</h2>
+                        <p>
+                            Data is used solely to provide the features of {
+                                appName
+                            }. We do not:
+                        </p>
+                        <ul class="policy-list">
+                            <li>Sell your data to any party</li>
+                            <li>Use your data for advertising</li>
+                            <li>
+                                Build a profile of you across apps or sessions
+                            </li>
+                            <li>
+                                Share your data with anyone not listed in the
+                                table above
+                            </li>
+                            <li>
+                                Retain data beyond the period necessary for the
+                                feature it supports
+                            </li>
+                        </ul>
+                    </section>
+
+                    <!-- 4. AI PROCESSING — only renders when aiProcessing = true -->
+                    {
+                        aiProcessing && (
+                            <section id="ai" class="doc-section">
+                                <h2 class="doc-h2">4. AI processing</h2>
+                                <div class="callout callout--amber">
+                                    <span
+                                        class="callout-icon"
+                                        aria-hidden="true"
+                                    >
+                                        ⚠
+                                    </span>
+                                    <div>
+                                        <strong>
+                                            Some data is processed by an
+                                            external AI service.
+                                        </strong>{" "}
+                                        When you use the identification feature,
+                                        the image or text you submit is sent to
+                                        a third-party AI provider. It is not
+                                        stored by Curvachip, but it is processed
+                                        outside your device.
+                                    </div>
+                                </div>
+                                <p>
+                                    {appName} uses{" "}
+                                    <strong>{aiProviderName}</strong> to process
+                                    identification requests. The data sent
+                                    consists only of the image or text you
+                                    explicitly submit by pressing the
+                                    identification button. This data is:
+                                </p>
+                                <ul class="policy-list">
+                                    <li>
+                                        Transmitted over an encrypted HTTPS
+                                        connection
+                                    </li>
+                                    <li>
+                                        Processed by {aiProviderName} under
+                                        their own privacy policy:{" "}
+                                        <a
+                                            href={aiProviderPolicyUrl}
+                                            target="_blank"
+                                            rel="noopener"
+                                            class="inline-link"
+                                        >
+                                            {aiProviderPolicyUrl}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        Not stored by Curvachip after the
+                                        response is returned
+                                    </li>
+                                    <li>
+                                        Not used to train Curvachip's own models
+                                        (we don't have any)
+                                    </li>
+                                </ul>
+                                <p>
+                                    We recommend reviewing {aiProviderName}'s
+                                    privacy policy if you have concerns about
+                                    how they handle submitted data on their end.
+                                </p>
+                            </section>
+                        )
+                    }
+
+                    <!-- 5. ICLOUD SYNC — only renders when icloudSync = true -->
+                    {
+                        icloudSync && (
+                            <section id="icloud" class="doc-section">
+                                <h2 class="doc-h2">5. iCloud sync</h2>
+                                <p>
+                                    {appName} uses Apple's CloudKit framework to
+                                    sync your data across your devices via
+                                    iCloud. This means your data is stored in
+                                    your personal iCloud account — Curvachip
+                                    cannot access it. Apple's iCloud is governed
+                                    by{" "}
+                                    <a
+                                        href="https://www.apple.com/legal/privacy/"
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="inline-link"
+                                    >
+                                        Apple's Privacy Policy
+                                    </a>
+                                    .
+                                </p>
+                                <p>
+                                    You can disable iCloud sync for {appName} at
+                                    any time in
+                                    <strong>
+                                        {" "}
+                                        Settings → [Your Name] → iCloud
+                                    </strong>{" "}
+                                    on your device. Disabling sync does not
+                                    delete data already stored locally on your
+                                    device.
+                                </p>
+                            </section>
+                        )
+                    }
+
+                    <!-- 6. THIRD PARTIES — only renders when thirdParty = true -->
+                    {
+                        thirdParty && (
+                            <section id="third-party" class="doc-section">
+                                <h2 class="doc-h2">6. Third-party services</h2>
+                                <p>
+                                    {appName} uses the following third-party
+                                    services. Each link goes to that service's
+                                    own privacy policy:
+                                </p>
+                                <ul class="policy-list">
+                                    {/* Add specific third-party entries here when thirdParty = true */}
+                                    <li>
+                                        See the data table in section 2 for the
+                                        complete list of services.
+                                    </li>
+                                </ul>
+                                <p>
+                                    Curvachip selects third-party services
+                                    carefully and only includes those that are
+                                    necessary for a specific feature. We do not
+                                    use advertising SDKs.
+                                </p>
+                            </section>
+                        )
+                    }
+
+                    <!-- 7. RETENTION -->
+                    <section id="retention" class="doc-section">
+                        <h2 class="doc-h2">7. Data retention</h2>
+                        <p>
+                            On-device data is retained until you delete the app
+                            or manually clear it within the app's settings.
+                            Curvachip holds no copies of on-device data and
+                            cannot recover it if you uninstall the app.
+                        </p>
+                        {
+                            aiProcessing && (
+                                <p>
+                                    Data submitted to the AI identification
+                                    feature is processed in real time and is not
+                                    retained by Curvachip after the response is
+                                    received. Retention by {aiProviderName} is
+                                    governed by their own privacy policy.
+                                </p>
+                            )
+                        }
+                    </section>
+
+                    <!-- 8. YOUR RIGHTS -->
+                    <section id="rights" class="doc-section">
+                        <h2 class="doc-h2">8. Your rights</h2>
+                        <p>
+                            Depending on where you live, you may have rights
+                            under applicable privacy law (including GDPR, CCPA,
+                            or equivalent legislation). Because {appName} collects
+                            minimal data, most of these rights are satisfied automatically:
+                        </p>
+                        <ul class="policy-list">
+                            <li>
+                                <strong>Access:</strong> On-device data is stored
+                                only on your device — you have direct access to it
+                                at all times.
+                            </li>
+                            <li>
+                                <strong>Deletion:</strong> Delete the app to remove
+                                all on-device data. For any data held by a third party,
+                                contact that party directly.
+                            </li>
+                            <li>
+                                <strong>Portability:</strong> On-device data is not
+                                locked in a proprietary format inaccessible to you.
+                            </li>
+                            <li>
+                                <strong>Objection / opt-out:</strong> You can stop
+                                using any feature that processes data externally.
+                                AI features can be ignored without losing core functionality.
+                            </li>
+                        </ul>
+                        <p>
+                            To exercise any right or ask a question about your
+                            data, email us at{" "}
+                            <a
+                                href={`mailto:${contactEmail}`}
+                                class="inline-link">{contactEmail}</a
+                            >. We will respond within 30 days.
+                        </p>
+                    </section>
+
+                    <!-- 9. CHILDREN -->
+                    <section id="children" class="doc-section">
+                        <h2 class="doc-h2">9. Children</h2>
+                        <p>
+                            {appName} is not directed at children under 13. We do
+                            not knowingly collect any information from users under
+                            13. If you believe a child has submitted data through
+                            this app, please contact us immediately at{" "}
+                            <a
+                                href={`mailto:${contactEmail}`}
+                                class="inline-link">{contactEmail}</a
+                            > and we will address it promptly.
+                        </p>
+                    </section>
+
+                    <!-- 10. CHANGES -->
+                    <section id="changes" class="doc-section">
+                        <h2 class="doc-h2">10. Changes to this policy</h2>
+                        <p>
+                            If this policy changes in a material way — for
+                            example, if a new feature requires collecting data
+                            that was not collected before — the revised policy
+                            will be published on this page with an updated date
+                            at the top. Continued use of {appName} after such changes
+                            constitutes acceptance of the revised policy.
+                        </p>
+                        <p>
+                            We will not silently expand data collection. Any
+                            material change will be communicated via an App
+                            Store update note.
+                        </p>
+                    </section>
+
+                    <!-- 11. CONTACT -->
+                    <section id="contact" class="doc-section">
+                        <h2 class="doc-h2">11. Contact</h2>
+                        <p>
+                            Questions, concerns, or requests regarding this
+                            policy should be sent to:
+                        </p>
+                        <div class="contact-block">
+                            <p class="contact-line">
+                                <strong>Curvachip LLC</strong>
+                            </p>
+                            <p class="contact-line">
+                                Email:{" "}
+                                <a
+                                    href={`mailto:${contactEmail}`}
+                                    class="inline-link">{contactEmail}</a
+                                >
+                            </p>
+                            <p class="contact-line">
+                                Website:{" "}
+                                <a
+                                    href="https://curvachip.com"
+                                    class="inline-link">curvachip.com</a
+                                >
+                            </p>
+                        </div>
+                        <p>
+                            We take every privacy question seriously and respond
+                            to all emails personally.
+                        </p>
+                    </section>
+
+                    <!-- BOTTOM ACTIONS -->
+                    <div class="doc-app-links">
+                        <a
+                            href={appStoreUrl}
+                            target="_blank"
+                            rel="noopener"
+                            class="btn btn-primary"
+                        >
+                            ⬇ Download {appName}
+                        </a>
+                        <a href={appPageUrl} class="btn btn-ghost">Learn more</a
+                        >
+                        <a href="/apps" class="btn btn-ghost">← All apps</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+
+        <!-- ── FOOTER ── -->
+        <footer class="footer">
+            <div class="container footer-inner">
+                <div class="footer-brand">
+                    <span class="logo-chip" aria-hidden="true">◈</span>
+                    <span class="logo-text">Curvachip</span>
+                    <p class="footer-tagline">
+                        Crafting exceptional software for Apple platforms.
+                    </p>
+                </div>
+                <nav class="footer-links" aria-label="Footer navigation">
+                    <a href="/" class="footer-link">Home</a>
+                    <a href="/apps" class="footer-link">Apps</a>
+                    <a href="/privacy" class="footer-link">Privacy</a>
+                    <a href="/contact" class="footer-link">Contact</a>
+                    <a href="/about" class="footer-link">About</a>
+                </nav>
+                <p class="footer-legal">
+                    Copyright © 2026 Curvachip LLC. All rights reserved.<br />
+                    <small
+                        >Apple is a trademark of Apple Inc. and is not
+                        affiliated with Curvachip LLC.</small
+                    >
+                </p>
+                <div class="footer-policy-links">
+                    <a href="/privacy-policy-curvachip" class="footer-link"
+                        >Privacy Policy</a
+                    >
+                    <span aria-hidden="true">·</span>
+                    <a
+                        href="/terms-and-conditions-curvachip"
+                        class="footer-link">Terms of Use</a
+                    >
+                </div>
+            </div>
+        </footer>
+
+        <!-- ── HAMBURGER SCRIPT ── -->
+        <script>
+            const hamburger = document.getElementById(
+                "hamburger",
+            ) as HTMLButtonElement | null;
+            const mobileMenu = document.getElementById(
+                "mobile-menu",
+            ) as HTMLElement | null;
+
+            if (hamburger && mobileMenu) {
+                hamburger.addEventListener("click", () => {
+                    const open =
+                        mobileMenu.classList.toggle("mobile-menu--open");
+                    hamburger.setAttribute("aria-expanded", String(open));
+                    mobileMenu.setAttribute("aria-hidden", String(!open));
+                    hamburger.classList.toggle("hamburger--open", open);
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (
+                        e.key === "Escape" &&
+                        mobileMenu.classList.contains("mobile-menu--open")
+                    ) {
+                        mobileMenu.classList.remove("mobile-menu--open");
+                        mobileMenu.setAttribute("aria-hidden", "true");
+                        hamburger.setAttribute("aria-expanded", "false");
+                        hamburger.classList.remove("hamburger--open");
+                        hamburger.focus();
+                    }
+                });
+            }
+        </script>
+    </body>
+</html>
+
+<!-- ═══════════════════════════════════════════════════════════
+     STYLES
+     ═══════════════════════════════════════════════════════════ -->
+<style is:global>
+    /* ── DESIGN TOKENS ── */
+    :root {
+        --cc-bg: #080810;
+        --cc-surface: #10101e;
+        --cc-border: #1c1c32;
+        --cc-blue: #5b9cf6;
+        --cc-blue-dim: rgba(91, 156, 246, 0.12);
+        --cc-violet: #a78bfa;
+        --cc-green: #34d399;
+        --cc-amber: #fbbf24;
+        --cc-text: #e8e8f0;
+        --cc-muted: #6a6a88;
+        --cc-radius: 12px;
+        --cc-max: 1120px;
+        --font-display: "Outfit", system-ui, sans-serif;
+        --font-body: "DM Sans", system-ui, sans-serif;
+        --font-size-base: 1.0625rem;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        background: var(--cc-bg);
+        color: var(--cc-text);
+        font-family: var(--font-body);
+        font-size: var(--font-size-base);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    strong {
+        font-weight: 600;
+    }
+    .container {
+        width: 100%;
+        max-width: var(--cc-max);
+        margin-inline: auto;
+        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    }
+
+    /* ── NAV ── */
+    .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        border-bottom: 1px solid var(--cc-border);
+        background: rgba(8, 8, 16, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+        max-width: var(--cc-max);
+        margin-inline: auto;
+        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.05rem;
+    }
+    .logo-chip {
+        color: var(--cc-blue);
+        font-size: 1.2rem;
+    }
+    .logo-text {
+        font-weight: 700;
+    }
+    .nav-links {
+        display: flex;
+        gap: 0.25rem;
+        list-style: none;
+    }
+    .nav-link {
+        padding: 0.35rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        color: var(--cc-muted);
+        transition:
+            color 0.15s,
+            background 0.15s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+        color: var(--cc-text);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        border-radius: 6px;
+    }
+    .hamburger:focus-visible {
+        outline: 2px solid var(--cc-blue);
+        outline-offset: 2px;
+    }
+    .ham-bar {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--cc-text);
+        border-radius: 2px;
+        transition:
+            transform 0.22s ease,
+            opacity 0.18s ease;
+        transform-origin: center;
+    }
+    .hamburger--open .ham-bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger--open .ham-bar:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .hamburger--open .ham-bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+    @media (max-width: 640px) {
+        .nav-links {
+            display: none;
+        }
+        .hamburger {
+            display: flex;
+        }
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        border-top: 1px solid var(--cc-border);
+        background: rgba(8, 8, 16, 0.97);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        z-index: 99;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .mobile-menu--open {
+        display: block;
+    }
+    .mobile-links {
+        list-style: none;
+        padding: 0.75rem clamp(1.25rem, 5vw, 2.5rem);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    .mobile-link {
+        display: block;
+        padding: 0.7rem 0.75rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: var(--cc-muted);
+        transition:
+            color 0.15s,
+            background 0.15s;
+    }
+    .mobile-link:hover,
+    .mobile-link--active {
+        color: var(--cc-text);
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* ── DOC HERO ── */
+    .doc-hero {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(3rem, 8vw, 6rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+        border-bottom: 1px solid var(--cc-border);
+    }
+    .hero-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            ellipse 60% 80% at 20% 50%,
+            rgba(91, 156, 246, 0.05) 0%,
+            transparent 70%
+        );
+        pointer-events: none;
+    }
+    .doc-hero-inner {
+        position: relative;
+        max-width: 680px;
+    }
+    .back-link {
+        display: inline-block;
+        font-size: 0.8rem;
+        color: var(--cc-muted);
+        margin-bottom: 1.75rem;
+        transition: color 0.15s;
+    }
+    .back-link:hover {
+        color: var(--cc-blue);
+    }
+    .app-ident {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        margin-bottom: 1.5rem;
+    }
+    .app-ident-emoji {
+        font-size: 2.25rem;
+        line-height: 1;
+    }
+    .app-ident-tagline {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 0.15rem;
+    }
+    .app-ident-name {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+    }
+    .doc-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 4vw, 2.8rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.5rem;
+    }
+    .doc-meta {
+        font-size: 0.8rem;
+        color: var(--cc-muted);
+        margin-bottom: 1.25rem;
+    }
+    .doc-intro {
+        font-size: 1rem;
+        color: var(--cc-muted);
+        line-height: 1.8;
+        max-width: 580px;
+    }
+
+    /* ── DOC LAYOUT ── */
+    .doc-layout {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 3rem;
+        padding-block: clamp(2.5rem, 6vw, 5rem);
+        align-items: start;
+    }
+    @media (max-width: 800px) {
+        .doc-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ── TOC ── */
+    .toc {
+        position: sticky;
+        top: 80px;
+    }
+    @media (max-width: 800px) {
+        .toc {
+            position: static;
+            background: var(--cc-surface);
+            border: 1px solid var(--cc-border);
+            border-radius: var(--cc-radius);
+            padding: 1.25rem;
+        }
+    }
+    .toc-title {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-muted);
+        margin-bottom: 0.75rem;
+    }
+    .toc-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+    @media (max-width: 800px) {
+        .toc-list {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+    }
+    .toc-link {
+        font-size: 0.82rem;
+        color: var(--cc-muted);
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+        display: block;
+        transition:
+            color 0.15s,
+            background 0.15s;
+    }
+    .toc-link:hover {
+        color: var(--cc-text);
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ── DOC BODY ── */
+    .doc-body {
+        min-width: 0;
+    }
+    .doc-section {
+        margin-bottom: 3rem;
+    }
+    .doc-h2 {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.015em;
+        margin-bottom: 1rem;
+        color: var(--cc-text);
+    }
+    .doc-section p {
+        font-size: 0.95rem;
+        color: var(--cc-muted);
+        line-height: 1.8;
+        margin-bottom: 0.85rem;
+    }
+    .doc-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* ── CALLOUTS ── */
+    .callout {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        margin: 1.25rem 0;
+    }
+    .callout-icon {
+        font-size: 1rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+    .callout div {
+        font-size: 0.875rem;
+        color: var(--cc-muted);
+        line-height: 1.65;
+    }
+    .callout div strong {
+        color: var(--cc-text);
+    }
+    .callout--green {
+        background: rgba(52, 211, 153, 0.07);
+        border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+    .callout--green .callout-icon {
+        color: var(--cc-green);
+    }
+    .callout--blue {
+        background: rgba(91, 156, 246, 0.07);
+        border: 1px solid rgba(91, 156, 246, 0.2);
+    }
+    .callout--blue .callout-icon {
+        color: var(--cc-blue);
+    }
+    .callout--amber {
+        background: rgba(251, 191, 36, 0.07);
+        border: 1px solid rgba(251, 191, 36, 0.2);
+    }
+    .callout--amber .callout-icon {
+        color: var(--cc-amber);
+    }
+
+    /* ── DATA TABLE ── */
+    .data-table-wrapper {
+        overflow-x: auto;
+        margin: 1.25rem 0;
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+    }
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.84rem;
+    }
+    .data-table thead {
+        background: var(--cc-surface);
+    }
+    .data-table th {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+        color: var(--cc-muted);
+        border-bottom: 1px solid var(--cc-border);
+        white-space: nowrap;
+    }
+    .data-table td {
+        padding: 0.75rem 1rem;
+        color: var(--cc-muted);
+        border-bottom: 1px solid var(--cc-border);
+        vertical-align: top;
+    }
+    .data-table tr:last-child td {
+        border-bottom: none;
+    }
+    .data-table td:first-child {
+        color: var(--cc-text);
+        font-weight: 500;
+    }
+    .table-empty {
+        text-align: center;
+        font-style: italic;
+    }
+    .table-note {
+        font-size: 0.8rem !important;
+        color: var(--cc-muted);
+        font-style: italic;
+        margin-top: 0.75rem !important;
+    }
+
+    /* ── BADGES ── */
+    .badge {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+    .badge--green {
+        background: rgba(52, 211, 153, 0.12);
+        color: var(--cc-green);
+        border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+    .badge--amber {
+        background: rgba(251, 191, 36, 0.12);
+        color: var(--cc-amber);
+        border: 1px solid rgba(251, 191, 36, 0.25);
+    }
+    .badge--muted {
+        background: var(--cc-surface);
+        color: var(--cc-muted);
+        border: 1px solid var(--cc-border);
+    }
+
+    /* ── POLICY LIST ── */
+    .policy-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    .policy-list li {
+        display: flex;
+        gap: 0.65rem;
+        align-items: flex-start;
+        font-size: 0.9rem;
+        color: var(--cc-muted);
+        line-height: 1.65;
+    }
+    .policy-list li::before {
+        content: "–";
+        color: var(--cc-blue);
+        flex-shrink: 0;
+        font-weight: 600;
+        margin-top: 0.05rem;
+    }
+    .policy-list li strong {
+        color: var(--cc-text);
+    }
+
+    /* ── INLINE LINK ── */
+    .inline-link {
+        color: var(--cc-blue);
+    }
+    .inline-link:hover {
+        text-decoration: underline;
+    }
+
+    /* ── CONTACT BLOCK ── */
+    .contact-block {
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        margin: 1.25rem 0;
+    }
+    .contact-line {
+        font-size: 0.9rem;
+        color: var(--cc-muted);
+        line-height: 1.8;
+    }
+    .contact-line strong {
+        color: var(--cc-text);
+    }
+
+    /* ── BOTTOM ACTIONS ── */
+    .doc-app-links {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--cc-border);
+        margin-top: 3rem;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.6rem 1.4rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: var(--font-body);
+        transition:
+            opacity 0.15s,
+            transform 0.15s,
+            box-shadow 0.15s;
+        cursor: pointer;
+        border: none;
+    }
+    .btn:hover {
+        opacity: 0.88;
+        transform: translateY(-1px);
+    }
+    .btn-primary {
+        background: var(--cc-blue);
+        color: #07070f;
+        box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);
+    }
+    .btn-primary:hover {
+        box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
+    }
+    .btn-ghost {
+        background: transparent;
+        color: var(--cc-text);
+        border: 1px solid var(--cc-border);
+    }
+    .btn-ghost:hover {
+        border-color: var(--cc-blue);
+        color: var(--cc-blue);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+        border-top: 1px solid var(--cc-border);
+        padding: 3.5rem 0 2rem;
+    }
+    .footer-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .footer-tagline {
+        color: var(--cc-muted);
+        font-size: 0.85rem;
+        width: 100%;
+        margin-top: 0.25rem;
+    }
+    .footer-links {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+    }
+    .footer-link {
+        font-size: 0.85rem;
+        color: var(--cc-muted);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: color 0.15s;
+    }
+    .footer-link:hover {
+        color: var(--cc-text);
+    }
+    .footer-legal {
+        font-size: 0.78rem;
+        color: var(--cc-muted);
+        line-height: 1.7;
+    }
+    .footer-policy-links {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 0.8rem;
+        color: var(--cc-muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            transition: none !important;
+            animation: none !important;
+        }
+    }
+</style>

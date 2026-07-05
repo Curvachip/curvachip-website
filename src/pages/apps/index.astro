@@ -9,16 +9,16 @@
 
 const title = "Creative Apps that Meet Your Needs | Curvachip";
 const description =
-    "Curvachip apps for Apple platforms — each built around a purpose, designed with care, and submitted to the App Store with intention. Download Shadow Task, TipZap, StoneClip, BugClip, PlantClip, and Grocery Wiz.";
+    "Curvachip apps for Apple platforms — each built around a purpose, designed with care, and submitted to the App Store with intention. Download Shadow Task, TipZap, StoneClip, BugClip, PlantClip, Tally Snap, and Grocery Wiz.";
 
 const DEVELOPER_PAGE =
-    "https://apps.apple.com/developer/michael-sharman/id1774903560";
+    "https://apps.apple.com/us/developer/curvachip-llc/id1774903560";
 
 const apps = [
     {
         name: "Shadow Task",
         tagline: "Focus & Track",
-        emoji: "🌑",
+        iconUrl: "shadow-task.png",
         description:
             "An exceptional Pomodoro timer focused on making work sessions meaningful. Track progress by task, add personal quotes to keep yourself inspired, and earn special rewards for pushing through.",
         features: [
@@ -36,13 +36,14 @@ const apps = [
             },
         ],
         pageHref: "/shadow-task",
-        appStoreUrl: DEVELOPER_PAGE, // TODO: replace with direct App Store link
-        privacyHref: "/apps/privacy-shadow-task",
+        appStoreUrl:
+            "https://apps.apple.com/us/app/study-timer-shadow-task/id6737145799?itscg=30200&itsct=apps_box_link&mttnsubad=6737145799", // TODO: replace with direct App Store link
+        privacyHref: "/privacy/shadow-task",
     },
     {
         name: "TipZap",
         tagline: "Tip Calculator",
-        emoji: "⚡",
+        iconUrl: "tipzap.png",
         description:
             "A beautifully focused tip calculator that handles dinner parties, group tabs, and late-night rounding with zero friction. The number pad is built in — no switching to another keyboard.",
         features: [
@@ -60,13 +61,13 @@ const apps = [
             },
         ],
         pageHref: "/tipzap",
-        appStoreUrl: DEVELOPER_PAGE,
-        privacyHref: "/privacy-policy-tipzap",
+        appStoreUrl: "https://apps.apple.com/us/app/tip-calculator-tipzap/id6743986322?itscg=30200&itsct=apps_box_link&mttnsubad=6743986322",
+        privacyHref: "/privacy/tipzap",
     },
     {
         name: "StoneClip",
         tagline: "Rock Identifier",
-        emoji: "🪨",
+        iconUrl: "stoneclip.png",
         description:
             "Point your camera at any rock and receive an AI-powered identification within seconds — complete with geological context and a chat interface so you can keep asking follow-up questions.",
         features: [
@@ -83,14 +84,14 @@ const apps = [
                 body: "Open, aim, press shutter. The AI handles the rest.",
             },
         ],
-        pageHref: "/stoneclip-rock-identifier",
-        appStoreUrl: DEVELOPER_PAGE,
-        privacyHref: "/privacy-policy-stoneclip",
+        pageHref: "/stoneclip",
+        appStoreUrl: "https://apps.apple.com/us/app/crystal-identifier-stoneclip/id6744538893?itscg=30200&itsct=apps_box_link&mttnsubad=6744538893",
+        privacyHref: "/privacy/stoneclip",
     },
     {
         name: "BugClip",
         tagline: "Bug Identifier",
-        emoji: "🐛",
+        iconUrl: "bugclip.png",
         description:
             "The same fast, AI-powered identification experience as StoneClip — this time focused on insects and arthropods. Great for curious kids, hikers, or anyone who just found something alarming under the sink.",
         features: [
@@ -107,14 +108,14 @@ const apps = [
                 body: "No waiting. Identification happens in real time.",
             },
         ],
-        pageHref: "/stoneclip-rock-identifier",
-        appStoreUrl: DEVELOPER_PAGE,
-        privacyHref: "/privacy-policy-bugclip",
+        pageHref: "/bugclip",
+        appStoreUrl: "https://apps.apple.com/us/app/bug-identifier-bugclip-ai/id6745129568?itscg=30200&itsct=apps_box_link&mttnsubad=6745129568",
+        privacyHref: "/privacy/bugclip",
     },
     {
         name: "PlantClip",
         tagline: "Plant Identifier",
-        emoji: "🌿",
+        iconUrl: "plantclip.png",
         description:
             "Identify plants, flowers, trees, and shrubs in seconds with AI. Great for hikers, gardeners, and anyone walking past an interesting hedge.",
         features: [
@@ -131,14 +132,14 @@ const apps = [
                 body: "Point, shoot, and know exactly what you're looking at.",
             },
         ],
-        pageHref: "/stoneclip-rock-identifier",
-        appStoreUrl: DEVELOPER_PAGE,
-        privacyHref: "/privacy-policy-plantclip",
+        pageHref: "/plantclip",
+        appStoreUrl: "https://apps.apple.com/us/app/identify-plants-plantclip/id6745438705?itscg=30200&itsct=apps_box_link&mttnsubad=6745438705",
+        privacyHref: "/privacy/plantclip",
     },
     {
         name: "Grocery Wiz",
         tagline: "Smart Grocery List",
-        emoji: "🛒",
+        iconUrl: "grocery-wiz.png",
         description:
             "A smarter grocery list experience designed to save you time and reduce forgotten items. Organize by aisle, set quantities, and move through your shop efficiently.",
         features: [
@@ -156,8 +157,32 @@ const apps = [
             },
         ],
         pageHref: "/grocery-wiz",
-        appStoreUrl: DEVELOPER_PAGE,
-        privacyHref: "/privacy-policy-grocery-liz",
+        appStoreUrl: "https://apps.apple.com/us/app/shopping-list-grocery-wiz/id6746955108?itscg=30200&itsct=apps_box_link&mttnsubad=6746955108",
+        privacyHref: "/privacy/grocery-wiz",
+    },
+    {
+        name: "Tally Snap",
+        tagline: "Click Counter",
+        iconUrl: "tally-snap.png",
+        description:
+            "A simple, thoughtful tool to help you track what is important—without distractions. Count anything, from laps to inventory, with a single tap. Tally Snap is designed to be fast, private, and easy to use.",
+        features: [
+            {
+                label: "Simple & Fast",
+                body: "Count anything with a single tap — no more complicated interfaces.",
+            },
+            {
+                label: "Share or Export",
+                body: "Easily share your counts or export them for further analysis.",
+            },
+            {
+                label: "Count up by 1, 5, or 10",
+                body: "Choose the increment that fits your counting needs, whether it's small or large.",
+            },
+        ],
+        pageHref: "/tally-snap",
+        appStoreUrl: "https://apps.apple.com/us/app/click-counter-tally-snap/id6746059766?itscg=30200&itsct=apps_box_link&mttnsubad=6746059766",
+        privacyHref: "/privacy/tally-snap",
     },
 ];
 
@@ -288,12 +313,18 @@ const review = {
                                 id={app.name.toLowerCase().replace(/\s+/g, "-")}
                             >
                                 <div class="app-row-header">
-                                    <span
-                                        class="app-big-emoji"
-                                        aria-hidden="true"
+                                    <a
+                                        href={app.appStoreUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
-                                        {app.emoji}
-                                    </span>
+                                        <img
+                                            src={app.iconUrl}
+                                            alt={app.name}
+                                            width="64"
+                                            height="64"
+                                        />
+                                    </a>
                                     <div class="app-row-meta">
                                         <p class="app-tagline">{app.tagline}</p>
                                         <h2 class="app-row-title">
@@ -329,10 +360,13 @@ const review = {
                                     <a
                                         href={app.appStoreUrl}
                                         target="_blank"
-                                        rel="noopener"
-                                        class="btn btn-primary"
+                                        rel="noopener noreferrer"
                                     >
-                                        ⬇ Download on App Store
+                                        <img
+                                            src="appblack.svg"
+                                            alt={app.name + " on the App Store"}
+                                            height="44"
+                                        />
                                     </a>
                                     <a
                                         href={app.pageHref}
@@ -671,13 +705,21 @@ const review = {
         transform: translateY(-1px);
     }
     .btn-primary {
-        background: var(--cc-blue);
-        color: #07070f;
-        box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);
+        /*background: var(--cc-blue);*/
+        /*color: #07070f;*/
+        /*box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);*/
+        scale: 2.2;
+        /*padding: 0.6rem 1.4rem;*/
+        /* padding-left: 2rem;
+        padding-right: 2rem; */
+    }
+    /* .btn-primary:hover {
+        box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
     }
     .btn-primary:hover {
         box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
     }
+    */
     .btn-ghost {
         background: transparent;
         color: var(--cc-text);
