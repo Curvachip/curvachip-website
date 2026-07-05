@@ -1,0 +1,167 @@
+---
+// src/components/Hero.astro
+// ═══════════════════════════════════════════════════════════════
+// REUSABLE HERO COMPONENT
+// ───────────────────────────────────────────────────────────────
+// USAGE:
+//
+//   import Hero from '../components/Hero.astro';
+//
+//   <Hero
+//     eyebrow="Apple Platforms · Est. 2024"
+//     title="Software built <em>around&nbsp;you</em>"
+//     subtitle="Curvachip distributes privacy-first apps…"
+//   >
+//     <!-- Optional: buttons or any extra content go in the slot -->
+//     <a href="/apps"  class="btn btn-primary">Explore Apps</a>
+//     <a href="/about" class="btn btn-ghost">Our Story</a>
+//   </Hero>
+//
+// PROPS:
+//   eyebrow  — small uppercase label above the title  (optional)
+//   title    — main heading; supports raw HTML for <em> gradient text
+//   subtitle — paragraph beneath the title            (optional)
+//   align    — "center" | "left" — default "center"  (optional)
+// ───────────────────────────────────────────────────────────────
+// NOTE: title accepts raw HTML (e.g. "Built <em>for you</em>")
+// because Astro's set:html directive is used below. Only pass
+// content you control — never pass user-generated strings here.
+// ═══════════════════════════════════════════════════════════════
+
+interface Props {
+  eyebrow?:  string;
+  title:     string;
+  subtitle?: string;
+  align?:    "center" | "left";
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  align = "center",
+} = Astro.props;
+---
+
+<section class={`hero hero--${align}`}>
+
+  <!-- Decorative grid / glow backdrop -->
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="container hero-content">
+
+    {eyebrow && (
+      <p class="eyebrow">{eyebrow}</p>
+    )}
+
+    <!--
+      set:html lets the title prop contain inline HTML tags
+      like <em> for the gradient text effect.
+      If you never need that, swap to: <h1 class="hero-title">{title}</h1>
+    -->
+    <h1 class="hero-title" set:html={title} />
+
+    {subtitle && (
+      <p class="hero-sub">{subtitle}</p>
+    )}
+
+    <!--
+      Slot: drop buttons or any extra content between the
+      opening and closing <Hero> tags in the parent page.
+      If nothing is slotted, the .hero-cta div is not rendered.
+    -->
+    <slot>
+      <!-- default slot — empty if parent passes nothing -->
+    </slot>
+
+  </div>
+</section>
+
+<style>
+  /* ── HERO SHELL ──────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(4rem, 10vw, 7rem) 0 clamp(3.5rem, 8vw, 6rem);
+  }
+
+  /* Alignment variants */
+  .hero--center { text-align: center; }
+  .hero--left   { text-align: left;  }
+
+  /* ── DECORATIVE GRID ─────────────────────────────────────── */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(91, 156, 246, 0.06) 0%,
+        transparent 65%
+      ),
+      linear-gradient(rgba(91, 156, 246, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91, 156, 246, 0.035) 1px, transparent 1px);
+    background-size: auto, 44px 44px, 44px 44px;
+    mask-image: radial-gradient(
+      ellipse 80% 70% at 50% 0%,
+      black 40%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* ── CONTENT ─────────────────────────────────────────────── */
+  .hero-content { position: relative; }
+
+  /* Center variant: constrain and centre the text block */
+  .hero--center .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── EYEBROW ─────────────────────────────────────────────── */
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cc-blue);
+    margin-bottom: 1.5rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(91, 156, 246, 0.25);
+    border-radius: 99px;
+    background: rgba(91, 156, 246, 0.07);
+  }
+
+  /* ── TITLE ───────────────────────────────────────────────── */
+  .hero-title {
+    font-size: clamp(2.8rem, 7vw, 5.2rem);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    color: var(--cc-text);
+    margin-bottom: 1.5rem;
+    /* Left-aligned heroes cap the title width for readability */
+    max-width: 700px;
+  }
+
+  .hero-title :global(em) {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── SUBTITLE ────────────────────────────────────────────── */
+  .hero-sub {
+    max-width: 560px;
+    color: var(--cc-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+</style>

@@ -1,0 +1,16 @@
+{
+  "name": "Curvachip",
+  "short_name": "Curvachip",
+  "description": "Software Development for Apple Platforms",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#080810",
+  "theme_color": "#5B9CF6",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

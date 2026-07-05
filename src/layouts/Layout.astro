@@ -1,23 +1,683 @@
+---
+interface Props {
+	title: string;
+	description: string;
+	activeNav?: "home" | "apps" | "privacy" | "contact" | "about";
+	canonicalUrl?: string;
+	ogType?: string;
+}
+
+const {
+	title,
+	description,
+	activeNav = "",
+	canonicalUrl = Astro.url.href,
+	ogType = "website",
+} = Astro.props;
+
+// Nav items defined once — add, remove, or reorder here only.
+const navItems = [
+	{ label: "Home", href: "/", key: "home" },
+	{ label: "Apps", href: "/apps", key: "apps" },
+	{ label: "Privacy", href: "/privacy", key: "privacy" },
+	{ label: "Contact", href: "/contact", key: "contact" },
+	{ label: "About", href: "/about", key: "about" },
+];
+
+// Footer social links — edit here only.
+const socials = [
+	{ label: "GitHub", href: "https://github.com/Curvachip", abbr: "GH" },
+	{ label: "X/Twitter", href: "https://x.com/curvachip", abbr: "𝕏" },
+	{
+		label: "LinkedIn",
+		href: "https://www.linkedin.com/company/curvachip",
+		abbr: "in",
+	},
+	{
+		label: "Instagram",
+		href: "https://www.instagram.com/curvachip/",
+		abbr: "IG",
+	},
+	{
+		label: "YouTube",
+		href: "https://www.youtube.com/@curvachip",
+		abbr: "YT",
+	},
+	{ label: "Email", href: "mailto:developer@curvachip.com", abbr: "@" },
+];
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Primary meta -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content="Curvachip" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		<!-- Canonical -->
+		<link rel="canonical" href={canonicalUrl} />
+
+		<!-- Favicon -->
+		<!-- ─────────────────────────────────────────────────────────
+       Place your favicon files in src/public/ and update the
+       paths below. Recommended set:
+         /favicon.ico          (32×32, legacy browsers)
+         /favicon.svg          (modern browsers — scales perfectly)
+         /apple-touch-icon.png (180×180, iOS home screen)
+         /site.webmanifest     (PWA manifest for Android)
+       ───────────────────────────────────────────────────────── -->
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content="#5B9CF6" />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Allow pages to inject extra <head> content (e.g. page-specific meta) -->
+		<slot name="head" />
 	</head>
 	<body>
+		<!-- ══════════════════════════════════════════════════════════
+     NAV
+     Edit navItems at the top of this file to add/remove links.
+     ══════════════════════════════════════════════════════════ -->
+		<nav class="nav" role="navigation" aria-label="Main navigation">
+			<div class="nav-inner">
+				<!-- Logo -->
+				<a href="/" class="nav-logo" aria-label="Curvachip home">
+					<img
+						src="/graphiclogodark.svg"
+						alt="Curvachip logo"
+						class="logo-chip"
+					/>
+					<span class="logo-text">Curvachip</span>
+				</a>
+
+				<!-- Desktop links -->
+				<ul class="nav-links" id="nav-links" role="list">
+					{
+						navItems.map((item) => (
+							<li>
+								<a
+									href={item.href}
+									class={`nav-link${activeNav === item.key ? " active" : ""}`}
+									aria-current={
+										activeNav === item.key
+											? "page"
+											: undefined
+									}
+								>
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+
+				<!-- Hamburger (mobile only) -->
+				<button
+					class="hamburger"
+					id="hamburger"
+					aria-label="Open menu"
+					aria-expanded="false"
+					aria-controls="nav-links"
+				>
+					<span class="ham-bar"></span>
+					<span class="ham-bar"></span>
+					<span class="ham-bar"></span>
+				</button>
+			</div>
+
+			<!-- Mobile drawer (overlay, does not push content) -->
+			<div
+				class="mobile-menu"
+				id="mobile-menu"
+				aria-hidden="true"
+				role="dialog"
+				aria-label="Navigation menu"
+			>
+				<ul class="mobile-links" role="list">
+					{
+						navItems.map((item) => (
+							<li>
+								<a
+									href={item.href}
+									class={`mobile-link${activeNav === item.key ? " mobile-link--active" : ""}`}
+									aria-current={
+										activeNav === item.key
+											? "page"
+											: undefined
+									}
+								>
+									{item.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</nav>
+
+		<!-- ══════════════════════════════════════════════════════════
+     PAGE CONTENT
+     Each page's markup is slotted in here.
+     ══════════════════════════════════════════════════════════ -->
 		<slot />
+
+		<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+     Edit socials / links at the top of this file.
+     ══════════════════════════════════════════════════════════ -->
+		<footer class="footer">
+			<div class="container footer-inner">
+				<div class="footer-brand">
+					<img
+						src="/graphiclogodark.svg"
+						alt="Curvachip logo"
+						class="logo-chip"
+					/>
+					<span class="logo-text">Curvachip</span>
+					<p class="footer-tagline">
+						Crafting exceptional software for Apple platforms.
+					</p>
+				</div>
+
+				<nav class="footer-nav" aria-label="Footer navigation">
+					{
+						navItems.map((item) => (
+							<a href={item.href} class="footer-link">
+								{item.label}
+							</a>
+						))
+					}
+				</nav>
+
+				<div
+					class="footer-social"
+					role="list"
+					aria-label="Social links"
+				>
+					{
+						socials.map((s) => (
+							<a
+								href={s.href}
+								class="social-link"
+								target={
+									s.href.startsWith("mailto")
+										? "_self"
+										: "_blank"
+								}
+								rel={
+									s.href.startsWith("mailto")
+										? undefined
+										: "noopener noreferrer"
+								}
+								aria-label={s.label}
+								role="listitem"
+							>
+								{s.abbr}
+							</a>
+						))
+					}
+				</div>
+
+				<p class="footer-legal">
+					Copyright &copy; {new Date().getFullYear()} Curvachip LLC. All
+					rights reserved.<br />
+					<small
+						>Apple is a trademark of Apple Inc. and is not
+						affiliated with Curvachip LLC.</small
+					>
+				</p>
+
+				<div class="footer-policy-links">
+					<a href="/privacy-policy-curvachip" class="footer-link"
+						>Privacy Policy</a
+					>
+					<span aria-hidden="true">&middot;</span>
+					<a
+						href="/terms-and-conditions-curvachip"
+						class="footer-link">Terms of Use</a
+					>
+				</div>
+			</div>
+		</footer>
+
+		<!-- ══════════════════════════════════════════════════════════
+     HAMBURGER SCRIPT
+     Defined once here — works on every page automatically.
+     ══════════════════════════════════════════════════════════ -->
+		<script>
+			const hamburger = document.getElementById(
+				"hamburger",
+			) as HTMLButtonElement | null;
+			const mobileMenu = document.getElementById(
+				"mobile-menu",
+			) as HTMLElement | null;
+
+			if (hamburger && mobileMenu) {
+				// Toggle open / closed
+				hamburger.addEventListener("click", () => {
+					const open =
+						mobileMenu.classList.toggle("mobile-menu--open");
+					hamburger.setAttribute("aria-expanded", String(open));
+					mobileMenu.setAttribute("aria-hidden", String(!open));
+					hamburger.classList.toggle("hamburger--open", open);
+					// Prevent body scroll while menu is open
+					document.body.style.overflow = open ? "hidden" : "";
+				});
+
+				// Close on Escape key
+				document.addEventListener("keydown", (e) => {
+					if (
+						e.key === "Escape" &&
+						mobileMenu.classList.contains("mobile-menu--open")
+					) {
+						mobileMenu.classList.remove("mobile-menu--open");
+						mobileMenu.setAttribute("aria-hidden", "true");
+						hamburger.setAttribute("aria-expanded", "false");
+						hamburger.classList.remove("hamburger--open");
+						document.body.style.overflow = "";
+						hamburger.focus();
+					}
+				});
+
+				// Close when a mobile link is tapped (navigating to current page)
+				mobileMenu.querySelectorAll(".mobile-link").forEach((link) => {
+					link.addEventListener("click", () => {
+						mobileMenu.classList.remove("mobile-menu--open");
+						mobileMenu.setAttribute("aria-hidden", "true");
+						hamburger.setAttribute("aria-expanded", "false");
+						hamburger.classList.remove("hamburger--open");
+						document.body.style.overflow = "";
+					});
+				});
+			}
+		</script>
 	</body>
 </html>
 
-<style>
-	html,
-	body {
+<!-- ══════════════════════════════════════════════════════════
+     GLOBAL STYLES
+     Defined once here — inherited by every page.
+     ══════════════════════════════════════════════════════════ -->
+<style is:global>
+	/* ── DESIGN TOKENS ─────────────────────────────────────── */
+	/* Change a value here and it updates across every page.   */
+	:root {
+		/* Palette */
+		--cc-bg: #080810;
+		--cc-surface: #10101e;
+		--cc-border: #1c1c32;
+		--cc-blue: #5b9cf6;
+		--cc-blue-dim: rgba(91, 156, 246, 0.12);
+		--cc-violet: #a78bfa;
+		--cc-green: #34d399;
+		--cc-amber: #fbbf24;
+		--cc-red: #ef4444;
+		--cc-text: #e8e8f0;
+		--cc-muted: #6a6a88;
+		--cc-radius: 12px;
+		--cc-max: 1120px;
+
+		/* Typography */
+		--font-display: "Outfit", system-ui, sans-serif;
+		--font-body: "DM Sans", system-ui, sans-serif;
+		--font-size-base: 1.0625rem; /* 17px */
+	}
+
+	/* ── RESET ─────────────────────────────────────────────── */
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
 		margin: 0;
+		padding: 0;
+	}
+	html {
+		scroll-behavior: smooth;
+	}
+	:target {
+		scroll-margin-top: 80px;
+	}
+	body {
+		background: var(--cc-bg);
+		color: var(--cc-text);
+		font-family: var(--font-body);
+		font-size: var(--font-size-base);
+		line-height: 1.65;
+		-webkit-font-smoothing: antialiased;
+	}
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+	strong {
+		font-weight: 600;
+	}
+	em {
+		font-style: normal;
+	}
+
+	/* ── LAYOUT ─────────────────────────────────────────────── */
+	.container {
 		width: 100%;
-		height: 100%;
+		max-width: var(--cc-max);
+		margin-inline: auto;
+		padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+	}
+
+	/* ── NAV ─────────────────────────────────────────────────── */
+	.nav {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		border-bottom: 1px solid var(--cc-border);
+		background: rgba(8, 8, 16, 0.8);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+	}
+	.nav-inner {
+		max-width: var(--cc-max);
+		margin-inline: auto;
+		padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+		height: 60px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.nav-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-weight: 600;
+		font-size: 1.05rem;
+		letter-spacing: -0.01em;
+	}
+	.logo-text {
+		font-weight: 600;
+	}
+	.logo-chip {
+		height: 20px;
+		width: auto;
+		display: block;
+	}
+	.nav-links {
+		display: flex;
+		gap: 0.25rem;
+		list-style: none;
+	}
+	.nav-link {
+		padding: 0.35rem 0.75rem;
+		border-radius: 6px;
+		font-size: 0.875rem;
+		color: var(--cc-muted);
+		transition:
+			color 0.15s,
+			background 0.15s;
+	}
+	.nav-link:hover,
+	.nav-link.active {
+		color: var(--cc-text);
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	/* ── HAMBURGER ───────────────────────────────────────────── */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 6px;
+		border-radius: 6px;
+	}
+	.hamburger:focus-visible {
+		outline: 2px solid var(--cc-blue);
+		outline-offset: 2px;
+	}
+	.ham-bar {
+		display: block;
+		width: 22px;
+		height: 2px;
+		background: var(--cc-text);
+		border-radius: 2px;
+		transition:
+			transform 0.22s ease,
+			opacity 0.18s ease;
+		transform-origin: center;
+	}
+	.hamburger--open .ham-bar:nth-child(1) {
+		transform: translateY(7px) rotate(45deg);
+	}
+	.hamburger--open .ham-bar:nth-child(2) {
+		opacity: 0;
+		transform: scaleX(0);
+	}
+	.hamburger--open .ham-bar:nth-child(3) {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+
+	@media (max-width: 640px) {
+		.nav-links {
+			display: none;
+		}
+		.hamburger {
+			display: flex;
+		}
+	}
+
+	/* ── MOBILE MENU ─────────────────────────────────────────── */
+	.mobile-menu {
+		display: none;
+		position: fixed;
+		top: 60px;
+		left: 0;
+		right: 0; /* overlay, never pushes content */
+		border-top: 1px solid var(--cc-border);
+		background: rgba(8, 8, 16, 0.97);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		z-index: 99;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+	}
+	.mobile-menu--open {
+		display: block;
+	}
+	.mobile-links {
+		list-style: none;
+		padding: 0.75rem clamp(1.25rem, 5vw, 2.5rem);
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.mobile-link {
+		display: block;
+		padding: 0.7rem 0.75rem;
+		border-radius: 8px;
+		font-size: 1rem;
+		color: var(--cc-muted);
+		transition:
+			color 0.15s,
+			background 0.15s;
+	}
+	.mobile-link:hover,
+	.mobile-link--active {
+		color: var(--cc-text);
+		background: rgba(255, 255, 255, 0.06);
+	}
+
+	/* ── BUTTONS ─────────────────────────────────────────────── */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.6rem 1.4rem;
+		border-radius: 8px;
+		font-size: 0.9rem;
+		font-weight: 500;
+		font-family: var(--font-body);
+		transition:
+			opacity 0.15s,
+			transform 0.15s,
+			box-shadow 0.15s;
+		cursor: pointer;
+		border: none;
+	}
+	.btn:hover {
+		opacity: 0.88;
+		transform: translateY(-1px);
+	}
+	.btn-primary {
+		background: var(--cc-blue);
+		color: #07070f;
+		box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);
+	}
+	.btn-primary:hover {
+		box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
+	}
+	.btn-ghost {
+		background: transparent;
+		color: var(--cc-text);
+		border: 1px solid var(--cc-border);
+	}
+	.btn-ghost:hover {
+		border-color: var(--cc-blue);
+		color: var(--cc-blue);
+	}
+	.btn-sm {
+		padding: 0.45rem 1rem;
+		font-size: 0.82rem;
+	}
+	.btn-text {
+		background: transparent;
+		color: var(--cc-muted);
+		padding-inline: 0.5rem;
+		font-size: 0.85rem;
+	}
+	.btn-text:hover {
+		color: var(--cc-blue);
+	}
+
+	/* ── FOOTER ──────────────────────────────────────────────── */
+	.footer {
+		border-top: 1px solid var(--cc-border);
+		padding: 3.5rem 0 2rem;
+	}
+	.footer-inner {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+	.footer-brand {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+	.footer-tagline {
+		color: var(--cc-muted);
+		font-size: 0.85rem;
+		width: 100%;
+		margin-top: 0.25rem;
+	}
+	.footer-nav {
+		display: flex;
+		gap: 0.25rem;
+		flex-wrap: wrap;
+	}
+	.footer-link {
+		font-size: 0.85rem;
+		color: var(--cc-muted);
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		transition: color 0.15s;
+	}
+	.footer-link:hover {
+		color: var(--cc-text);
+	}
+	.footer-social {
+		display: flex;
+		gap: 0.4rem;
+		flex-wrap: wrap;
+	}
+	.social-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 34px;
+		height: 34px;
+		border: 1px solid var(--cc-border);
+		border-radius: 6px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: var(--cc-muted);
+		transition:
+			color 0.15s,
+			border-color 0.15s;
+	}
+	.social-link:hover {
+		color: var(--cc-blue);
+		border-color: var(--cc-blue);
+	}
+	.footer-legal {
+		font-size: 0.78rem;
+		color: var(--cc-muted);
+		line-height: 1.7;
+	}
+	.footer-policy-links {
+		display: flex;
+		gap: 0.5rem;
+		align-items: center;
+		font-size: 0.8rem;
+		color: var(--cc-muted);
+	}
+
+	/* ── UTILITY ─────────────────────────────────────────────── */
+	.text-link {
+		color: var(--cc-blue);
+	}
+	.text-link:hover {
+		text-decoration: underline;
+	}
+	.inline-link {
+		color: var(--cc-blue);
+	}
+	.inline-link:hover {
+		text-decoration: underline;
+	}
+
+	/* ── ACCESSIBILITY ───────────────────────────────────────── */
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			transition: none !important;
+			animation: none !important;
+		}
 	}
 </style>

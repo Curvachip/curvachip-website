@@ -7,11 +7,13 @@
 // how Curvachip handles data differently.
 // ─────────────────────────────────────────────────────────────
 
+import Layout from '../../layouts/Layout.astro';
+
 const title = "What You Share with AI Chatbots Stays There | Curvachip";
 const description =
     "A plain-English look at the data risks of AI chatbots — what they collect, who can see it, and why you should never paste in sensitive information. Plus, how Curvachip approaches data differently.";
 
-const publishDate = "June 2025";
+const publishDate = "July 2026";
 
 const risks = [
     {
@@ -72,100 +74,12 @@ const curvachipApproach = [
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://curvachip.com/privacy" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="canonical" href="https://curvachip.com/privacy" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <script>
-            const hamburger = document.getElementById("hamburger");
-            const mobileMenu = document.getElementById("mobile-menu");
-            if (hamburger && mobileMenu) {
-                hamburger.addEventListener("click", () => {
-                    const open =
-                        mobileMenu.classList.toggle("mobile-menu--open");
-                    hamburger.setAttribute("aria-expanded", String(open));
-                    mobileMenu.setAttribute("aria-hidden", String(!open));
-                    hamburger.classList.toggle("hamburger--open", open);
-                });
-                document.addEventListener("keydown", (e) => {
-                    if (
-                        e.key === "Escape" &&
-                        mobileMenu.classList.contains("mobile-menu--open")
-                    ) {
-                        mobileMenu.classList.remove("mobile-menu--open");
-                        mobileMenu.setAttribute("aria-hidden", "true");
-                        hamburger.setAttribute("aria-expanded", "false");
-                        hamburger.classList.remove("hamburger--open");
-                        hamburger.focus();
-                    }
-                });
-            }
-        </script>
-    </head>
-
-    <body>
-        <!-- ── NAV ── -->
-        <nav class="nav">
-            <div class="nav-inner">
-                <a href="/" class="nav-logo" aria-label="Curvachip home">
-                    <img
-                        src="/graphiclogodark.svg"
-                        alt="Curvachip logo"
-                        class="logo-chip"
-                    />
-                    <span class="logo-text">Curvachip</span>
-                </a>
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="/" class="nav-link">Home</a></li>
-                    <li><a href="/apps" class="nav-link">Apps</a></li>
-                    <li>
-                        <a href="/privacy" class="nav-link active">Privacy</a>
-                    </li>
-                    <li><a href="/contact" class="nav-link">Contact</a></li>
-                    <li><a href="/about" class="nav-link">About</a></li>
-                </ul>
-                <button
-                    class="hamburger"
-                    id="hamburger"
-                    aria-label="Open menu"
-                    aria-expanded="false"
-                    aria-controls="nav-links"
-                >
-                    <span class="ham-bar"></span>
-                    <span class="ham-bar"></span>
-                    <span class="ham-bar"></span>
-                </button>
-            </div>
-            <!-- Mobile drawer — rendered below the bar, pushed out of flow -->
-            <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-                <ul class="mobile-links">
-                    <li><a href="/" class="mobile-link">Home</a></li>
-                    <li><a href="/apps" class="mobile-link">Apps</a></li>
-                    <li>
-                        <a href="/privacy" class="mobile-link--active"
-                            >Privacy</a>
-                    </li>
-                    <li><a href="/contact" class="mobile-link">Contact</a></li>
-                    <li><a href="/about" class="mobile-link">About</a></li>
-                </ul>
-            </div>
-        </nav>
+<Layout
+  title={title}
+  description={description}
+  activeNav="privacy"
+  canonicalUrl="https://curvachip.com/privacy"
+>
 
         <!-- ── ARTICLE HERO ── -->
         <header class="article-hero">
@@ -387,255 +301,9 @@ const curvachipApproach = [
             </div>
         </main>
 
-        <!-- ── FOOTER ── -->
-        <footer class="footer">
-            <div class="container footer-inner">
-                <div class="footer-brand">
-                    <span class="logo-chip" aria-hidden="true">◈</span>
-                    <span class="logo-text">Curvachip</span>
-                    <p class="footer-tagline">
-                        Crafting exceptional software for Apple platforms.
-                    </p>
-                </div>
-                <nav class="footer-links" aria-label="Footer navigation">
-                    <a href="/" class="footer-link">Home</a>
-                    <a href="/apps" class="footer-link">Apps</a>
-                    <a href="/privacy" class="footer-link">Privacy</a>
-                    <a href="/contact" class="footer-link">Contact</a>
-                    <a href="/about" class="footer-link">About</a>
-                </nav>
-                <div class="footer-social">
-                    <a
-                        href="https://github.com/Curvachip"
-                        class="social-link"
-                        target="_blank"
-                        rel="noopener"
-                        aria-label="GitHub">GH</a
-                    >
-                    <a
-                        href="https://x.com/curvachip"
-                        class="social-link"
-                        target="_blank"
-                        rel="noopener"
-                        aria-label="X">𝕏</a
-                    >
-                    <a
-                        href="https://www.linkedin.com/company/curvachip"
-                        class="social-link"
-                        target="_blank"
-                        rel="noopener"
-                        aria-label="LinkedIn">in</a
-                    >
-                    <a
-                        href="mailto:developer@curvachip.com"
-                        class="social-link"
-                        aria-label="Email">@</a
-                    >
-                </div>
-                <p class="footer-legal">
-                    Copyright © 2026 Curvachip LLC. All rights reserved.<br />
-                    <small
-                        >Apple is a trademark of Apple Inc. and is not
-                        affiliated with Curvachip LLC.</small
-                    >
-                </p>
-                <div class="footer-policy-links">
-                    <a href="/privacy-policy-curvachip" class="footer-link"
-                        >Privacy Policy</a
-                    >
-                    <span aria-hidden="true">·</span>
-                    <a
-                        href="/terms-and-conditions-curvachip"
-                        class="footer-link">Terms of Use</a
-                    >
-                </div>
-            </div>
-        </footer>
-    </body>
-</html>
+</Layout>
 
-<style is:global>
-    :root {
-        --cc-bg: #080810;
-        --cc-surface: #10101e;
-        --cc-border: #1c1c32;
-        --cc-blue: #5b9cf6;
-        --cc-blue-dim: rgba(91, 156, 246, 0.12);
-        --cc-violet: #a78bfa;
-        --cc-text: #e8e8f0;
-        --cc-muted: #6a6a88;
-        --cc-radius: 12px;
-        --cc-max: 1120px;
-    }
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-    html {
-        scroll-behavior: smooth;
-    }
-    body {
-        background: var(--cc-bg);
-        color: var(--cc-text);
-        font-family: "Inter", system-ui, sans-serif;
-        font-size: 1rem;
-        line-height: 1.65;
-        -webkit-font-smoothing: antialiased;
-    }
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-    strong {
-        font-weight: 600;
-    }
-    .container {
-        width: 100%;
-        max-width: var(--cc-max);
-        margin-inline: auto;
-        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
-    }
-
-    .nav {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        border-bottom: 1px solid var(--cc-border);
-        background: rgba(8, 8, 16, 0.8);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-    }
-    .nav-inner {
-        max-width: var(--cc-max);
-        margin-inline: auto;
-        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .nav-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 600;
-        font-size: 1.05rem;
-    }
-    .logo-text {
-        font-weight: 600;
-    }
-    .logo-chip {
-        height: 20px;
-        width: auto;
-        display: block;
-    }
-    .nav-links {
-        display: flex;
-        gap: 0.25rem;
-        list-style: none;
-    }
-    .nav-link {
-        padding: 0.35rem 0.75rem;
-        border-radius: 6px;
-        font-size: 0.875rem;
-        color: var(--cc-muted);
-        transition:
-            color 0.15s,
-            background 0.15s;
-    }
-    .nav-link:hover,
-    .nav-link.active {
-        color: var(--cc-text);
-        background: rgba(255, 255, 255, 0.06);
-    }
-    .hamburger {
-        display: none;
-        flex-direction: column;
-        justify-content: center;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 6px;
-        border-radius: 6px;
-    }
-    .hamburger:focus-visible {
-        outline: 2px solid var(--cc-blue);
-        outline-offset: 2px;
-    }
-    .ham-bar {
-        display: block;
-        width: 22px;
-        height: 2px;
-        background: var(--cc-text);
-        border-radius: 2px;
-        transition:
-            transform 0.22s ease,
-            opacity 0.18s ease;
-        transform-origin: center;
-    }
-    .hamburger--open .ham-bar:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-    .hamburger--open .ham-bar:nth-child(2) {
-        opacity: 0;
-        transform: scaleX(0);
-    }
-    .hamburger--open .ham-bar:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-    }
-
-    @media (max-width: 640px) {
-        .nav-links {
-            display: none;
-        }
-        .hamburger {
-            display: flex;
-        }
-    }
-
-    /* ── MOBILE MENU ── */
-    .mobile-menu {
-        display: none;
-        position: fixed;
-        top: 60px; /* matches the nav height */
-        left: 0;
-        right: 0;
-        border-top: 1px solid var(--cc-border);
-        background: rgba(8, 8, 16, 0.97);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        z-index: 99; /* just below the nav's z-index: 100 */
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    }
-    .mobile-menu--open {
-        display: block;
-    }
-    .mobile-links {
-        list-style: none;
-        padding: 0.75rem clamp(1.25rem, 5vw, 2.5rem);
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-    .mobile-link {
-        display: block;
-        padding: 0.7rem 0.75rem;
-        border-radius: 8px;
-        font-size: 1rem;
-        color: var(--cc-muted);
-        transition:
-            color 0.15s,
-            background 0.15s;
-    }
-    .mobile-link:hover,
-    .mobile-link--active {
-        color: var(--cc-text);
-        background: rgba(255, 255, 255, 0.06);
-    }
+<style>
 
     /* Article hero */
     .article-hero {
@@ -649,26 +317,25 @@ const curvachipApproach = [
         inset: 0;
         background-image:
             radial-gradient(
-                circle at 30% 50%,
-                rgba(167, 139, 250, 0.05) 0%,
-                transparent 60%
+                circle at 50% 0%,
+                rgba(91, 156, 246, 0.06) 0%,
+                transparent 65%
             ),
-            radial-gradient(
-                circle at 70% 50%,
-                rgba(91, 156, 246, 0.05) 0%,
-                transparent 60%
-            ),
-            linear-gradient(rgba(91, 156, 246, 0.03) 1px, transparent 1px),
+            linear-gradient(rgba(91, 156, 246, 0.035) 1px, transparent 1px),
             linear-gradient(
                 90deg,
-                rgba(91, 156, 246, 0.03) 1px,
+                rgba(91, 156, 246, 0.035) 1px,
                 transparent 1px
             );
         background-size:
             auto,
-            auto,
             44px 44px,
             44px 44px;
+        mask-image: radial-gradient(
+            ellipse 80% 70% at 50% 0%,
+            black 40%,
+            transparent 100%
+        );
         pointer-events: none;
     }
     .article-hero-content {
@@ -903,118 +570,4 @@ const curvachipApproach = [
         margin-top: 1.5rem;
     }
 
-    /* Buttons */
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.6rem 1.4rem;
-        border-radius: 8px;
-        font-size: 0.9rem;
-        font-weight: 500;
-        transition:
-            opacity 0.15s,
-            transform 0.15s,
-            box-shadow 0.15s;
-        cursor: pointer;
-        border: none;
-    }
-    .btn:hover {
-        opacity: 0.88;
-        transform: translateY(-1px);
-    }
-    .btn-primary {
-        background: var(--cc-blue);
-        color: #07070f;
-        box-shadow: 0 0 20px rgba(91, 156, 246, 0.3);
-    }
-    .btn-primary:hover {
-        box-shadow: 0 0 28px rgba(91, 156, 246, 0.45);
-    }
-    .btn-ghost {
-        background: transparent;
-        color: var(--cc-text);
-        border: 1px solid var(--cc-border);
-    }
-    .btn-ghost:hover {
-        border-color: var(--cc-blue);
-        color: var(--cc-blue);
-    }
-
-    /* Footer */
-    .footer {
-        border-top: 1px solid var(--cc-border);
-        padding: 3.5rem 0 2rem;
-    }
-    .footer-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    .footer-brand {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-    .footer-tagline {
-        color: var(--cc-muted);
-        font-size: 0.85rem;
-        width: 100%;
-        margin-top: 0.25rem;
-    }
-    .footer-links,
-    .footer-social {
-        display: flex;
-        gap: 0.25rem;
-        flex-wrap: wrap;
-    }
-    .footer-link {
-        font-size: 0.85rem;
-        color: var(--cc-muted);
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        transition: color 0.15s;
-    }
-    .footer-link:hover {
-        color: var(--cc-text);
-    }
-    .social-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 34px;
-        height: 34px;
-        border: 1px solid var(--cc-border);
-        border-radius: 6px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--cc-muted);
-        transition:
-            color 0.15s,
-            border-color 0.15s;
-    }
-    .social-link:hover {
-        color: var(--cc-blue);
-        border-color: var(--cc-blue);
-    }
-    .footer-legal {
-        font-size: 0.78rem;
-        color: var(--cc-muted);
-        line-height: 1.7;
-    }
-    .footer-policy-links {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        font-size: 0.8rem;
-        color: var(--cc-muted);
-    }
-    @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-            transition: none !important;
-        }
-    }
 </style>
