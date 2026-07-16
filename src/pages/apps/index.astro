@@ -276,7 +276,7 @@ const review = {
                                     rel="noopener noreferrer"
                                 >
                                     <img
-                                        src="appblack.svg"
+                                        src="/appblack.svg"
                                         alt={app.name + " on the App Store"}
                                         height="44"
                                     />
@@ -324,7 +324,6 @@ const review = {
 </Layout>
 
 <style>
-
     /* ── SECTIONS ── */
     .section {
         padding: clamp(4rem, 9vw, 7rem) 0;
@@ -427,6 +426,9 @@ const review = {
         gap: 0.75rem;
         flex-wrap: wrap;
         align-items: center;
+    }
+    .app-row-actions img {
+        display: block;
     }
     .app-divider {
         height: 1px;

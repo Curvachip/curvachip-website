@@ -531,6 +531,22 @@ const {
 // Derived meta — built from props so they're always in sync
 const title = `Privacy Policy — ${appName} | Curvachip`;
 const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly what data is collected, how it is used, and your rights as a user.`;
+
+let section = 1;
+
+const overviewNum = section++;
+const collectedNum = section++;
+const usageNum = section++;
+
+const aiNum = aiProcessing ? section++ : null;
+const icloudNum = icloudSync ? section++ : null;
+const thirdPartyNum = thirdParty ? section++ : null;
+
+const retentionNum = section++;
+const rightsNum = section++;
+const childrenNum = section++;
+const changesNum = section++;
+const contactNum = section++;
 ---
 
 <Layout
@@ -573,22 +589,22 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                 <p class="toc-title">On this page</p>
                 <ol class="toc-list">
                     <li>
-                        <a href="#overview" class="toc-link">1. Overview</a>
+                        <a href="#overview" class="toc-link">{overviewNum}. Overview</a>
                     </li>
                     <li>
                         <a href="#data-collected" class="toc-link"
-                            >2. What we collect</a
+                            >{collectedNum}. What we collect</a
                         >
                     </li>
                     <li>
-                        <a href="#data-use" class="toc-link">3. How we use it</a
+                        <a href="#data-use" class="toc-link">{usageNum}. How we handle your data</a
                         >
                     </li>
                     {
                         aiProcessing && (
                             <li>
                                 <a href="#ai" class="toc-link">
-                                    4. AI processing
+                                    {aiNum}. AI processing
                                 </a>
                             </li>
                         )
@@ -597,7 +613,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                         icloudSync && (
                             <li>
                                 <a href="#icloud" class="toc-link">
-                                    5. iCloud sync
+                                    {icloudNum}. iCloud sync
                                 </a>
                             </li>
                         )
@@ -606,27 +622,27 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                         thirdParty && (
                             <li>
                                 <a href="#third-party" class="toc-link">
-                                    6. Third parties
+                                    {thirdPartyNum}. Third parties
                                 </a>
                             </li>
                         )
                     }
                     <li>
                         <a href="#retention" class="toc-link"
-                            >7. Data retention</a
+                            >{retentionNum}. Data retention</a
                         >
                     </li>
                     <li>
-                        <a href="#rights" class="toc-link">8. Your rights</a>
+                        <a href="#rights" class="toc-link">{rightsNum}. Your rights</a>
                     </li>
                     <li>
-                        <a href="#children" class="toc-link">9. Children</a>
+                        <a href="#children" class="toc-link">{childrenNum}. Children</a>
                     </li>
                     <li>
-                        <a href="#changes" class="toc-link">10. Changes</a>
+                        <a href="#changes" class="toc-link">{changesNum}. Changes</a>
                     </li>
                     <li>
-                        <a href="#contact" class="toc-link">11. Contact</a>
+                        <a href="#contact" class="toc-link">{contactNum}. Contact</a>
                     </li>
                 </ol>
             </nav>
@@ -635,7 +651,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
             <article class="doc-body">
                 <!-- 1. OVERVIEW -->
                 <section id="overview" class="doc-section">
-                    <h2 class="doc-h2">1. Overview</h2>
+                    <h2 class="doc-h2">{overviewNum}. Overview</h2>
                     <p>
                         {appName} is published by Curvachip LLC, a single-person software
                         company. We are committed to limiting the data we collect
@@ -679,7 +695,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 2. DATA COLLECTED -->
                 <section id="data-collected" class="doc-section">
-                    <h2 class="doc-h2">2. What we collect</h2>
+                    <h2 class="doc-h2">{collectedNum}. What we collect</h2>
                     <p>
                         The table below is a complete record of every category
                         of data that {appName}
@@ -750,12 +766,14 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 3. HOW WE USE IT -->
                 <section id="data-use" class="doc-section">
-                    <h2 class="doc-h2">3. How we use it</h2>
+                    <h2 class="doc-h2">{usageNum}. How we handle your data</h2>
                     <p>
-                        Data is used solely to provide the features of {
-                            appName
-                        }. We do not:
+                        Any data processed by {appName} is used only to provide the
+                        features you choose to use. We do not use your data for unrelated
+                        purposes.
                     </p>
+
+                    <p>Specifically, we never:</p>
                     <ul class="policy-list">
                         <li>Sell your data to any party</li>
                         <li>Use your data for advertising</li>
@@ -775,7 +793,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                 {
                     aiProcessing && (
                         <section id="ai" class="doc-section">
-                            <h2 class="doc-h2">4. AI processing</h2>
+                            <h2 class="doc-h2">{aiNum}. AI processing</h2>
                             <div class="callout callout--amber">
                                 <span class="callout-icon" aria-hidden="true">
                                     ⚠
@@ -838,7 +856,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                 {
                     icloudSync && (
                         <section id="icloud" class="doc-section">
-                            <h2 class="doc-h2">5. iCloud sync</h2>
+                            <h2 class="doc-h2">{icloudNum}. iCloud sync</h2>
                             <p>
                                 {appName} uses Apple's CloudKit framework to
                                 sync your data across your devices via iCloud.
@@ -873,7 +891,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                 {
                     thirdParty && (
                         <section id="third-party" class="doc-section">
-                            <h2 class="doc-h2">6. Third-party services</h2>
+                            <h2 class="doc-h2">{thirdPartyNum}. Third-party services</h2>
                             <p>
                                 {appName} uses the following third-party
                                 services. Each link goes to that service's own
@@ -898,7 +916,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 7. RETENTION -->
                 <section id="retention" class="doc-section">
-                    <h2 class="doc-h2">7. Data retention</h2>
+                    <h2 class="doc-h2">{retentionNum}. Data retention</h2>
                     <p>
                         On-device data is retained until you delete the app or
                         manually clear it within the app's settings. Curvachip
@@ -920,7 +938,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 8. YOUR RIGHTS -->
                 <section id="rights" class="doc-section">
-                    <h2 class="doc-h2">8. Your rights</h2>
+                    <h2 class="doc-h2">{rightsNum}. Your rights</h2>
                     <p>
                         Depending on where you live, you may have rights under
                         applicable privacy law (including GDPR, CCPA, or
@@ -958,7 +976,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 9. CHILDREN -->
                 <section id="children" class="doc-section">
-                    <h2 class="doc-h2">9. Children</h2>
+                    <h2 class="doc-h2">{childrenNum}. Children</h2>
                     <p>
                         {appName} is not directed at children under 13. We do not
                         knowingly collect any information from users under 13. If
@@ -972,7 +990,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 10. CHANGES -->
                 <section id="changes" class="doc-section">
-                    <h2 class="doc-h2">10. Changes to this policy</h2>
+                    <h2 class="doc-h2">{changesNum}. Changes to this policy</h2>
                     <p>
                         If this policy changes in a material way — for example,
                         if a new feature requires collecting data that was not
@@ -990,7 +1008,7 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
 
                 <!-- 11. CONTACT -->
                 <section id="contact" class="doc-section">
-                    <h2 class="doc-h2">11. Contact</h2>
+                    <h2 class="doc-h2">{contactNum}. Contact</h2>
                     <p>
                         Questions, concerns, or requests regarding this policy
                         should be sent to:
@@ -1024,10 +1042,13 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
                     <a
                         href={appStoreUrl}
                         target="_blank"
-                        rel="noopener"
-                        class="btn btn-primary"
+                        rel="noopener noreferrer"
                     >
-                        ⬇ Download {appName}
+                        <img
+                            src="/appblack.svg"
+                            alt={appName + " on the App Store"}
+                            height="44"
+                        />
                     </a>
                     <a href={appPageUrl} class="btn btn-ghost">Learn more</a>
                     <a href="/apps" class="btn btn-ghost">← All apps</a>
@@ -1042,6 +1063,9 @@ const description = `Privacy policy for ${appName} by Curvachip LLC. Exactly wha
      ═══════════════════════════════════════════════════════════ -->
 <style>
     /* ── DOC HERO ── */
+    .doc-app-links img {
+        display: block;
+    }
     .doc-hero {
         position: relative;
         overflow: hidden;
