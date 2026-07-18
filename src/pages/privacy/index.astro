@@ -357,7 +357,7 @@ const curvachipApproach = [
     }
     .article-title {
         font-size: clamp(2rem, 5vw, 3.5rem);
-        font-family: "Lora", Georgia, serif;
+        font-family: var(--font-display);
         font-weight: 600;
         letter-spacing: -0.02em;
         line-height: 1.12;
@@ -365,14 +365,16 @@ const curvachipApproach = [
         color: var(--cc-text);
     }
     .article-title em {
-        font-style: italic;
+        display: inline-block;
+        padding-inline-end: 0.02em;
+        font-style: inherit;
         background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
     .article-lead {
-        font-family: "Lora", Georgia, serif;
+        font-family: var(--font-display);
         font-size: clamp(1rem, 2.5vw, 1.2rem);
         color: var(--cc-muted);
         line-height: 1.75;
@@ -390,10 +392,7 @@ const curvachipApproach = [
         margin-bottom: 3.5rem;
     }
     .prose-h2 {
-        font-family:
-            system-ui,
-            -apple-system,
-            sans-serif;
+        font-family: var(--font-body);
         font-size: clamp(1.2rem, 2.5vw, 1.6rem);
         font-weight: 700;
         letter-spacing: -0.02em;
@@ -495,7 +494,7 @@ const curvachipApproach = [
         font-size: 0.9rem;
     }
     .step-num {
-        font-family: "SF Mono", "JetBrains Mono", monospace;
+        font-family: "SFMono-Regular", "SF Mono", "JetBrains Mono", monospace;
         font-size: 0.7rem;
         color: var(--cc-blue);
         background: rgba(91, 156, 246, 0.1);

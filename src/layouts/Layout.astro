@@ -1,4 +1,10 @@
 ---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/600.css";
+
 interface Props {
 	title: string;
 	description: string;
@@ -88,12 +94,7 @@ const socials = [
 		<meta name="theme-color" content="#5B9CF6" />
 
 		<!-- Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-			rel="stylesheet"
-		/>
+		<!-- Self-hosted via @fontsource packages bundled with the site -->
 
 		<!-- Allow pages to inject extra <head> content (e.g. page-specific meta) -->
 		<slot name="head" />
@@ -344,7 +345,7 @@ const socials = [
 
 		/* Typography */
 		--font-display: "Outfit", system-ui, sans-serif;
-		--font-body: "DM Sans", system-ui, sans-serif;
+		--font-body: "Inter", system-ui, sans-serif;
 		--font-size-base: 1.0625rem; /* 17px */
 	}
 
