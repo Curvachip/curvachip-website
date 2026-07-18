@@ -1,346 +1,498 @@
 ---
-// src/pages/privacy.astro
-// PRIVACY PAGE — "What You Share with AI Chatbots Stays There"
-// ─────────────────────────────────────────────────────────────
-// This is an editorial article about the risks of sharing
-// sensitive information with AI chatbots, plus a section on
-// how Curvachip handles data differently.
-// ─────────────────────────────────────────────────────────────
+// src/pages/privacy/index.astro
+// ═══════════════════════════════════════════════════════════════
+// PRIVACY HUB
+// ───────────────────────────────────────────────────────────────
+// Routing note:
+//   This file lives at src/pages/privacy/index.astro → /privacy
+//   The existing article moves to:
+//     src/pages/privacy/blog/ai-chatbots.astro → /privacy/blog/ai-chatbots
+//   Any future blog post is added as a new file in privacy/blog/
+//
+// PURPOSE:
+//   A public-facing overview of Curvachip's privacy posture.
+//   Not a legal document — those are the Privacy Policy and T&C.
+//   This page answers the human question: "Can I trust this company
+//   with my data?" The answer should be obvious before they scroll.
+// ═══════════════════════════════════════════════════════════════
 
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
 
-const title = "What You Share with AI Chatbots Stays There | Curvachip";
-const description =
-    "A plain-English look at the data risks of AI chatbots — what they collect, who can see it, and why you should never paste in sensitive information. Plus, how Curvachip approaches data differently.";
-
-const publishDate = "July 2026";
-
-const risks = [
+// ── BLOG POSTS ─────────────────────────────────────────────────
+// Add new entries here as you publish more articles.
+const blogPosts = [
     {
-        icon: "⚠",
-        label: "Training data inclusion",
-        body: "Many AI providers — especially free tiers — explicitly reserve the right to use your conversations to improve their models. That message you typed may become part of a training dataset.",
+        slug: "/privacy/blog/ai-chatbots",
+        emoji: "🤖",
+        tag: "AI & Data",
+        title: "What You Share with AI Chatbots Stays There",
+        excerpt:
+            "AI assistants are genuinely useful — but the moment you type something sensitive into one, you've handed it to a server you don't control. Here's what that means and what to do about it.",
+        date: "July 2026",
+        featured: true,
+    },
+    // Add future posts here:
+    // {
+    //   slug:     "/privacy/blog/your-slug",
+    //   emoji:    "🔒",
+    //   tag:      "Privacy Tips",
+    //   title:    "Your Post Title",
+    //   excerpt:  "A short excerpt…",
+    //   date:     "Month YYYY",
+    //   featured: false,
+    // },
+];
+
+// ── APP PRIVACY CARDS ──────────────────────────────────────────
+const appCards = [
+    {
+        name: "Shadow Task",
+        emoji: "🌑",
+        label: "Data Not Collected",
+        color: "green",
+        href: "/apps/privacy-shadow-task",
     },
     {
-        icon: "🔍",
-        label: "Human review",
-        body: "For safety and quality purposes, a percentage of conversations are reviewed by human contractors. If you've typed your social security number or a confidential business strategy, a real person may have read it.",
+        name: "TipZap",
+        emoji: "⚡",
+        label: "Data Not Collected",
+        color: "green",
+        href: "/apps/privacy-tipzap",
     },
     {
-        icon: "💾",
-        label: "Server-side storage",
-        body: "Your conversation history is stored on servers you don't control, governed by privacy policies that can change, and subject to legal requests such as subpoenas.",
+        name: "Grocery Wiz",
+        emoji: "🛒",
+        label: "Data Not Collected",
+        color: "green",
+        href: "/apps/privacy-grocery-wiz",
     },
     {
-        icon: "🔗",
-        label: "Third-party data sharing",
-        body: "Some providers share usage data with advertising, analytics, or business intelligence partners. The exact chain of data custody is often opaque.",
+        name: "Tally Snap",
+        emoji: "🔢",
+        label: "Data Not Collected",
+        color: "green",
+        href: "/apps/privacy-tally-snap",
     },
     {
-        icon: "🛡",
-        label: "Breach exposure",
-        body: "Even providers with strong security practices can be breached. Data you shared six months ago could surface in a future incident.",
+        name: "StoneClip",
+        emoji: "🪨",
+        label: "Data Not Linked to You",
+        color: "blue",
+        href: "/apps/privacy-stoneclip",
+    },
+    {
+        name: "BugClip",
+        emoji: "🐛",
+        label: "Data Not Linked to You",
+        color: "blue",
+        href: "/apps/privacy-bugclip",
+    },
+    {
+        name: "PlantClip",
+        emoji: "🌿",
+        label: "Data Not Linked to You",
+        color: "blue",
+        href: "/apps/privacy-plantclip",
     },
 ];
 
-const doNotShare = [
-    "Passwords, PINs, or security question answers",
-    "Social security or national identity numbers",
-    "Bank account or credit card details",
-    "Medical records, diagnoses, or prescriptions",
-    "Legal or attorney-client privileged documents",
-    "Confidential business plans, source code, or trade secrets",
-    "Personal information about someone else without their consent",
-    "Immigration status or other legally sensitive personal data",
-];
-
-const curvachipApproach = [
+// ── PRINCIPLES ─────────────────────────────────────────────────
+const principles = [
     {
-        label: "On-device by default",
-        body: "Apps like Shadow Task process and store all data locally. Nothing leaves your device. There are no accounts, no sync servers, and no analytics.",
+        icon: "◎",
+        title: "Collect only what is necessary",
+        body: "Every data point we process has a specific, stated reason. If a feature can be built without touching your data, it is built that way.",
     },
     {
-        label: "Explicit AI disclosure",
-        body: "When an app uses AI — like StoneClip or BugClip — the App Store listing says so clearly and the privacy policy explains exactly what data is sent, to whom, and why.",
+        icon: "◈",
+        title: "Process on-device by default",
+        body: "Four of our seven apps collect zero data. Everything happens on your device, governed by your control — not ours.",
     },
     {
-        label: "Minimal collection",
-        body: "We don't collect what we don't need. If a feature can be built without touching your data, it is built that way — full stop.",
+        icon: "◬",
+        title: "Disclose before we collect",
+        body: "When an app sends data externally — such as an AI identification request — we say so clearly on the App Store listing before you download.",
     },
     {
-        label: "No advertising",
+        icon: "◇",
+        title: "No advertising. Ever.",
         body: "Curvachip apps are not ad-supported. Your data is never sold, shared with advertisers, or used to build a profile of you.",
     },
 ];
+
+const featuredPost = blogPosts.find((p) => p.featured) ?? blogPosts[0];
+const otherPosts = blogPosts.filter((p) => !p.featured);
 ---
 
 <Layout
-  title={title}
-  description={description}
-  activeNav="privacy"
-  canonicalUrl="https://curvachip.com/privacy"
+    title="Privacy | Curvachip"
+    description="Curvachip's approach to privacy — on-device by default, zero advertising, transparent AI disclosure, and individual privacy policies for every app."
+    activeNav="privacy"
+    canonicalUrl="https://curvachip.com/privacy"
 >
+    <!-- ══════════════════════════════════════════════════════════
+       HERO
+       ══════════════════════════════════════════════════════════ -->
+    <Hero
+        eyebrow="Our commitment"
+        title="Privacy is not a feature.<br /><em>It is the foundation.</em>"
+        subtitle="At Curvachip, privacy shapes every product decision before a
+                single line of code is written. Here is exactly what that looks
+                like in practice — no fine print, no vague reassurances."
+    >
+        <div
+            class="hero-stat-row"
+            role="list"
+            aria-label="Privacy at a glance"
+        >
+            <div class="hero-stat" role="listitem">
+                <span class="stat-number">4</span>
+                <span class="stat-label">apps that collect<br />zero data</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="hero-stat" role="listitem">
+                <span class="stat-number">0</span>
+                <span class="stat-label">advertising<br />SDKs used</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="hero-stat" role="listitem">
+                <span class="stat-number">7</span>
+                <span class="stat-label">individual app<br />privacy policies</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="hero-stat" role="listitem">
+                <span class="stat-number">0</span>
+                <span class="stat-label">cookies on<br />this website</span>
+            </div>
+        </div>
+    </Hero>
 
-        <!-- ── ARTICLE HERO ── -->
-        <header class="article-hero">
-            <div class="hero-grid" aria-hidden="true"></div>
-            <div class="container article-hero-content">
-                <p class="eyebrow">Privacy · {publishDate}</p>
-                <h1 class="article-title">
-                    What You Share with AI Chatbots<br /><em>Stays There</em>
-                </h1>
-                <p class="article-lead">
-                    AI assistants are genuinely useful tools. But the moment you
-                    type something into one, you've handed it to a server you
-                    don't control — and what happens next is governed by a
-                    privacy policy most people have never read.
+    <!-- ══════════════════════════════════════════════════════════
+       FEATURED BLOG POST
+       ══════════════════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="blog-heading">
+        <div class="container">
+            <div class="blog-header">
+                <div>
+                    <p class="section-eyebrow">From the blog</p>
+                    <h2 class="section-title" id="blog-heading">
+                        Privacy in the real world
+                    </h2>
+                </div>
+                {
+                    otherPosts.length > 0 && (
+                        <a href="/privacy/blog" class="view-all-link">
+                            View all posts →
+                        </a>
+                    )
+                }
+            </div>
+
+            <!-- Featured post — full-width card -->
+            <a href={featuredPost.slug} class="featured-post-card">
+                <div class="featured-post-emoji-wrap" aria-hidden="true">
+                    <span class="featured-post-emoji">{featuredPost.emoji}</span
+                    >
+                </div>
+                <div class="featured-post-body">
+                    <div class="featured-post-top">
+                        <span class="post-tag">{featuredPost.tag}</span>
+                        <span class="post-date">{featuredPost.date}</span>
+                    </div>
+                    <h3 class="featured-post-title">{featuredPost.title}</h3>
+                    <p class="featured-post-excerpt">{featuredPost.excerpt}</p>
+                    <span class="featured-post-cta">Read the article →</span>
+                </div>
+            </a>
+
+            <!-- Additional posts (only shows when you have more than one) -->
+            {
+                otherPosts.length > 0 && (
+                    <div class="other-posts-grid">
+                        {otherPosts.map((post) => (
+                            <a href={post.slug} class="other-post-card">
+                                <div class="other-post-top">
+                                    <span class="post-tag">{post.tag}</span>
+                                    <span class="post-emoji" aria-hidden="true">
+                                        {post.emoji}
+                                    </span>
+                                </div>
+                                <h3 class="other-post-title">{post.title}</h3>
+                                <p class="other-post-excerpt">{post.excerpt}</p>
+                                <span class="post-date">{post.date}</span>
+                            </a>
+                        ))}
+                    </div>
+                )
+            }
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+       OUR PRINCIPLES
+       ══════════════════════════════════════════════════════════ -->
+    <section class="section section-alt" aria-labelledby="principles-heading">
+        <div class="container">
+            <p class="section-eyebrow">How we think</p>
+            <h2 class="section-title" id="principles-heading">
+                Four principles we don't compromise on
+            </h2>
+            <div class="principles-grid">
+                {
+                    principles.map((p) => (
+                        <div class="principle-card">
+                            <span class="principle-icon" aria-hidden="true">
+                                {p.icon}
+                            </span>
+                            <h3 class="principle-title">{p.title}</h3>
+                            <p class="principle-body">{p.body}</p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+       APP-BY-APP PRIVACY SNAPSHOT
+       ══════════════════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="apps-heading">
+        <div class="container">
+            <p class="section-eyebrow">App by app</p>
+            <h2 class="section-title" id="apps-heading">
+                Every app, accounted for
+            </h2>
+            <p class="apps-intro">
+                These are the same privacy labels Apple displays on every App
+                Store listing. Tap any app to read its full privacy policy.
+            </p>
+
+            <div class="app-privacy-grid">
+                {
+                    appCards.map((app) => (
+                        <a href={app.href} class="app-privacy-card">
+                            <span class="app-card-emoji" aria-hidden="true">
+                                {app.emoji}
+                            </span>
+                            <span class="app-card-name">{app.name}</span>
+                            <span
+                                class={`app-privacy-label app-privacy-label--${app.color}`}
+                            >
+                                {app.label}
+                            </span>
+                            <span class="app-card-arrow" aria-hidden="true">
+                                →
+                            </span>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <div class="app-privacy-legend">
+                <div class="legend-item">
+                    <span
+                        class="legend-dot legend-dot--green"
+                        aria-hidden="true"></span>
+                    <span
+                        ><strong>Data Not Collected</strong> — the app processes everything
+                        on your device and transmits nothing.</span
+                    >
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot legend-dot--blue" aria-hidden="true"
+                    ></span>
+                    <span
+                        ><strong>Data Not Linked to You</strong> — the app sends only
+                        what you explicitly submit (e.g. a photo for AI identification).
+                        It is not tied to your identity.</span
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+       WEBSITE PRIVACY
+       ══════════════════════════════════════════════════════════ -->
+    <section class="section section-alt" aria-labelledby="website-heading">
+        <div class="container website-privacy-layout">
+            <div class="website-privacy-text">
+                <p class="section-eyebrow">This website</p>
+                <h2 class="section-title" id="website-heading">
+                    curvachip.com collects nothing
+                </h2>
+                <p class="website-body">
+                    This is a static website. There is no server-side
+                    application, no database, and no user accounts. The contact
+                    form opens your own mail client — your message is never
+                    routed through our servers. We use no analytics, no
+                    advertising pixels, and no tracking scripts of any kind.
                 </p>
+                <p class="website-body">
+                    The one external request this site makes is loading fonts
+                    from Google Fonts. That is it. No cookies are set. No
+                    consent banner is needed because there is nothing to consent
+                    to.
+                </p>
+                <a
+                    href="/privacy-policy-curvachip"
+                    class="text-link website-policy-link"
+                >
+                    Read the full website privacy policy →
+                </a>
             </div>
-        </header>
-
-        <!-- ── ARTICLE BODY ── -->
-        <main>
-            <div class="container article-container">
-                <article class="article-body" aria-label="Main article content">
-                    <!-- INTRO -->
-                    <section class="prose-section">
-                        <h2 class="prose-h2">
-                            The invisible cost of convenience
-                        </h2>
-                        <p>
-                            In the past two years, AI chatbots have become a
-                            fixture of daily work. People use them to draft
-                            emails, summarise documents, debug code, and work
-                            through personal decisions. The experience feels
-                            private — it's just you and a text box. But that
-                            text box is a window into a server farm, and
-                            everything you type travels across the internet,
-                            gets processed by machines, and is stored by a
-                            company operating under policies that may not
-                            prioritise your interests above their own.
-                        </p>
-                        <p>
-                            This is not a reason to stop using AI tools. It is a
-                            reason to be deliberate about what you type into
-                            them.
-                        </p>
-                    </section>
-
-                    <!-- WHAT THEY COLLECT -->
-                    <section class="prose-section">
-                        <h2 class="prose-h2">
-                            What AI companies actually collect
-                        </h2>
-                        <p>
-                            When you use a cloud-based AI chatbot, here is what
-                            typically gets transmitted and stored: your message
-                            text, the AI's response, metadata about your session
-                            (device type, timestamp, approximate location), and
-                            in some cases, the files or images you attach. How
-                            long this data is retained, and what it is used for,
-                            varies dramatically between providers.
-                        </p>
-                        <div class="risk-grid">
-                            {
-                                risks.map((r) => (
-                                    <div class="risk-card">
-                                        <span
-                                            class="risk-icon"
-                                            aria-hidden="true"
-                                        >
-                                            {r.icon}
-                                        </span>
-                                        <div>
-                                            <strong class="risk-label">
-                                                {r.label}
-                                            </strong>
-                                            <p class="risk-body">{r.body}</p>
-                                        </div>
-                                    </div>
-                                ))
-                            }
+            <div
+                class="website-checks"
+                role="list"
+                aria-label="Website privacy checklist"
+            >
+                {
+                    [
+                        ["✓", "No cookies"],
+                        ["✓", "No analytics"],
+                        ["✓", "No tracking pixels"],
+                        ["✓", "No advertising scripts"],
+                        ["✓", "No form backend"],
+                        ["✓", "No user accounts"],
+                        ["✓", "No data sold"],
+                        ["✓", "No consent required"],
+                    ].map(([mark, label]) => (
+                        <div class="check-item" role="listitem">
+                            <span class="check-mark" aria-hidden="true">
+                                {mark}
+                            </span>
+                            <span>{label}</span>
                         </div>
-                    </section>
-
-                    <!-- DO NOT SHARE -->
-                    <section class="prose-section">
-                        <h2 class="prose-h2">
-                            What you should never send to an AI chatbot
-                        </h2>
-                        <p>
-                            The following categories of information should be
-                            treated as strictly off-limits for any cloud AI
-                            service, regardless of how trustworthy the provider
-                            seems:
-                        </p>
-                        <ul class="do-not-share-list" role="list">
-                            {
-                                doNotShare.map((item) => (
-                                    <li class="do-not-share-item">
-                                        <span class="x-icon" aria-hidden="true">
-                                            ✕
-                                        </span>
-                                        <span>{item}</span>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                        <p class="prose-note">
-                            <strong>A useful rule of thumb:</strong> if you would
-                            be uncomfortable reading that message aloud in a public
-                            place, do not put it in an AI chatbot.
-                        </p>
-                    </section>
-
-                    <!-- WHAT TO DO -->
-                    <section class="prose-section">
-                        <h2 class="prose-h2">How to use AI tools safely</h2>
-                        <p>
-                            This isn't about fear — it's about calibration. Here
-                            are practical steps that let you benefit from AI
-                            without unnecessary exposure:
-                        </p>
-                        <ol class="safe-steps" role="list">
-                            <li>
-                                <span class="step-num">01</span>
-                                <div>
-                                    <strong
-                                        >Read the privacy policy before you type
-                                        anything sensitive.</strong
-                                    > Most major providers have a toggle to opt out
-                                    of training data usage — but it is often off by
-                                    default, buried in account settings.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="step-num">02</span>
-                                <div>
-                                    <strong>Anonymize before you paste.</strong> If
-                                    you need help with a contract, replace the real
-                                    names and numbers with placeholders before sending
-                                    it. The AI can help with the structure without
-                                    seeing the real data.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="step-num">03</span>
-                                <div>
-                                    <strong
-                                        >Use on-device AI where it matters.</strong
-                                    > A growing number of apps — including some from
-                                    Curvachip — process AI requests locally on your
-                                    device, meaning your data never touches an external
-                                    server.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="step-num">04</span>
-                                <div>
-                                    <strong
-                                        >Regularly delete your conversation
-                                        history.</strong
-                                    > Most platforms offer a way to clear your chat
-                                    history. Do it. Especially before you forget what
-                                    you typed three months ago.
-                                </div>
-                            </li>
-                            <li>
-                                <span class="step-num">05</span>
-                                <div>
-                                    <strong
-                                        >Treat AI as a colleague, not a vault.</strong
-                                    > You would not hand a stranger your medical history
-                                    to help draft an email. Apply the same instinct
-                                    here.
-                                </div>
-                            </li>
-                        </ol>
-                    </section>
-
-                    <!-- CURVACHIP APPROACH -->
-                    <section class="prose-section curvachip-section">
-                        <div class="cc-badge" aria-hidden="true">
-                            Curvachip
-                        </div>
-                        <h2 class="prose-h2">How we handle it differently</h2>
-                        <p>
-                            We build apps for Apple platforms, and several of
-                            them use AI. We think that earns us a responsibility
-                            to be explicit about what happens to your data when
-                            you use them.
-                        </p>
-                        <div class="approach-grid">
-                            {
-                                curvachipApproach.map((item) => (
-                                    <div class="approach-card">
-                                        <strong class="approach-label">
-                                            {item.label}
-                                        </strong>
-                                        <p class="approach-body">{item.body}</p>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <p>
-                            Each of our apps has its own privacy policy, linked
-                            directly from its App Store listing. If you ever
-                            have questions about what a specific app does with
-                            your data, email us — we will answer.
-                        </p>
-                        <div class="cta-row">
-                            <a href="/apps" class="btn btn-primary"
-                                >See our apps</a
-                            >
-                            <a
-                                href="mailto:developer@curvachip.com"
-                                class="btn btn-ghost">Ask us a question</a
-                            >
-                        </div>
-                    </section>
-                </article>
+                    ))
+                }
             </div>
-        </main>
+        </div>
+    </section>
 
+    <!-- ══════════════════════════════════════════════════════════
+       DEEPER RESOURCES
+       ══════════════════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="resources-heading">
+        <div class="container">
+            <p class="section-eyebrow">Go deeper</p>
+            <h2 class="section-title" id="resources-heading">
+                All the documents, in one place
+            </h2>
+            <p class="resources-intro">
+                This page is an overview. Every legal detail, every data table,
+                and every right you hold is documented in full below.
+            </p>
+
+            <div class="resources-grid">
+                <a href="/privacy-policy-curvachip" class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">📄</span>
+                    <div>
+                        <h3 class="resource-title">Website Privacy Policy</h3>
+                        <p class="resource-desc">
+                            Exactly what curvachip.com does — and doesn't —
+                            collect when you visit.
+                        </p>
+                        <span class="resource-link">Read policy →</span>
+                    </div>
+                </a>
+
+                <a href="/terms-and-conditions-curvachip" class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">📋</span>
+                    <div>
+                        <h3 class="resource-title">Terms of Use</h3>
+                        <p class="resource-desc">
+                            The terms governing use of curvachip.com and all
+                            Curvachip apps. Plain English.
+                        </p>
+                        <span class="resource-link">Read terms →</span>
+                    </div>
+                </a>
+
+                <a href="/apps" class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">📱</span>
+                    <div>
+                        <h3 class="resource-title">Individual App Policies</h3>
+                        <p class="resource-desc">
+                            Each of our seven apps has its own privacy policy.
+                            Find them all on the Apps page.
+                        </p>
+                        <span class="resource-link">View apps →</span>
+                    </div>
+                </a>
+
+                <a href="/privacy/blog/ai-chatbots" class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">🤖</span>
+                    <div>
+                        <h3 class="resource-title">AI Chatbot Data Risks</h3>
+                        <p class="resource-desc">
+                            What AI services collect, who can see it, and what
+                            you should never type into one.
+                        </p>
+                        <span class="resource-link">Read article →</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════════
+       CONTACT CTA
+       ══════════════════════════════════════════════════════════ -->
+    <section
+        class="section section-alt priv-cta-section"
+        aria-label="Privacy questions"
+    >
+        <div class="container priv-cta-inner">
+            <span class="priv-cta-icon" aria-hidden="true">◈</span>
+            <h2 class="priv-cta-title">Have a privacy question?</h2>
+            <p class="priv-cta-sub">
+                We read every email personally. If something on this page is
+                unclear, or if you want to know something specific about how an
+                app handles data, ask us directly.
+            </p>
+            <a href="/contact" class="btn btn-primary">Get in touch</a>
+        </div>
+    </section>
 </Layout>
 
-<style>
-
-    /* Article hero */
-    .article-hero {
+<style is:global>
+    /* ── HERO ── */
+    .priv-hero {
         position: relative;
         overflow: hidden;
-        padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+        padding: clamp(4.5rem, 11vw, 8rem) 0 clamp(3.5rem, 8vw, 6rem);
         border-bottom: 1px solid var(--cc-border);
     }
-    .hero-grid {
+    .hero-glow {
         position: absolute;
         inset: 0;
-        background-image:
+        background:
             radial-gradient(
-                circle at 50% 0%,
+                ellipse 70% 60% at 10% 50%,
                 rgba(91, 156, 246, 0.06) 0%,
                 transparent 65%
             ),
-            linear-gradient(rgba(91, 156, 246, 0.035) 1px, transparent 1px),
+            radial-gradient(
+                ellipse 50% 60% at 90% 30%,
+                rgba(167, 139, 250, 0.04) 0%,
+                transparent 60%
+            ),
+            linear-gradient(rgba(91, 156, 246, 0.025) 1px, transparent 1px),
             linear-gradient(
                 90deg,
-                rgba(91, 156, 246, 0.035) 1px,
+                rgba(91, 156, 246, 0.025) 1px,
                 transparent 1px
             );
         background-size:
             auto,
+            auto,
             44px 44px,
             44px 44px;
-        mask-image: radial-gradient(
-            ellipse 80% 70% at 50% 0%,
-            black 40%,
-            transparent 100%
-        );
         pointer-events: none;
     }
-    .article-hero-content {
+    .priv-hero-inner {
         position: relative;
-        max-width: 760px;
     }
     .eyebrow {
         display: inline-block;
@@ -355,218 +507,546 @@ const curvachipApproach = [
         border-radius: 99px;
         background: rgba(91, 156, 246, 0.07);
     }
-    .article-title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+    .priv-hero-title {
         font-family: var(--font-display);
-        font-weight: 600;
-        letter-spacing: -0.02em;
-        line-height: 1.12;
-        margin-bottom: 1.5rem;
+        font-size: clamp(2.4rem, 6vw, 4.4rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        margin-bottom: 1.4rem;
         color: var(--cc-text);
     }
-    .article-title em {
-        display: inline-block;
-        padding-inline-end: 0.02em;
-        font-style: inherit;
+    .priv-hero-title em {
+        font-style: normal;
         background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        padding-right: 0.05em;
+        margin-right: -0.05em;
     }
-    .article-lead {
-        font-family: var(--font-display);
-        font-size: clamp(1rem, 2.5vw, 1.2rem);
+    .priv-hero-sub {
+        max-width: 580px;
         color: var(--cc-muted);
+        font-size: 1.05rem;
         line-height: 1.75;
-        max-width: 620px;
+        margin-bottom: 3rem;
     }
 
-    /* Article body */
-    .article-container {
-        padding-block: clamp(3rem, 7vw, 5rem);
+    /* Stat row */
+    .hero-stat-row {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        flex-wrap: wrap;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        overflow: hidden;
+        width: fit-content;
+        max-width: 100%;
     }
-    .article-body {
-        max-width: 720px;
+    .hero-stat {
+        display: flex;
+        flex-direction: column;
+        padding: 1.25rem 2rem;
+        align-items: center;
+        text-align: center;
     }
-    .prose-section {
-        margin-bottom: 3.5rem;
+    .stat-number {
+        font-family: var(--font-display);
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        color: var(--cc-blue);
+        line-height: 1;
     }
-    .prose-h2 {
-        font-family: var(--font-body);
-        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    .stat-label {
+        font-size: 0.75rem;
+        color: var(--cc-muted);
+        margin-top: 0.35rem;
+        line-height: 1.4;
+    }
+    .stat-divider {
+        width: 1px;
+        background: var(--cc-border);
+        align-self: stretch;
+    }
+    @media (max-width: 600px) {
+        .hero-stat-row {
+            width: 100%;
+        }
+        .hero-stat {
+            flex: 1;
+            padding: 1rem;
+        }
+        .stat-number {
+            font-size: 1.75rem;
+        }
+    }
+
+    /* ── SHARED SECTION STYLES ── */
+    .section {
+        padding: clamp(3.5rem, 8vw, 6rem) 0;
+    }
+    .section-alt {
+        background: var(--cc-surface);
+    }
+    .section-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 0.5rem;
+    }
+    .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 3.5vw, 2.2rem);
         font-weight: 700;
         letter-spacing: -0.02em;
-        margin-bottom: 1.25rem;
+        margin-bottom: 2rem;
         color: var(--cc-text);
     }
-    .prose-section p {
-        color: var(--cc-muted);
-        line-height: 1.8;
-        margin-bottom: 1rem;
-        font-size: 0.975rem;
-    }
-    .prose-section p:last-child {
+
+    /* ── BLOG ── */
+    .blog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 1rem;
         margin-bottom: 0;
     }
+    .blog-header .section-title {
+        margin-bottom: 0;
+    }
+    .view-all-link {
+        font-size: 0.875rem;
+        color: var(--cc-blue);
+        transition: opacity 0.15s;
+        white-space: nowrap;
+        margin-bottom: 2rem;
+    }
+    .view-all-link:hover {
+        opacity: 0.75;
+        text-decoration: underline;
+    }
 
-    /* Risk grid */
-    .risk-grid {
+    /* Featured post */
+    .featured-post-card {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        gap: 0;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        overflow: hidden;
+        margin-top: 1.5rem;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
+    }
+    .featured-post-card:hover {
+        border-color: rgba(91, 156, 246, 0.45);
+        box-shadow: 0 0 28px rgba(91, 156, 246, 0.08);
+    }
+    .featured-post-emoji-wrap {
+        background: linear-gradient(
+            135deg,
+            rgba(91, 156, 246, 0.1),
+            rgba(167, 139, 250, 0.08)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid var(--cc-border);
+    }
+    .featured-post-emoji {
+        font-size: 3.5rem;
+        line-height: 1;
+    }
+    .featured-post-body {
+        padding: 2rem;
         display: flex;
         flex-direction: column;
         gap: 0.75rem;
-        margin-top: 1.5rem;
     }
-    .risk-card {
+    .featured-post-top {
         display: flex;
-        gap: 1rem;
-        align-items: flex-start;
+        align-items: center;
+        gap: 0.75rem;
+    }
+    .post-tag {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        background: rgba(91, 156, 246, 0.1);
+        border: 1px solid rgba(91, 156, 246, 0.2);
+        border-radius: 4px;
+        padding: 0.15rem 0.5rem;
+    }
+    .post-date {
+        font-size: 0.78rem;
+        color: var(--cc-muted);
+    }
+    .featured-post-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--cc-text);
+        line-height: 1.25;
+    }
+    .featured-post-excerpt {
+        font-size: 0.9rem;
+        color: var(--cc-muted);
+        line-height: 1.75;
+    }
+    .featured-post-cta {
+        font-size: 0.875rem;
+        color: var(--cc-blue);
+        margin-top: auto;
+    }
+    .featured-post-card:hover .featured-post-cta {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        .featured-post-card {
+            grid-template-columns: 1fr;
+        }
+        .featured-post-emoji-wrap {
+            padding: 2rem;
+            border-right: none;
+            border-bottom: 1px solid var(--cc-border);
+        }
+    }
+
+    /* Other posts */
+    .other-posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.25rem;
+    }
+    .other-post-card {
+        background: var(--cc-bg);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        transition: border-color 0.2s;
+    }
+    .other-post-card:hover {
+        border-color: rgba(91, 156, 246, 0.4);
+    }
+    .other-post-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .post-emoji {
+        font-size: 1.25rem;
+    }
+    .other-post-title {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--cc-text);
+    }
+    .other-post-excerpt {
+        font-size: 0.85rem;
+        color: var(--cc-muted);
+        line-height: 1.65;
+        flex: 1;
+    }
+
+    /* ── PRINCIPLES ── */
+    .principles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+    }
+    .principle-card {
+        background: var(--cc-bg);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        padding: 1.75rem;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
+    }
+    .principle-card:hover {
+        border-color: rgba(91, 156, 246, 0.35);
+        box-shadow: 0 0 20px rgba(91, 156, 246, 0.06);
+    }
+    .principle-icon {
+        display: block;
+        font-size: 1.4rem;
+        color: var(--cc-blue);
+        margin-bottom: 0.9rem;
+    }
+    .principle-title {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.5rem;
+        color: var(--cc-text);
+    }
+    .principle-body {
+        font-size: 0.875rem;
+        color: var(--cc-muted);
+        line-height: 1.7;
+    }
+
+    /* ── APP PRIVACY GRID ── */
+    .apps-intro {
+        color: var(--cc-muted);
+        font-size: 0.9rem;
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+    }
+    .app-privacy-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+    .app-privacy-card {
+        display: grid;
+        grid-template-columns: 2.5rem 1fr auto auto;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 10px;
+        padding: 1rem 1.1rem;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
+    }
+    .app-privacy-card:hover {
+        border-color: rgba(91, 156, 246, 0.35);
+        box-shadow: 0 0 16px rgba(91, 156, 246, 0.07);
+    }
+    .app-card-emoji {
+        font-size: 1.4rem;
+        line-height: 1;
+    }
+    .app-card-name {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--cc-text);
+    }
+    .app-card-arrow {
+        color: var(--cc-muted);
+        font-size: 0.85rem;
+        transition:
+            color 0.15s,
+            transform 0.15s;
+    }
+    .app-privacy-card:hover .app-card-arrow {
+        color: var(--cc-blue);
+        transform: translateX(2px);
+    }
+
+    .app-privacy-label {
+        font-size: 0.68rem;
+        font-weight: 600;
+        padding: 0.15rem 0.5rem;
+        border-radius: 4px;
+        white-space: nowrap;
+    }
+    .app-privacy-label--green {
+        background: rgba(52, 211, 153, 0.1);
+        color: var(--cc-green);
+        border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+    .app-privacy-label--blue {
+        background: rgba(91, 156, 246, 0.1);
+        color: var(--cc-blue);
+        border: 1px solid rgba(91, 156, 246, 0.25);
+    }
+
+    /* Legend */
+    .app-privacy-legend {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
         background: var(--cc-surface);
         border: 1px solid var(--cc-border);
         border-radius: 8px;
         padding: 1.1rem 1.25rem;
     }
-    .risk-icon {
-        font-size: 1.1rem;
-        flex-shrink: 0;
-        margin-top: 0.1rem;
-    }
-    .risk-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-        color: var(--cc-text);
-    }
-    .risk-body {
+    .legend-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
         font-size: 0.85rem;
         color: var(--cc-muted);
-        line-height: 1.6;
     }
-
-    /* Do not share list */
-    .do-not-share-list {
-        margin-block: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
-        list-style: none;
-    }
-    .do-not-share-item {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
-        background: rgba(239, 68, 68, 0.05);
-        border: 1px solid rgba(239, 68, 68, 0.15);
-        border-radius: 6px;
-        padding: 0.65rem 1rem;
-        font-size: 0.875rem;
+    .legend-item strong {
         color: var(--cc-text);
     }
-    .x-icon {
-        color: #ef4444;
-        font-size: 0.8rem;
+    .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
         flex-shrink: 0;
-        margin-top: 0.1rem;
-        font-weight: 700;
+        margin-top: 0.25rem;
     }
-    .prose-note {
-        background: rgba(91, 156, 246, 0.06);
-        border-left: 3px solid var(--cc-blue);
-        padding: 1rem 1.25rem;
-        border-radius: 0 6px 6px 0;
-        font-size: 0.875rem !important;
-        color: var(--cc-text) !important;
-        margin-top: 1.25rem !important;
+    .legend-dot--green {
+        background: var(--cc-green);
+    }
+    .legend-dot--blue {
+        background: var(--cc-blue);
     }
 
-    /* Safe steps */
-    .safe-steps {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 1.1rem;
-        margin-top: 1.5rem;
+    /* ── WEBSITE PRIVACY ── */
+    .website-privacy-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
     }
-    .safe-steps li {
+    @media (max-width: 700px) {
+        .website-privacy-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+    .website-body {
+        font-size: 0.9rem;
+        color: var(--cc-muted);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+    .website-policy-link {
+        font-size: 0.875rem;
+        color: var(--cc-blue);
+    }
+    .website-policy-link:hover {
+        text-decoration: underline;
+    }
+
+    .website-checks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        overflow: hidden;
+    }
+    .check-item {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.8rem 1rem;
+        font-size: 0.84rem;
+        color: var(--cc-muted);
+        border-right: 1px solid var(--cc-border);
+        border-bottom: 1px solid var(--cc-border);
+    }
+    .check-item:nth-child(even) {
+        border-right: none;
+    }
+    .check-item:nth-last-child(-n + 2) {
+        border-bottom: none;
+    }
+    .check-mark {
+        color: var(--cc-green);
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    /* ── RESOURCES ── */
+    .resources-intro {
+        color: var(--cc-muted);
+        font-size: 0.9rem;
+        margin-top: -1rem;
+        margin-bottom: 2rem;
+    }
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.25rem;
+    }
+    .resource-card {
         display: flex;
         gap: 1rem;
         align-items: flex-start;
-        font-size: 0.9rem;
-    }
-    .step-num {
-        font-family: "SFMono-Regular", "SF Mono", "JetBrains Mono", monospace;
-        font-size: 0.7rem;
-        color: var(--cc-blue);
-        background: rgba(91, 156, 246, 0.1);
-        border: 1px solid rgba(91, 156, 246, 0.2);
-        border-radius: 4px;
-        padding: 0.2rem 0.5rem;
-        flex-shrink: 0;
-        margin-top: 0.15rem;
-        letter-spacing: 0.05em;
-    }
-    .safe-steps li div {
-        color: var(--cc-muted);
-        line-height: 1.7;
-    }
-    .safe-steps li strong {
-        color: var(--cc-text);
-    }
-
-    /* Curvachip section */
-    .curvachip-section {
         background: var(--cc-surface);
         border: 1px solid var(--cc-border);
         border-radius: var(--cc-radius);
-        padding: 2.5rem;
-        position: relative;
+        padding: 1.5rem;
+        transition:
+            border-color 0.2s,
+            box-shadow 0.2s;
     }
-    .cc-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.7rem;
+    .resource-card:hover {
+        border-color: rgba(91, 156, 246, 0.4);
+        box-shadow: 0 0 20px rgba(91, 156, 246, 0.07);
+    }
+    .resource-icon {
+        font-size: 1.5rem;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+    .resource-title {
+        font-family: var(--font-display);
+        font-size: 0.975rem;
         font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--cc-blue);
-        margin-bottom: 1rem;
-    }
-    .curvachip-section .prose-h2 {
-        margin-bottom: 1rem;
-    }
-    .curvachip-section p {
-        margin-bottom: 1.5rem;
-    }
-    .approach-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    .approach-card {
-        background: var(--cc-bg);
-        border: 1px solid var(--cc-border);
-        border-radius: 8px;
-        padding: 1.25rem;
-    }
-    .approach-label {
-        display: block;
-        font-size: 0.875rem;
-        font-weight: 600;
-        margin-bottom: 0.4rem;
         color: var(--cc-text);
+        margin-bottom: 0.35rem;
+        letter-spacing: -0.01em;
     }
-    .approach-body {
-        font-size: 0.825rem;
+    .resource-desc {
+        font-size: 0.84rem;
         color: var(--cc-muted);
         line-height: 1.65;
+        margin-bottom: 0.75rem;
     }
-    .cta-row {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        margin-top: 1.5rem;
+    .resource-link {
+        font-size: 0.82rem;
+        color: var(--cc-blue);
+    }
+    .resource-card:hover .resource-link {
+        text-decoration: underline;
     }
 
+    /* ── CONTACT CTA ── */
+    .priv-cta-section {
+        text-align: center;
+    }
+    .priv-cta-inner {
+        max-width: 520px;
+        margin-inline: auto;
+    }
+    .priv-cta-icon {
+        display: block;
+        font-size: 2.5rem;
+        color: var(--cc-blue);
+        margin-bottom: 1.25rem;
+        line-height: 1;
+    }
+    .priv-cta-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.4rem, 3.5vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
+    }
+    .priv-cta-sub {
+        color: var(--cc-muted);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+    }
 </style>

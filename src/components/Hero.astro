@@ -57,11 +57,14 @@ const { eyebrow, title, subtitle, align = "center" } = Astro.props;
         <!--
       Slot: drop buttons or any extra content between the
       opening and closing <Hero> tags in the parent page.
-      If nothing is slotted, the .hero-cta div is not rendered.
+      This is useful for supporting content that should appear
+      directly beneath the hero copy.
     -->
-        <slot>
-            <!-- default slot — empty if parent passes nothing -->
-        </slot>
+        <div class="hero-extra">
+            <slot>
+                
+            </slot>
+        </div>
     </div>
 </section>
 
@@ -70,7 +73,7 @@ const { eyebrow, title, subtitle, align = "center" } = Astro.props;
     .hero {
         position: relative;
         overflow: hidden;
-        padding: clamp(4rem, 10vw, 7rem) 0 clamp(3.5rem, 8vw, 6rem);
+        padding: clamp(4rem, 10vw, 7rem) 0 clamp(3.5rem, 3vw, 6rem);
     }
 
     /* Alignment variants */
@@ -160,6 +163,17 @@ const { eyebrow, title, subtitle, align = "center" } = Astro.props;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         padding: 0.1rem 0.2rem;
+    }
+
+    .hero-extra {
+        margin-top: 1.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero--left .hero-extra {
+        justify-content: flex-start;
     }
 
     /* ── SUBTITLE ────────────────────────────────────────────── */

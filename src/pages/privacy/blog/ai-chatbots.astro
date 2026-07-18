@@ -1,0 +1,572 @@
+---
+// src/pages/privacy.astro
+// PRIVACY PAGE — "What You Share with AI Chatbots Stays There"
+// ─────────────────────────────────────────────────────────────
+// This is an editorial article about the risks of sharing
+// sensitive information with AI chatbots, plus a section on
+// how Curvachip handles data differently.
+// ─────────────────────────────────────────────────────────────
+
+import Layout from '../../../layouts/Layout.astro';
+
+const title = "What You Share with AI Chatbots Stays There | Curvachip";
+const description =
+    "A plain-English look at the data risks of AI chatbots — what they collect, who can see it, and why you should never paste in sensitive information. Plus, how Curvachip approaches data differently.";
+
+const publishDate = "July 2026";
+
+const risks = [
+    {
+        icon: "⚠",
+        label: "Training data inclusion",
+        body: "Many AI providers — especially free tiers — explicitly reserve the right to use your conversations to improve their models. That message you typed may become part of a training dataset.",
+    },
+    {
+        icon: "🔍",
+        label: "Human review",
+        body: "For safety and quality purposes, a percentage of conversations are reviewed by human contractors. If you've typed your social security number or a confidential business strategy, a real person may have read it.",
+    },
+    {
+        icon: "💾",
+        label: "Server-side storage",
+        body: "Your conversation history is stored on servers you don't control, governed by privacy policies that can change, and subject to legal requests such as subpoenas.",
+    },
+    {
+        icon: "🔗",
+        label: "Third-party data sharing",
+        body: "Some providers share usage data with advertising, analytics, or business intelligence partners. The exact chain of data custody is often opaque.",
+    },
+    {
+        icon: "🛡",
+        label: "Breach exposure",
+        body: "Even providers with strong security practices can be breached. Data you shared six months ago could surface in a future incident.",
+    },
+];
+
+const doNotShare = [
+    "Passwords, PINs, or security question answers",
+    "Social security or national identity numbers",
+    "Bank account or credit card details",
+    "Medical records, diagnoses, or prescriptions",
+    "Legal or attorney-client privileged documents",
+    "Confidential business plans, source code, or trade secrets",
+    "Personal information about someone else without their consent",
+    "Immigration status or other legally sensitive personal data",
+];
+
+const curvachipApproach = [
+    {
+        label: "On-device by default",
+        body: "Apps like Shadow Task process and store all data locally. Nothing leaves your device. There are no accounts, no sync servers, and no analytics.",
+    },
+    {
+        label: "Explicit AI disclosure",
+        body: "When an app uses AI — like StoneClip or BugClip — the App Store listing says so clearly and the privacy policy explains exactly what data is sent, to whom, and why.",
+    },
+    {
+        label: "Minimal collection",
+        body: "We don't collect what we don't need. If a feature can be built without touching your data, it is built that way — full stop.",
+    },
+    {
+        label: "No advertising",
+        body: "Curvachip apps are not ad-supported. Your data is never sold, shared with advertisers, or used to build a profile of you.",
+    },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  activeNav="privacy"
+  canonicalUrl="https://curvachip.com/privacy"
+>
+
+        <!-- ── ARTICLE HERO ── -->
+        <header class="article-hero">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <div class="container article-hero-content">
+                <p class="eyebrow">Privacy · {publishDate}</p>
+                <h1 class="article-title">
+                    What You Share with AI Chatbots<br /><em>Stays There</em>
+                </h1>
+                <p class="article-lead">
+                    AI assistants are genuinely useful tools. But the moment you
+                    type something into one, you've handed it to a server you
+                    don't control — and what happens next is governed by a
+                    privacy policy most people have never read.
+                </p>
+            </div>
+        </header>
+
+        <!-- ── ARTICLE BODY ── -->
+        <main>
+            <div class="container article-container">
+                <article class="article-body" aria-label="Main article content">
+                    <!-- INTRO -->
+                    <section class="prose-section">
+                        <h2 class="prose-h2">
+                            The invisible cost of convenience
+                        </h2>
+                        <p>
+                            In the past two years, AI chatbots have become a
+                            fixture of daily work. People use them to draft
+                            emails, summarise documents, debug code, and work
+                            through personal decisions. The experience feels
+                            private — it's just you and a text box. But that
+                            text box is a window into a server farm, and
+                            everything you type travels across the internet,
+                            gets processed by machines, and is stored by a
+                            company operating under policies that may not
+                            prioritise your interests above their own.
+                        </p>
+                        <p>
+                            This is not a reason to stop using AI tools. It is a
+                            reason to be deliberate about what you type into
+                            them.
+                        </p>
+                    </section>
+
+                    <!-- WHAT THEY COLLECT -->
+                    <section class="prose-section">
+                        <h2 class="prose-h2">
+                            What AI companies actually collect
+                        </h2>
+                        <p>
+                            When you use a cloud-based AI chatbot, here is what
+                            typically gets transmitted and stored: your message
+                            text, the AI's response, metadata about your session
+                            (device type, timestamp, approximate location), and
+                            in some cases, the files or images you attach. How
+                            long this data is retained, and what it is used for,
+                            varies dramatically between providers.
+                        </p>
+                        <div class="risk-grid">
+                            {
+                                risks.map((r) => (
+                                    <div class="risk-card">
+                                        <span
+                                            class="risk-icon"
+                                            aria-hidden="true"
+                                        >
+                                            {r.icon}
+                                        </span>
+                                        <div>
+                                            <strong class="risk-label">
+                                                {r.label}
+                                            </strong>
+                                            <p class="risk-body">{r.body}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </section>
+
+                    <!-- DO NOT SHARE -->
+                    <section class="prose-section">
+                        <h2 class="prose-h2">
+                            What you should never send to an AI chatbot
+                        </h2>
+                        <p>
+                            The following categories of information should be
+                            treated as strictly off-limits for any cloud AI
+                            service, regardless of how trustworthy the provider
+                            seems:
+                        </p>
+                        <ul class="do-not-share-list" role="list">
+                            {
+                                doNotShare.map((item) => (
+                                    <li class="do-not-share-item">
+                                        <span class="x-icon" aria-hidden="true">
+                                            ✕
+                                        </span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        <p class="prose-note">
+                            <strong>A useful rule of thumb:</strong> if you would
+                            be uncomfortable reading that message aloud in a public
+                            place, do not put it in an AI chatbot.
+                        </p>
+                    </section>
+
+                    <!-- WHAT TO DO -->
+                    <section class="prose-section">
+                        <h2 class="prose-h2">How to use AI tools safely</h2>
+                        <p>
+                            This isn't about fear — it's about calibration. Here
+                            are practical steps that let you benefit from AI
+                            without unnecessary exposure:
+                        </p>
+                        <ol class="safe-steps" role="list">
+                            <li>
+                                <span class="step-num">01</span>
+                                <div>
+                                    <strong
+                                        >Read the privacy policy before you type
+                                        anything sensitive.</strong
+                                    > Most major providers have a toggle to opt out
+                                    of training data usage — but it is often off by
+                                    default, buried in account settings.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-num">02</span>
+                                <div>
+                                    <strong>Anonymize before you paste.</strong> If
+                                    you need help with a contract, replace the real
+                                    names and numbers with placeholders before sending
+                                    it. The AI can help with the structure without
+                                    seeing the real data.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-num">03</span>
+                                <div>
+                                    <strong
+                                        >Use on-device AI where it matters.</strong
+                                    > A growing number of apps — including some from
+                                    Curvachip — process AI requests locally on your
+                                    device, meaning your data never touches an external
+                                    server.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-num">04</span>
+                                <div>
+                                    <strong
+                                        >Regularly delete your conversation
+                                        history.</strong
+                                    > Most platforms offer a way to clear your chat
+                                    history. Do it. Especially before you forget what
+                                    you typed three months ago.
+                                </div>
+                            </li>
+                            <li>
+                                <span class="step-num">05</span>
+                                <div>
+                                    <strong
+                                        >Treat AI as a colleague, not a vault.</strong
+                                    > You would not hand a stranger your medical history
+                                    to help draft an email. Apply the same instinct
+                                    here.
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+
+                    <!-- CURVACHIP APPROACH -->
+                    <section class="prose-section curvachip-section">
+                        <div class="cc-badge" aria-hidden="true">
+                            Curvachip
+                        </div>
+                        <h2 class="prose-h2">How we handle it differently</h2>
+                        <p>
+                            We build apps for Apple platforms, and several of
+                            them use AI. We think that earns us a responsibility
+                            to be explicit about what happens to your data when
+                            you use them.
+                        </p>
+                        <div class="approach-grid">
+                            {
+                                curvachipApproach.map((item) => (
+                                    <div class="approach-card">
+                                        <strong class="approach-label">
+                                            {item.label}
+                                        </strong>
+                                        <p class="approach-body">{item.body}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <p>
+                            Each of our apps has its own privacy policy, linked
+                            directly from its App Store listing. If you ever
+                            have questions about what a specific app does with
+                            your data, email us — we will answer.
+                        </p>
+                        <div class="cta-row">
+                            <a href="/apps" class="btn btn-primary"
+                                >See our apps</a
+                            >
+                            <a
+                                href="mailto:developer@curvachip.com"
+                                class="btn btn-ghost">Ask us a question</a
+                            >
+                        </div>
+                    </section>
+                </article>
+            </div>
+        </main>
+
+</Layout>
+
+<style>
+
+    /* Article hero */
+    .article-hero {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(4rem, 10vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+        border-bottom: 1px solid var(--cc-border);
+    }
+    .hero-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+            radial-gradient(
+                circle at 50% 0%,
+                rgba(91, 156, 246, 0.06) 0%,
+                transparent 65%
+            ),
+            linear-gradient(rgba(91, 156, 246, 0.035) 1px, transparent 1px),
+            linear-gradient(
+                90deg,
+                rgba(91, 156, 246, 0.035) 1px,
+                transparent 1px
+            );
+        background-size:
+            auto,
+            44px 44px,
+            44px 44px;
+        mask-image: radial-gradient(
+            ellipse 80% 70% at 50% 0%,
+            black 40%,
+            transparent 100%
+        );
+        pointer-events: none;
+    }
+    .article-hero-content {
+        position: relative;
+        max-width: 760px;
+    }
+    .eyebrow {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 1.5rem;
+        padding: 0.3rem 0.8rem;
+        border: 1px solid rgba(91, 156, 246, 0.25);
+        border-radius: 99px;
+        background: rgba(91, 156, 246, 0.07);
+    }
+    .article-title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-family: var(--font-display);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.12;
+        margin-bottom: 1.5rem;
+        color: var(--cc-text);
+    }
+    .article-title em {
+        display: inline-block;
+        padding-inline-end: 0.02em;
+        font-style: inherit;
+        background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .article-lead {
+        font-family: var(--font-display);
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        color: var(--cc-muted);
+        line-height: 1.75;
+        max-width: 620px;
+    }
+
+    /* Article body */
+    .article-container {
+        padding-block: clamp(3rem, 7vw, 5rem);
+    }
+    .article-body {
+        max-width: 720px;
+    }
+    .prose-section {
+        margin-bottom: 3.5rem;
+    }
+    .prose-h2 {
+        font-family: var(--font-body);
+        font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.25rem;
+        color: var(--cc-text);
+    }
+    .prose-section p {
+        color: var(--cc-muted);
+        line-height: 1.8;
+        margin-bottom: 1rem;
+        font-size: 0.975rem;
+    }
+    .prose-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Risk grid */
+    .risk-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+    .risk-card {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 8px;
+        padding: 1.1rem 1.25rem;
+    }
+    .risk-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+    }
+    .risk-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--cc-text);
+    }
+    .risk-body {
+        font-size: 0.85rem;
+        color: var(--cc-muted);
+        line-height: 1.6;
+    }
+
+    /* Do not share list */
+    .do-not-share-list {
+        margin-block: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        list-style: none;
+    }
+    .do-not-share-item {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        background: rgba(239, 68, 68, 0.05);
+        border: 1px solid rgba(239, 68, 68, 0.15);
+        border-radius: 6px;
+        padding: 0.65rem 1rem;
+        font-size: 0.875rem;
+        color: var(--cc-text);
+    }
+    .x-icon {
+        color: #ef4444;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+        font-weight: 700;
+    }
+    .prose-note {
+        background: rgba(91, 156, 246, 0.06);
+        border-left: 3px solid var(--cc-blue);
+        padding: 1rem 1.25rem;
+        border-radius: 0 6px 6px 0;
+        font-size: 0.875rem !important;
+        color: var(--cc-text) !important;
+        margin-top: 1.25rem !important;
+    }
+
+    /* Safe steps */
+    .safe-steps {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+        margin-top: 1.5rem;
+    }
+    .safe-steps li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        font-size: 0.9rem;
+    }
+    .step-num {
+        font-family: "SFMono-Regular", "SF Mono", "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--cc-blue);
+        background: rgba(91, 156, 246, 0.1);
+        border: 1px solid rgba(91, 156, 246, 0.2);
+        border-radius: 4px;
+        padding: 0.2rem 0.5rem;
+        flex-shrink: 0;
+        margin-top: 0.15rem;
+        letter-spacing: 0.05em;
+    }
+    .safe-steps li div {
+        color: var(--cc-muted);
+        line-height: 1.7;
+    }
+    .safe-steps li strong {
+        color: var(--cc-text);
+    }
+
+    /* Curvachip section */
+    .curvachip-section {
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        padding: 2.5rem;
+        position: relative;
+    }
+    .cc-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 1rem;
+    }
+    .curvachip-section .prose-h2 {
+        margin-bottom: 1rem;
+    }
+    .curvachip-section p {
+        margin-bottom: 1.5rem;
+    }
+    .approach-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .approach-card {
+        background: var(--cc-bg);
+        border: 1px solid var(--cc-border);
+        border-radius: 8px;
+        padding: 1.25rem;
+    }
+    .approach-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        color: var(--cc-text);
+    }
+    .approach-body {
+        font-size: 0.825rem;
+        color: var(--cc-muted);
+        line-height: 1.65;
+    }
+    .cta-row {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+</style>
