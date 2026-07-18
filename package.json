@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "astro": "^7.1.0",
+    "astro-font": "^1.1.0",
     "lucide-astro": "^0.556.0"
   },
   "description": "```sh npm create astro@latest -- --template basics ```",
