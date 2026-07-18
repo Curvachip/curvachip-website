@@ -220,7 +220,12 @@ const timeline = [
             </div>
             <div class="leadership-card" aria-label="Michael S., CEO">
                 <div class="leadership-avatar" aria-hidden="true">
-                    <span class="avatar-initials">M</span>
+                    <!-- <span class="avatar-initials">M</span> -->
+                    <a
+                        class="avatar-initials"
+                    >
+                        <img src="michael.png" alt="M" width="96" height="96" />
+                    </a>
                     <div class="avatar-ring" aria-hidden="true"></div>
                 </div>
                 <p class="leadership-name">Michael S.</p>
@@ -573,7 +578,8 @@ const timeline = [
         justify-content: center;
         width: 80px;
         height: 80px;
-        background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
+        clip-path: circle();
+        /* background: linear-gradient(135deg, var(--cc-blue), var(--cc-violet));
         border-radius: 50%;
         font-size: 2rem;
         font-weight: 700;
@@ -581,7 +587,7 @@ const timeline = [
         font-family:
             system-ui,
             -apple-system,
-            sans-serif;
+            sans-serif; */
         position: relative;
         z-index: 1;
     }

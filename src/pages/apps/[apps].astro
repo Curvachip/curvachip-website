@@ -1,154 +1,471 @@
 ---
+// src/pages/apps/[app].astro
+// ═══════════════════════════════════════════════════════════════
+// DYNAMIC APP DETAIL PAGE
+// ───────────────────────────────────────────────────────────────
+// Generates one landing page per app at /apps/<slug>.
+// Each page has: hero, alternating feature sections, App Store
+// review, app info panel, and a final download CTA.
+//
+// TO ADD A NEW APP: copy one entry in getStaticPaths(), update
+// every field, and run `astro build`. The new URL appears
+// automatically.
+// ═══════════════════════════════════════════════════════════════
+
 import Layout from "../../layouts/Layout.astro";
 
-interface Highlight {
-    icon: string;
-    title: string;
-    description: string;
-}
+// ── TYPES ──────────────────────────────────────────────────────
 
 interface Feature {
-    eyebrow: string;
+    icon: string; // emoji
     title: string;
-    description: string;
-    image: string;
+    body: string;
 }
 
-interface AppPage {
-    appName: string;
-    slug: string;
+interface Review {
+    quote: string;
+    author: string;
+    date: string;
+    stars: number;
+}
 
-    tagline: string;
-    heroDescription: string;
-
+interface AppDetail {
+    // Identity
+    name: string; // display name, e.g. "Shadow Task"
+    fullName: string; // App Store title, e.g. "Study Timer - Shadow Task"
+    tagline: string; // subtitle shown under name
     iconUrl: string;
-
+    category: string; // "Productivity" | "Finance" | "Education" | etc.
+    description: string; // hero paragraph — the core value proposition
+    // URLs
     appStoreUrl: string;
-    privacyPolicyUrl: string;
+    privacyUrl: string;
     canonicalUrl: string;
-
-    screenshots: string[];
-
-    highlights: Highlight[];
-
+    // Meta
+    platforms: string[]; // ["iPhone", "iPad", "Mac", "Apple Watch"]
+    price: string; // "Free" | "Free · In‑App Purchases"
+    minIos: string; // "iOS 17.6"
+    rating: number;
+    ratingCount: number;
+    privacy: "none" | "not-linked"; // "none" = Data Not Collected
+    // Content
     features: Feature[];
-
-    perfectFor: string[];
-
-    useFor: string[];
-
-    category: string;
-    price: string;
-    compatibility: string;
-    developer: string;
-
-    privacySummary: string;
+    review: Review | null;
+    // Optional — shown as a safety callout for AI / nature apps
+    disclaimer?: string;
 }
+
+// ── ROUTE DEFINITIONS ──────────────────────────────────────────
 
 export function getStaticPaths() {
-    const apps: { params: { apps: string }; props: AppPage }[] = [
+    const apps: { params: { apps: string }; props: AppDetail }[] = [
+        // ── SHADOW TASK ───────────────────────────────────────────
         {
-            params: {
-                apps: "shadow-task",
-            },
-
+            params: { apps: "shadow-task" },
             props: {
-                appName: "Shadow Task",
-                slug: "shadow-task",
-
-                tagline: "Focus & Track",
-
-                heroDescription:
-                    "A distraction-free Pomodoro timer designed to help you study, work, and build consistent focus without unnecessary clutter.",
-
+                name: "Shadow Task",
+                fullName: "Study Timer - Shadow Task",
+                tagline: "Pomodoro Timer & Progress Tracker",
                 iconUrl: "/shadow-task.png",
-
+                category: "Productivity",
+                description:
+                    "Keep your focus sharp, your privacy protected, and your productivity soaring. From motivational quotes and task names to a progress chart that displays your daily focus for each task, Shadow Task is the perfect app for students, hobbyists, professionals, and anyone looking to track and master their time. Everything you do stays on your device and never leaves the app.",
                 appStoreUrl:
-                    "https://apps.apple.com/us/app/study-timer-shadow-task/id6737145799",
-
-                privacyPolicyUrl: "/privacy/shadow-task",
-
-                canonicalUrl: "https://curvachip.com/apps/shadow-task",
-
-                screenshots: [
-                    "/screenshots/shadow-task/1.png",
-                    "/screenshots/shadow-task/2.png",
-                    "/screenshots/shadow-task/3.png",
-                    "/screenshots/shadow-task/4.png",
-                ],
-
-                highlights: [
+                    "https://apps.apple.com/app/apple-store/id6737145799?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/shadow-task",
+                canonicalUrl: "/apps/shadow-task",
+                platforms: ["iPhone", "iPad", "Mac"],
+                price: "Free · In‑App Purchases",
+                minIos: "iOS 17.6",
+                rating: 5.0,
+                ratingCount: 3,
+                privacy: "none",
+                features: [
                     {
-                        icon: "⏱️",
-                        title: "Pomodoro Sessions",
-                        description:
-                            "Stay focused using customizable work and break intervals.",
+                        icon: "⏱",
+                        title: "Customizable Timed Tasks",
+                        body: "Create, edit, and delete tasks with ease. Set individual session and break durations for each task, tailoring your Pomodoro routine to exactly how you work.",
                     },
                     {
-                        icon: "✓",
-                        title: "Task Tracking",
-                        description:
-                            "Organize today's work while keeping your focus uninterrupted.",
+                        icon: "🏝",
+                        title: "Dynamic Island & Live Activity",
+                        body: "View your timer interval and progress from the lock screen or in the Dynamic Island while you concentrate in another app — no need to leave your flow.",
                     },
                     {
-                        icon: "📈",
-                        title: "Daily Progress",
-                        description:
-                            "Watch your completed sessions build productive habits.",
+                        icon: "🔁",
+                        title: "Repeating Sessions",
+                        body: "Need a task to repeat? Schedule how many work-break cycles you want and let Shadow Task handle the rhythm, helping you maintain consistent progress.",
+                    },
+                    {
+                        icon: "📊",
+                        title: "Visual Progress Tracking",
+                        body: "Track your progress with an intuitive chart that resets daily. Get insights on your total focus time across days, weeks, months, and years.",
+                    },
+                    {
+                        icon: "💬",
+                        title: "Motivational Quotes",
+                        body: "Make focus time personal by drawing inspiration from the people you admire — or enter your own quotes to keep yourself driven.",
                     },
                     {
                         icon: "🔒",
-                        title: "Private",
-                        description:
-                            "Everything stays on your device. No accounts. No tracking.",
+                        title: "Zero Data Collection",
+                        body: "Shadow Task stores all data locally on your device. Your task history and progress are completely private — no accounts, no sync servers, no collection.",
                     },
                 ],
+                review: {
+                    quote: "I have been struggling over the years with ADHD and I have gone through various pomodoro timers. This is the only app I can use on my phone, iPad, and Mac. The developer has been very receptive to my emails. I am very happy it is a free app.",
+                    author: "Playingalldayallnight",
+                    date: "June 2025",
+                    stars: 5,
+                },
+            },
+        },
 
+        // ── TIPZAP ────────────────────────────────────────────────
+        {
+            params: { apps: "tipzap" },
+            props: {
+                name: "TipZap",
+                fullName: "Tip Calculator: TipZap",
+                tagline: "Smart Tips. Easy Splits.",
+                iconUrl: "/tipzap.png",
+                category: "Finance",
+                description:
+                    "TipZap makes tipping simple, fast, and smarter than ever. Whether you're dining out, grabbing drinks, or splitting the bill with friends, TipZap handles the math in seconds so you can focus on enjoying your meal. It even includes built-in tipping guides for eight countries — perfect for travel.",
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6743986322?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/tipzap",
+                canonicalUrl: "https://curvachip.com/apps/tipzap",
+                platforms: ["iPhone", "iPad"],
+                price: "Free",
+                minIos: "iOS 17.6",
+                rating: 5.0,
+                ratingCount: 2,
+                privacy: "none",
                 features: [
                     {
-                        eyebrow: "Focus",
-                        title: "Stay in the zone.",
-                        description:
-                            "Start a session with one tap, eliminate distractions, and work until the timer finishes.",
-                        image: "/screenshots/shadow-task/feature-1.png",
+                        icon: "💡",
+                        title: "Instant Tip Calculation",
+                        body: "Clean, intuitive interface — enter the bill and your result appears immediately. No fussing with keyboards or switching between apps.",
                     },
                     {
-                        eyebrow: "Organize",
-                        title: "Know exactly what you're working on.",
-                        description:
-                            "Assign tasks to every focus session so your progress stays intentional.",
-                        image: "/screenshots/shadow-task/feature-2.png",
+                        icon: "↕",
+                        title: "Round Up or Down",
+                        body: "Eliminate awkward coins by rounding the total tip included in a single tap. Pay the clean number every time.",
                     },
                     {
-                        eyebrow: "Improve",
-                        title: "Small sessions become big results.",
-                        description:
-                            "Track completed Pomodoros and build consistency over time.",
-                        image: "/screenshots/shadow-task/feature-3.png",
+                        icon: "👥",
+                        title: "Split Up to 30 Ways",
+                        body: "Divide the bill among up to 30 people instantly. Everyone's share calculated in one step — no group mental arithmetic required.",
+                    },
+                    {
+                        icon: "💾",
+                        title: "Saved Custom Percentage",
+                        body: "Set a custom tip percentage from 1% to 50% and it stays saved, even after closing the app. Your preference, always ready.",
+                    },
+                    {
+                        icon: "🌍",
+                        title: "8-Country Tipping Guides",
+                        body: "Built-in guides show standard tip percentages for restaurants, taxis, food delivery, bars, and hotel service across eight countries.",
+                    },
+                    {
+                        icon: "💱",
+                        title: "Regional Currencies",
+                        body: "Calculate tips in regional currencies. Whether you're home or abroad, TipZap always shows the right amount.",
                     },
                 ],
+                review: null,
+            },
+        },
 
-                perfectFor: [
-                    "Students",
-                    "Developers",
-                    "Writers",
-                    "Professionals",
+        // ── STONECLIP ─────────────────────────────────────────────
+        {
+            params: { apps: "stoneclip" },
+            props: {
+                name: "StoneClip",
+                fullName: "Crystal Identifier: StoneClip",
+                tagline: "Jewelry, Gem & Rock Scanner",
+                iconUrl: "/stoneclip.png",
+                category: "Education",
+                description:
+                    "Unearth the secrets of stones with StoneClip, the smartest way to identify and learn about rocks, gems, minerals, and crystals using cutting-edge AI. Whether you're out exploring or browsing your photo library, StoneClip gives you instant, accurate results — and so much more.",
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6744538893?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/stoneclip",
+                canonicalUrl: "https://curvachip.com/apps/stoneclip",
+                platforms: ["iPhone", "iPad"],
+                price: "Free · In‑App Purchases",
+                minIos: "iOS 16.6",
+                rating: 5.0,
+                ratingCount: 1,
+                privacy: "not-linked",
+                features: [
+                    {
+                        icon: "📸",
+                        title: "Snap or Select for Instant ID",
+                        body: "Take a photo or choose one from your gallery — StoneClip instantly analyzes and identifies your rock with powerful AI.",
+                    },
+                    {
+                        icon: "📖",
+                        title: "In-Depth Rock Descriptions",
+                        body: "Learn more than just a name. Get rich, detailed explanations about your stone's type, composition, formation, and fun facts.",
+                    },
+                    {
+                        icon: "💬",
+                        title: "Ask Follow-Up Questions",
+                        body: "Curious about what makes a stone rare, where it forms, or how it was used historically? StoneClip's AI is ready to keep the conversation going.",
+                    },
+                    {
+                        icon: "📋",
+                        title: "Identification History",
+                        body: "Never lose a discovery. View all your past identifications and even ask new questions about previous finds from the History panel.",
+                    },
+                    {
+                        icon: "🟢",
+                        title: "Shareable Results",
+                        body: "Share a beautifully formatted green content card with your identification — name, description, and image — so your friends can learn too.",
+                    },
+                    {
+                        icon: "🔒",
+                        title: "Privacy-First Design",
+                        body: "StoneClip only collects what is strictly necessary to function. No unnecessary data leaves your device.",
+                    },
                 ],
+                review: null,
+                disclaimer:
+                    "StoneClip is an educational tool. AI identifications should be verified by a qualified expert before any professional or safety-related decision.",
+            },
+        },
 
-                useFor: [
-                    "Deep Work",
-                    "Homework",
-                    "Study Sessions",
-                    "Exams",
+        // ── BUGCLIP ───────────────────────────────────────────────
+        {
+            params: { apps: "bugclip" },
+            props: {
+                name: "BugClip",
+                fullName: "Bug Identifier - BugClip AI",
+                tagline: "Identify Insects, Spiders & More",
+                iconUrl: "/bugclip.png",
+                category: "Education",
+                description:
+                    "BugClip AI is the easiest and most reliable way to identify bugs, spiders, and other small creatures you encounter. Whether you are a curious explorer, a nature enthusiast, or simply someone who wants to know what is crawling nearby, BugClip helps you find accurate answers quickly and effortlessly.",
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6745129568?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/bugclip",
+                canonicalUrl: "https://curvachip.com/apps/bugclip",
+                platforms: ["iPhone", "iPad"],
+                price: "Free · In‑App Purchases",
+                minIos: "iOS 16.6",
+                rating: 5.0,
+                ratingCount: 1,
+                privacy: "not-linked",
+                features: [
+                    {
+                        icon: "🔍",
+                        title: "Instant Bug Identification",
+                        body: "Take a photo and BugClip will analyze the image to provide the most likely match — both a general bug group and a specific species name.",
+                    },
+                    {
+                        icon: "📄",
+                        title: "Clear, Friendly Information",
+                        body: "No confusing scientific jargon. Each identification includes a helpful description of the creature's color, size, habitat, and behavior.",
+                    },
+                    {
+                        icon: "💬",
+                        title: "Chat History & Follow-Up",
+                        body: "Every identification is saved so you can revisit past results or ask follow-up questions without starting over.",
+                    },
+                    {
+                        icon: "🎁",
+                        title: "Free Daily Identifications",
+                        body: "One free identification every day — no commitment required. Upgrade to Premium for unlimited identifications whenever you're ready.",
+                    },
+                    {
+                        icon: "🌏",
+                        title: "Global Coverage",
+                        body: "Recognize a wide range of insects and spiders from around the world, whether you're in your backyard, on a hiking trail, or traveling abroad.",
+                    },
+                    {
+                        icon: "🟠",
+                        title: "Shareable Results",
+                        body: "Share a formatted orange-accented card with the bug's name, species, description, and image — perfect for sharing curious finds.",
+                    },
                 ],
+                review: null,
+                disclaimer:
+                    "BugClip is an educational tool. Do not rely on identifications to determine whether a creature is safe to handle. Always consult a local expert.",
+            },
+        },
 
-                category: "Productivity",
+        // ── PLANTCLIP ─────────────────────────────────────────────
+        {
+            params: { apps: "plantclip" },
+            props: {
+                name: "PlantClip",
+                fullName: "Identify Plants - PlantClip",
+                tagline: "Forager & Plant Care Guide",
+                iconUrl: "/plantclip.png",
+                category: "Education",
+                description:
+                    "Whether you're a curious hiker, home gardener, or just stumbled upon a mysterious mushroom on your walk, PlantClip helps you identify plants, trees, mushrooms, flowers, and more — right from your camera. Simply take a photo or upload one from your library and get instant, AI-powered insight into the living world around you.",
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6745438705?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/plantclip",
+                canonicalUrl: "https://curvachip.com/apps/plantclip",
+                platforms: ["iPhone", "iPad"],
+                price: "Free · In‑App Purchases",
+                minIos: "iOS 17.6",
+                rating: 5.0,
+                ratingCount: 1,
+                privacy: "not-linked",
+                features: [
+                    {
+                        icon: "🌸",
+                        title: "Instant Plant ID",
+                        body: "Identify plants, wildflowers, mushrooms, trees, and garden favorites in seconds from a photo or your camera.",
+                    },
+                    {
+                        icon: "✨",
+                        title: "Friendly AI Insights",
+                        body: "Get vivid descriptions, common names, habitats, and fun facts about each plant — like walking with a nature guide.",
+                    },
+                    {
+                        icon: "⚠",
+                        title: "Toxicity Warnings",
+                        body: "Clear labels like 'Safe for pets' or 'Toxic' — especially helpful for pet owners, parents, and safety-conscious foragers.",
+                    },
+                    {
+                        icon: "📔",
+                        title: "Field Journal Feel",
+                        body: "Each identification feels like an entry in your personal nature logbook. Your history is preserved and searchable.",
+                    },
+                    {
+                        icon: "🌐",
+                        title: "No Region Lock",
+                        body: "Identify plants from around the world with no assumptions based on your location. Global database, local results.",
+                    },
+                    {
+                        icon: "🎯",
+                        title: "Customized to Your Use Case",
+                        body: "Set up PlantClip as a plant parent, nature explorer, or safety guide — the experience adapts to how you use it.",
+                    },
+                ],
+                review: null,
+                disclaimer:
+                    "PlantClip is an educational tool, not a substitute for professional foraging advice. Never consume any wild plant or mushroom based solely on an AI identification. Always consult a local expert.",
+            },
+        },
+
+        // ── GROCERY WIZ ───────────────────────────────────────────
+        {
+            params: { apps: "grocery-wiz" },
+            props: {
+                name: "Grocery Wiz",
+                fullName: "Shopping List: Grocery Wiz",
+                tagline: "Pantry Inventory & Smart Checklist",
+                iconUrl: "/grocery-wiz.png",
+                category: "Shopping",
+                description:
+                    "Say goodbye to scribbled paper lists and clunky note apps. Grocery Wiz is your intelligent shopping assistant designed to make every grocery run faster, simpler, and more organized. Whether you're prepping for the week or grabbing a few essentials, Grocery Wiz turns chaos into convenience.",
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6746955108?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/grocery-wiz",
+                canonicalUrl: "https://curvachip.com/apps/grocery-wiz",
+                platforms: ["iPhone", "iPad"],
                 price: "Free",
-                compatibility: "iPhone • iOS 18+",
-                developer: "Curvachip LLC",
+                minIos: "iOS 16.6",
+                rating: 5.0,
+                ratingCount: 2,
+                privacy: "none",
+                features: [
+                    {
+                        icon: "🏷",
+                        title: "Smart Tagging",
+                        body: "Assign customizable tags to every item — Produce, Dairy, Household — to group and sort your list naturally and logically.",
+                    },
+                    {
+                        icon: "🚩",
+                        title: "Priority Marking",
+                        body: "Flag urgent items so they stand out from the rest. Never forget that one must-have ingredient again.",
+                    },
+                    {
+                        icon: "📂",
+                        title: "Category Sections",
+                        body: "Items auto-organize by tag for quick scanning and logical shopping paths through the store. One pass, done.",
+                    },
+                    {
+                        icon: "🖨",
+                        title: "Clean, Print-Ready Layouts",
+                        body: "Share or print beautifully formatted lists with easy checkmarks and clear categories for analog backup.",
+                    },
+                    {
+                        icon: "⚡",
+                        title: "Quick Add & Edit",
+                        body: "Add items in a snap or edit existing ones without friction. Designed for speed at the kitchen counter or in the store.",
+                    },
+                    {
+                        icon: "🔒",
+                        title: "Completely Private",
+                        body: "Your shopping list is your business. Grocery Wiz stores everything on-device and collects no data whatsoever.",
+                    },
+                ],
+                review: null,
+            },
+        },
 
-                privacySummary:
-                    "Shadow Task stores all information locally on your device. No accounts, analytics, advertising, or tracking.",
+        // ── TALLY SNAP ────────────────────────────────────────────
+        {
+            params: { apps: "tally-snap" },
+            props: {
+                name: "Tally Snap",
+                fullName: "Click Counter - Tally Snap",
+                tagline: "Structure, Certainty, Autonomy",
+                iconUrl: "/tally-snap.png",
+                category: "Utilities",
+                description:
+                    "Tally Snap is more than a counter. It's a simple, thoughtful tool to help you track what matters — without distractions. People use tally counters to create structure in busy moments, to build habits, to stay present, or just to keep life a little more organized. Tally Snap was designed to support all of that.",
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6746059766?pt=127392432&ct=website&mt=8",
+                privacyUrl: "/privacy/tally-snap",
+                canonicalUrl: "https://curvachip.com/apps/tally-snap",
+                platforms: ["iPhone", "Apple Watch"],
+                price: "Free",
+                minIos: "iOS 16.6",
+                rating: 5.0,
+                ratingCount: 3,
+                privacy: "none",
+                features: [
+                    {
+                        icon: "👆",
+                        title: "Instant, Intuitive Counting",
+                        body: "Tap to count. That's it. No setup, no onboarding, no account. Open the app and start the moment you need to.",
+                    },
+                    {
+                        icon: "📳",
+                        title: "Haptic Feedback",
+                        body: "Feel every count. The satisfying vibration helps you maintain rhythm and focus, especially when counting without looking.",
+                    },
+                    {
+                        icon: "🎨",
+                        title: "Rename & Color Your Tallies",
+                        body: "Give each counter a name and a color for clarity and fun. Track multiple different things side by side.",
+                    },
+                    {
+                        icon: "⌚",
+                        title: "Apple Watch Support",
+                        body: "Tally Snap works seamlessly on Apple Watch — count on your wrist without taking your phone out of your pocket.",
+                    },
+                    {
+                        icon: "🔇",
+                        title: "No Ads. No Noise.",
+                        body: "Designed for quiet focus. No advertising, no push notifications, no clutter. Just counting.",
+                    },
+                    {
+                        icon: "🔒",
+                        title: "Zero Data Collection",
+                        body: "Tally Snap does not collect any data. Your counts are your own, stored only on your device.",
+                    },
+                ],
+                review: null,
             },
         },
     ];
@@ -156,1395 +473,728 @@ export function getStaticPaths() {
     return apps;
 }
 
+// ── PROPS FOR CURRENT ROUTE ────────────────────────────────────
 const {
-    appName,
+    name,
+    fullName,
     tagline,
-    heroDescription,
-
     iconUrl,
-
-    appStoreUrl,
-    privacyPolicyUrl,
-    canonicalUrl,
-
-    screenshots,
-
-    highlights,
-
-    features,
-
-    perfectFor,
-
-    useFor,
-
     category,
+    description,
+    appStoreUrl,
+    privacyUrl,
+    canonicalUrl,
+    platforms,
     price,
-    compatibility,
-    developer,
+    minIos,
+    rating,
+    ratingCount,
+    privacy,
+    features,
+    review,
+    disclaimer,
+} = Astro.props as AppDetail;
 
-    privacySummary,
-} = Astro.props as AppPage;
-
-const title = `${appName} | Curvachip`;
-const description = heroDescription;
+// Derived
+const title = `${name} — ${tagline} | Curvachip`;
+const metaDesc =
+    description.slice(0, 155) + (description.length > 155 ? "…" : "");
+const stars = "★".repeat(rating);
+const privacyBadgeLabel =
+    privacy === "none" ? "Data Not Collected" : "Data Not Linked to You";
+const privacyBadgeColor = privacy === "none" ? "green" : "blue";
 ---
 
 <Layout
     title={title}
-    description={description}
-    canonicalUrl={canonicalUrl}
+    description={metaDesc}
     activeNav="apps"
+    canonicalUrl={canonicalUrl}
+    ogType="website"
 >
+    <!-- ── HERO ── -->
     <header class="app-hero">
-        <div class="hero-glow"></div>
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="container app-hero-inner">
+            <a href="/apps" class="back-link">← All apps</a>
 
-        <div class="container hero-inner">
-            <a href="/apps" class="back-link"> ← Back to Apps </a>
-
-            <div class="hero-grid">
-                <div class="hero-copy">
-                    <div class="app-ident">
-                        <img
-                            src={iconUrl}
-                            alt={appName}
-                            width="84"
-                            height="84"
-                        />
-
-                        <div>
-                            <p class="app-tagline">
-                                {tagline}
-                            </p>
-
-                            <h1>
-                                {appName}
-                            </h1>
-                        </div>
-                    </div>
-
-                    <p class="hero-description">
-                        {heroDescription}
-                    </p>
-
-                    <div class="hero-actions">
-                        <a
-                            class="btn"
-                            href={appStoreUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Download on the App Store
-                        </a>
-
-                        <a class="btn btn-ghost" href={privacyPolicyUrl}>
-                            Privacy Policy
-                        </a>
+            <div class="hero-top">
+                <div aria-hidden="true">
+                    <!-- <span class="app-icon-emoji">{iconUrl}</span> -->
+                    <a
+                        href={appStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img src={iconUrl} alt={name} width="96" height="96" />
+                    </a>
+                </div>
+                <div class="hero-meta">
+                    <p class="hero-category">{category}</p>
+                    <h1 class="hero-name">{name}</h1>
+                    <p class="hero-tagline">{tagline}</p>
+                    <div class="hero-badges">
+                        {
+                            platforms.map((p) => (
+                                <span class="platform-badge">{p}</span>
+                            ))
+                        }
+                        <span class="price-badge">{price}</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="hero-preview">
-                    <img src={screenshots[0]} alt={`${appName} screenshot`} />
+            <p class="hero-description">{description}</p>
+
+            <div class="hero-actions">
+                <!-- <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+                    <img src="/appblack.svg" alt={name} height="50" />
+                </a> -->
+                <a
+                    href="#download-cta"
+                    class="btn btn-primary btn-download"
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                        ></path>
+                    </svg>
+                    Get {name}
+                </a>
+                <div
+                    class="hero-rating"
+                    aria-label={`Rated ${rating} out of 5 — ${ratingCount} ratings`}
+                >
+                    <span class="stars" aria-hidden="true">{stars}</span>
+                    <span class="rating-count"
+                        >{ratingCount} {ratingCount === 1 ? "rating" : "ratings"}</span
+                    >
                 </div>
             </div>
         </div>
     </header>
 
-    <main>
+    <!-- ── FEATURES ── -->
+    <section class="section" aria-label="Key features">
         <div class="container">
-            <section class="screenshots">
-                <div class="section-header">
-                    <p class="section-label">Gallery</p>
+            <p class="section-eyebrow">What it does</p>
+            <h2 class="section-title">Built for a purpose</h2>
 
-                    <h2>Take a closer look.</h2>
-                </div>
-
-                <div class="screenshot-strip">
-                    {
-                        screenshots.map((shot) => (
-                            <img src={shot} alt="" loading="lazy" />
-                        ))
-                    }
-                </div>
-            </section>
-
-            <section class="highlights">
-                <div class="section-header">
-                    <p class="section-label">Highlights</p>
-
-                    <h2>Everything you need. Nothing you don't.</h2>
-                </div>
-
-                <div class="highlight-grid">
-                    {
-                        highlights.map((item) => (
-                            <article class="highlight-card">
-                                <div class="highlight-icon">{item.icon}</div>
-
-                                <h3>{item.title}</h3>
-
-                                <p>{item.description}</p>
-                            </article>
-                        ))
-                    }
-                </div>
-            </section>
-
-            <section class="feature-list">
+            <div class="features-grid">
                 {
-                    features.map((feature, index) => (
-                        <section
-                            class={`feature-row ${
-                                index % 2 === 1 ? "reverse" : ""
-                            }`}
+                    features.map((f, i) => (
+                        <div
+                            class={`feature-row ${i % 2 === 1 ? "feature-row--flip" : ""}`}
                         >
-                            <div class="feature-copy">
-                                <p class="section-label">{feature.eyebrow}</p>
-
-                                <h2>{feature.title}</h2>
-
-                                <p>{feature.description}</p>
+                            <div class="feature-visual" aria-hidden="true">
+                                <span class="feature-big-emoji">{f.icon}</span>
                             </div>
-
-                            <div class="feature-image">
-                                <img
-                                    src={feature.image}
-                                    alt={feature.title}
-                                    loading="lazy"
-                                />
+                            <div class="feature-text">
+                                <h3 class="feature-title">{f.title}</h3>
+                                <p class="feature-body">{f.body}</p>
                             </div>
-                        </section>
+                        </div>
                     ))
                 }
-            </section>
+            </div>
+        </div>
+    </section>
 
-            <section class="perfect-for">
-                <div class="section-header">
-                    <p class="section-label">Built For</p>
-
-                    <h2>Users like you...</h2>
-                </div>
-
-                <div class="pill-grid">
-                    {perfectFor.map((item) => <span class="pill">{item}</span>)}
-                </div>
-            </section>
-
-            <section class="perfect-for">
-                <div class="section-header">
-                    <p class="section-label">Covering</p>
-
-                    <h2>Tasks like these...</h2>
-                </div>
-
-                <div class="pill-grid">
-                    {useFor.map((item) => <span class="pill">{item}</span>)}
-                </div>
-            </section>
-
-            <section class="privacy-summary">
-                <div class="privacy-card">
-                    <div class="privacy-header">
-                        <div class="privacy-icon">🔒</div>
-
+    <!-- ── DISCLAIMER (AI/nature apps only) ── -->
+    {
+        disclaimer && (
+            <section class="section section-tight">
+                <div class="container">
+                    <div class="disclaimer-card">
+                        <span class="disclaimer-icon" aria-hidden="true">
+                            ⚠
+                        </span>
                         <div>
-                            <p class="section-label">Privacy</p>
-
-                            <h2>Your data stays yours.</h2>
+                            <strong>Important notice</strong>
+                            <p>{disclaimer}</p>
                         </div>
                     </div>
-
-                    <p class="privacy-description">
-                        {privacySummary}
-                    </p>
-
-                    <ul class="privacy-list">
-                        <li>✓ No ads</li>
-
-                        <li>✓ No tracking</li>
-
-                        <li>✓ No account required</li>
-
-                        <li>✓ Privacy-first design</li>
-                    </ul>
-
-                    <a href={privacyPolicyUrl} class="btn btn-ghost">
-                        Read Privacy Policy →
-                    </a>
                 </div>
             </section>
+        )
+    }
 
-            <section class="app-information">
-                <div class="section-header">
-                    <p class="section-label">Information</p>
-
-                    <h2>App details</h2>
-                </div>
-
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label"> Category </span>
-
-                        <span class="info-value">
-                            {category}
-                        </span>
-                    </div>
-
-                    <div class="info-item">
-                        <span class="info-label"> Price </span>
-
-                        <span class="info-value">
-                            {price}
-                        </span>
-                    </div>
-
-                    <div class="info-item">
-                        <span class="info-label"> Compatibility </span>
-
-                        <span class="info-value">
-                            {compatibility}
-                        </span>
-                    </div>
-
-                    <div class="info-item">
-                        <span class="info-label"> Developer </span>
-
-                        <span class="info-value">
-                            {developer}
-                        </span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="download-cta">
-                <div class="cta-card">
-                    <img src={iconUrl} alt={appName} width="72" height="72" />
-
-                    <h2>Ready to get started?</h2>
-
-                    <p>
-                        Download <strong>{appName}</strong> today and start using
-                        it in seconds.
-                    </p>
-
-                    <div class="cta-actions">
-                        <a
-                            href={appStoreUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+    <!-- ── REVIEW ── -->
+    {
+        review && (
+            <section class="section section-alt" aria-label="App Store review">
+                <div class="container">
+                    <p class="section-eyebrow">From the App Store</p>
+                    <h2 class="section-title">What users say</h2>
+                    <figure class="review-card">
+                        <div
+                            class="review-stars"
+                            aria-label={`${review.stars} stars`}
                         >
-                            <img
-                                src="/appblack.svg"
-                                alt={`Download ${appName} on the App Store`}
-                                height="44"
-                            />
-                        </a>
-
-                        <a href={privacyPolicyUrl} class="btn btn-ghost">
-                            Privacy Policy
-                        </a>
-
-                        <a href="/apps" class="btn btn-ghost"> ← All Apps </a>
-                    </div>
+                            {"★".repeat(review.stars)}
+                        </div>
+                        <blockquote class="review-quote">
+                            <p>"{review.quote}"</p>
+                        </blockquote>
+                        <figcaption class="review-meta">
+                            <strong>{review.author}</strong>
+                            <span>{review.date} · App Store</span>
+                        </figcaption>
+                    </figure>
                 </div>
             </section>
+        )
+    }
+
+    <!-- ── APP INFO ── -->
+    <section class="section" aria-label="App information">
+        <div class="container info-layout">
+            <div>
+                <p class="section-eyebrow">App details</p>
+                <h2 class="section-title">The essentials</h2>
+                <p class="info-full-name">{fullName}</p>
+                <p class="info-blurb">
+                    Published by Curvachip LLC · Available on the Apple App
+                    Store
+                </p>
+            </div>
+            <dl class="info-grid">
+                <div class="info-cell">
+                    <dt>Category</dt>
+                    <dd>{category}</dd>
+                </div>
+                <div class="info-cell">
+                    <dt>Platforms</dt>
+                    <dd>{platforms.join(", ")}</dd>
+                </div>
+                <div class="info-cell">
+                    <dt>Price</dt>
+                    <dd>{price}</dd>
+                </div>
+                <div class="info-cell">
+                    <dt>Requires</dt>
+                    <dd>{minIos} or later</dd>
+                </div>
+                <div class="info-cell">
+                    <dt>Rating</dt>
+                    <dd>
+                        <span class="info-stars" aria-hidden="true"
+                            >{"★".repeat(Math.round(rating))}</span
+                        >
+                        {" "}{rating.toFixed(1)} ({ratingCount})
+                    </dd>
+                </div>
+                <div class="info-cell">
+                    <dt>Privacy</dt>
+                    <dd>
+                        <span
+                            class={`privacy-badge privacy-badge--${privacyBadgeColor}`}
+                        >
+                            {privacyBadgeLabel}
+                        </span>
+                    </dd>
+                </div>
+                <div class="info-cell info-cell--wide">
+                    <dt>Copyright</dt>
+                    <dd>
+                        © {new Date().getFullYear()} Curvachip LLC. All rights reserved.
+                    </dd>
+                </div>
+            </dl>
         </div>
-    </main>
+    </section>
+
+    <!-- ── FINAL CTA ── -->
+    <section
+        id="download-cta"
+        class="section section-alt section-cta"
+        aria-label="Download call to action"
+    >
+        <div class="container cta-inner">
+            <!-- <span class="cta-emoji" aria-hidden="true">{iconUrl}</span> -->
+            <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+                <img src={iconUrl} alt={name} width="96" height="96" />
+            </a>
+            <h2 class="cta-title">Ready to try {name}?</h2>
+            <p class="cta-sub">
+                Free to download. Privacy by default. Built with care.
+            </p>
+            <div>
+                <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+                    <img src="/appblack.svg" alt={name} height="55" />
+                </a>
+            </div>
+        </div>
+        <!-- <div class="cta-actions">
+                <a
+                    href={appStoreUrl}
+                    target="_blank"
+                    rel="noopener"
+                    class="btn btn-primary btn-download"
+                >
+                    <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                        ></path>
+                    </svg>
+                    Download on the App Store
+                </a>
+                <a href={privacyUrl} class="btn btn-ghost">Privacy Policy →</a>
+                <a href="/apps" class="btn btn-ghost">← All apps</a>
+            </div> -->
+    </section>
 </Layout>
 
-<style>
-    /* ═══════════════════════════════════════════════════════════════
-       GLOBAL
-       ═══════════════════════════════════════════════════════════════ */
-
-    .section-header {
-        max-width: 680px;
-        margin: 0 auto 2.5rem;
-        text-align: center;
-    }
-
-    .section-label {
-        display: inline-block;
-        margin-bottom: 0.5rem;
-
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-
-        color: var(--cc-blue);
-    }
-
-    .section-header h2 {
-        font-family: var(--font-display);
-        font-size: clamp(2rem, 5vw, 3rem);
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        line-height: 1.05;
-        color: var(--cc-text);
-    }
-
-    .section-header p {
-        margin-top: 1rem;
-        color: var(--cc-muted);
-        line-height: 1.8;
-    }
-
-    main > .container {
-        display: flex;
-        flex-direction: column;
-        gap: clamp(5rem, 10vw, 8rem);
-        padding-block: clamp(4rem, 7vw, 7rem);
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       HERO
-       ═══════════════════════════════════════════════════════════════ */
-
+<!-- ── STYLES ─────────────────────────────────────────────────
+     is:global is required here because features, review, and
+     info cells are all rendered inside .map() expressions —
+     Astro's scoped hash cannot reach dynamically-rendered
+     elements, so we escape scoping deliberately and narrowly.
+     ─────────────────────────────────────────────────────────── -->
+<style is:global>
+    /* ── APP HERO ── */
     .app-hero {
         position: relative;
-        overflow: hidden;
+        overflow: clip;
+        overflow-clip-margin: 4px;
+        padding: clamp(3rem, 8vw, 6rem) 0 clamp(3rem, 7vw, 5rem);
         border-bottom: 1px solid var(--cc-border);
-
-        padding-top: clamp(3rem, 7vw, 5rem);
-        padding-bottom: clamp(4rem, 8vw, 6rem);
     }
-
     .hero-glow {
         position: absolute;
         inset: 0;
-
-        pointer-events: none;
-
         background:
             radial-gradient(
-                ellipse at top left,
-                rgba(91, 156, 246, 0.12),
+                ellipse 70% 80% at 0% 50%,
+                rgba(91, 156, 246, 0.06) 0%,
                 transparent 65%
             ),
             radial-gradient(
-                ellipse at bottom right,
-                rgba(91, 156, 246, 0.06),
-                transparent 70%
+                ellipse 50% 60% at 100% 20%,
+                rgba(167, 139, 250, 0.04) 0%,
+                transparent 60%
             );
-    }
-
-    .hero-inner {
-        position: relative;
-        z-index: 1;
-    }
-
-    .back-link {
-        display: inline-block;
-        margin-bottom: 2.5rem;
-
-        color: var(--cc-muted);
-        font-size: 0.85rem;
-
-        transition: color 0.2s;
-    }
-
-    .back-link:hover {
-        color: var(--cc-blue);
-    }
-
-    .hero-grid {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: clamp(3rem, 8vw, 6rem);
-        align-items: center;
-    }
-
-    .hero-copy {
-        max-width: 560px;
-    }
-
-    .app-ident {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        margin-bottom: 2rem;
-    }
-
-    .app-ident img {
-        width: 84px;
-        height: 84px;
-
-        border-radius: 22px;
-
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
-    }
-
-    .app-tagline {
-        margin-bottom: 0.35rem;
-
-        color: var(--cc-blue);
-
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-    }
-
-    .app-ident h1 {
-        font-family: var(--font-display);
-        font-size: clamp(2.7rem, 6vw, 4.6rem);
-        line-height: 0.95;
-        letter-spacing: -0.045em;
-        font-weight: 800;
-
-        color: var(--cc-text);
-    }
-
-    .hero-description {
-        margin: 2rem 0;
-
-        color: var(--cc-muted);
-
-        font-size: 1.08rem;
-        line-height: 1.9;
-    }
-
-    .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.9rem;
-    }
-
-    .hero-preview {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .hero-preview img {
-        width: 100%;
-        max-width: 320px;
-
-        border-radius: 28px;
-
-        border: 1px solid var(--cc-border);
-
-        box-shadow: 0 35px 80px rgba(0, 0, 0, 0.35);
-
-        transition:
-            transform 0.35s ease,
-            box-shadow 0.35s ease;
-    }
-
-    .hero-preview img:hover {
-        transform: translateY(-8px) rotate(-1deg);
-
-        box-shadow: 0 45px 90px rgba(0, 0, 0, 0.42);
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       COMMON SECTION SPACING
-       ═══════════════════════════════════════════════════════════════ */
-
-    .screenshots,
-    .highlights,
-    .feature-list,
-    .perfect-for,
-    .privacy-summary,
-    .app-information,
-    .download-cta {
-        scroll-margin-top: 90px;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       RESPONSIVE (GLOBAL + HERO)
-       ═══════════════════════════════════════════════════════════════ */
-
-    @media (max-width: 960px) {
-        .hero-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .hero-copy {
-            max-width: none;
-        }
-
-        .hero-preview {
-            order: -1;
-        }
-
-        .hero-preview img {
-            max-width: 280px;
-        }
-    }
-
-    @media (max-width: 640px) {
-        .app-ident {
-            align-items: flex-start;
-        }
-
-        .app-ident img {
-            width: 72px;
-            height: 72px;
-            border-radius: 18px;
-        }
-
-        .hero-actions {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .hero-actions .btn {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-        }
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       SCREENSHOT GALLERY
-       ═══════════════════════════════════════════════════════════════ */
-
-    .screenshot-strip {
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: minmax(220px, 260px);
-
-        gap: 1.5rem;
-
-        overflow-x: auto;
-        overflow-y: hidden;
-
-        padding: 0.5rem 0 1rem;
-
-        scroll-snap-type: x proximity;
-        scrollbar-width: thin;
-    }
-
-    .screenshot-strip::-webkit-scrollbar {
-        height: 8px;
-    }
-
-    .screenshot-strip::-webkit-scrollbar-thumb {
-        background: var(--cc-border);
-        border-radius: 999px;
-    }
-
-    .screenshot-strip img {
-        width: 100%;
-        display: block;
-
-        border-radius: 24px;
-        border: 1px solid var(--cc-border);
-
-        background: var(--cc-surface);
-
-        scroll-snap-align: start;
-
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
-
-        transition:
-            transform 0.28s ease,
-            box-shadow 0.28s ease,
-            border-color 0.28s ease;
-    }
-
-    .screenshot-strip img:hover {
-        transform: translateY(-6px) scale(1.015);
-
-        border-color: rgba(91, 156, 246, 0.35);
-
-        box-shadow: 0 28px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       HIGHLIGHTS
-       ═══════════════════════════════════════════════════════════════ */
-
-    .highlight-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1.5rem;
-    }
-
-    .highlight-card {
-        position: relative;
-
-        display: flex;
-        flex-direction: column;
-
-        padding: 1.75rem;
-
-        border-radius: 18px;
-
-        background: var(--cc-surface);
-        border: 1px solid var(--cc-border);
-
-        transition:
-            transform 0.25s ease,
-            border-color 0.25s ease,
-            box-shadow 0.25s ease;
-    }
-
-    .highlight-card:hover {
-        transform: translateY(-4px);
-
-        border-color: rgba(91, 156, 246, 0.35);
-
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
-    }
-
-    .highlight-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 52px;
-        height: 52px;
-
-        margin-bottom: 1.25rem;
-
-        border-radius: 14px;
-
-        background: linear-gradient(
-            180deg,
-            rgba(91, 156, 246, 0.18),
-            rgba(91, 156, 246, 0.08)
-        );
-
-        border: 1px solid rgba(91, 156, 246, 0.18);
-
-        font-size: 1.35rem;
-    }
-
-    .highlight-card h3 {
-        margin-bottom: 0.75rem;
-
-        font-family: var(--font-display);
-        font-size: 1.15rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-
-        color: var(--cc-text);
-    }
-
-    .highlight-card p {
-        color: var(--cc-muted);
-
-        font-size: 0.94rem;
-        line-height: 1.75;
-
-        flex: 1;
-    }
-
-    /* subtle top accent */
-
-    .highlight-card::before {
-        content: "";
-
-        position: absolute;
-
-        top: 0;
-        left: 24px;
-        right: 24px;
-
-        height: 2px;
-
-        border-radius: 999px;
-
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(91, 156, 246, 0.9),
-            transparent
-        );
-
-        opacity: 0;
-
-        transition: opacity 0.25s ease;
-    }
-
-    .highlight-card:hover::before {
-        opacity: 1;
-    }
-
-    /* ═══════════════════════════════════════════════════════════════
-       RESPONSIVE
-       ═══════════════════════════════════════════════════════════════ */
-
-    @media (max-width: 1100px) {
-        .highlight-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 700px) {
-        .highlight-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .highlight-card {
-            padding: 1.5rem;
-        }
-
-        .screenshot-strip {
-            grid-auto-columns: minmax(180px, 220px);
-        }
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   HERO
-   ════════════════════════════════════════════════════════════════ */
-
-    .app-hero {
-        position: relative;
-        overflow: hidden;
-        padding: clamp(4rem, 8vw, 7rem) 0;
-        border-bottom: 1px solid var(--cc-border);
-    }
-
-    .hero-glow {
-        position: absolute;
-        inset: 0;
         pointer-events: none;
-        background:
-            radial-gradient(
-                circle at 15% 25%,
-                rgba(91, 156, 246, 0.12),
-                transparent 45%
-            ),
-            radial-gradient(
-                circle at 85% 75%,
-                rgba(91, 156, 246, 0.06),
-                transparent 40%
-            );
     }
-
     .app-hero-inner {
         position: relative;
-        display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 4rem;
-        align-items: center;
-    }
-
-    @media (max-width: 900px) {
-        .app-hero-inner {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-        }
     }
 
     .back-link {
         display: inline-block;
+        font-size: 0.8rem;
         color: var(--cc-muted);
-        font-size: 0.82rem;
-        margin-bottom: 1.5rem;
-        transition: color 0.18s;
+        margin-bottom: 2rem;
+        transition: color 0.15s;
     }
-
     .back-link:hover {
         color: var(--cc-blue);
     }
 
-    .hero-tag {
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        color: var(--cc-blue);
-        font-weight: 700;
-        margin-bottom: 0.8rem;
+    /* Hero top: icon + meta */
+    .hero-top {
+        display: flex;
+        gap: 1.75rem;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+    }
+    @media (max-width: 480px) {
+        .hero-top {
+            flex-direction: column;
+            gap: 1rem;
+        }
     }
 
-    .hero-title {
-        font-family: var(--font-display);
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
+    .app-icon-wrap {
+        flex-shrink: 0;
+        width: 96px;
+        height: 96px;
+        background: var(--cc-surface);
+        border: 1px solid var(--cc-border);
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    }
+    .app-icon-emoji {
+        font-size: 2.8rem;
         line-height: 1;
-        letter-spacing: -0.04em;
-        margin-bottom: 1.25rem;
+    }
+
+    .hero-category {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 0.35rem;
+    }
+    .hero-name {
+        font-family: var(--font-display);
+        font-size: clamp(1.8rem, 5vw, 3rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: var(--cc-text);
+        margin-bottom: 0.35rem;
+    }
+    .hero-tagline {
+        font-size: 1rem;
+        color: var(--cc-muted);
+        margin-bottom: 1rem;
+    }
+    .hero-badges {
+        display: flex;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+    }
+    .platform-badge,
+    .price-badge {
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 0.2rem 0.6rem;
+        border-radius: 99px;
+        border: 1px solid var(--cc-border);
+        background: var(--cc-surface);
+        color: var(--cc-muted);
+    }
+    .price-badge {
+        color: var(--cc-blue);
+        border-color: rgba(91, 156, 246, 0.25);
+        background: rgba(91, 156, 246, 0.07);
     }
 
     .hero-description {
-        max-width: 620px;
+        font-size: 1rem;
         color: var(--cc-muted);
-        font-size: 1.05rem;
-        line-height: 1.85;
+        line-height: 1.8;
+        max-width: 640px;
         margin-bottom: 2rem;
     }
 
     .hero-actions {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
         align-items: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+    }
+    .btn-download {
+        background: var(--cc-blue);
+        color: #07070f;
+        box-shadow: 0 0 24px rgba(91, 156, 246, 0.35);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.7rem 1.6rem;
+        border-radius: 10px;
+        font-size: 0.925rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition:
+            transform 0.15s,
+            box-shadow 0.15s;
+    }
+    .btn-download:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 0 32px rgba(91, 156, 246, 0.5);
     }
 
-    .hero-actions img {
-        display: block;
-    }
-
-    .hero-phone {
+    .hero-rating {
         display: flex;
-        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .stars {
+        color: #fbbf24;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+    }
+    .rating-count {
+        font-size: 0.8rem;
+        color: var(--cc-muted);
     }
 
-    .phone-frame {
-        width: min(360px, 100%);
-        aspect-ratio: 9 / 19.5;
-        border-radius: 40px;
-        overflow: hidden;
-        border: 1px solid var(--cc-border);
+    /* ── SECTIONS ── */
+    .section {
+        padding: clamp(3.5rem, 8vw, 6rem) 0;
+    }
+    .section-alt {
         background: var(--cc-surface);
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+    .section-tight {
+        padding-block: 1.5rem;
     }
 
-    .phone-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+    .section-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cc-blue);
+        margin-bottom: 0.5rem;
+    }
+    .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 3rem;
     }
 
-    /* ════════════════════════════════════════════════════════════════
-   FEATURE SECTIONS
-   ════════════════════════════════════════════════════════════════ */
-
-    .features {
-        padding: clamp(4rem, 8vw, 7rem) 0;
+    /* ── FEATURES GRID ── */
+    .features-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
     }
 
     .feature-row {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 5rem;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
         align-items: center;
-        margin-bottom: clamp(5rem, 10vw, 8rem);
+        padding: 2.25rem 0;
+        border-bottom: 1px solid var(--cc-border);
     }
-
-    .feature-row:last-child {
-        margin-bottom: 0;
+    .feature-row:first-of-type {
+        border-top: 1px solid var(--cc-border);
     }
-
-    .feature-row.reverse {
+    .feature-row--flip {
         direction: rtl;
     }
-
-    .feature-row.reverse > * {
+    .feature-row--flip > * {
         direction: ltr;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 600px) {
         .feature-row,
-        .feature-row.reverse {
+        .feature-row--flip {
             grid-template-columns: 1fr;
-            gap: 2rem;
             direction: ltr;
+        }
+        .feature-visual {
+            display: none;
         }
     }
 
-    .feature-image {
-        border-radius: var(--cc-radius);
-        overflow: hidden;
-        border: 1px solid var(--cc-border);
+    .feature-visual {
         background: var(--cc-surface);
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        aspect-ratio: 4/3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s;
     }
-
-    .feature-image img {
-        width: 100%;
-        display: block;
+    .feature-row:hover .feature-visual {
+        border-color: rgba(91, 156, 246, 0.3);
     }
-
-    .feature-tag {
-        color: var(--cc-blue);
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-size: 0.72rem;
-        font-weight: 700;
-        margin-bottom: 0.75rem;
+    .feature-big-emoji {
+        font-size: 3.5rem;
+        line-height: 1;
     }
 
     .feature-title {
         font-family: var(--font-display);
-        font-size: clamp(1.8rem, 4vw, 2.8rem);
-        line-height: 1.15;
-        margin-bottom: 1rem;
-        letter-spacing: -0.03em;
-    }
-
-    .feature-description {
-        color: var(--cc-muted);
-        line-height: 1.9;
-        margin-bottom: 1.5rem;
-    }
-
-    .feature-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .feature-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.8rem;
-        color: var(--cc-muted);
-        line-height: 1.75;
-    }
-
-    .feature-list li::before {
-        content: "✓";
-        color: var(--cc-blue);
+        font-size: 1.15rem;
         font-weight: 700;
-        flex-shrink: 0;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   PRIVACY
-   ════════════════════════════════════════════════════════════════ */
-
-    .privacy-section {
-        padding-bottom: clamp(4rem, 8vw, 6rem);
-    }
-
-    .privacy-card {
-        border: 1px solid var(--cc-border);
-        border-radius: var(--cc-radius);
-        background: var(--cc-surface);
-        padding: 2rem;
-    }
-
-    .privacy-header {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-
-    .privacy-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        background: rgba(91, 156, 246, 0.1);
-        display: grid;
-        place-items: center;
-        color: var(--cc-blue);
-    }
-
-    .privacy-card h2 {
-        font-family: var(--font-display);
-        font-size: 1.6rem;
-        margin-bottom: 0.2rem;
-    }
-
-    .privacy-card p {
-        color: var(--cc-muted);
-        line-height: 1.85;
-    }
-
-    .privacy-links {
-        display: flex;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        margin-top: 1.75rem;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   APP INFO
-   ════════════════════════════════════════════════════════════════ */
-
-    .app-info {
-        padding-bottom: clamp(4rem, 8vw, 6rem);
-    }
-
-    .info-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-    }
-
-    @media (max-width: 900px) {
-        .info-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 600px) {
-        .info-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    .info-card {
-        border: 1px solid var(--cc-border);
-        border-radius: var(--cc-radius);
-        padding: 1.4rem;
-        background: var(--cc-surface);
-    }
-
-    .info-label {
-        color: var(--cc-muted);
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        margin-bottom: 0.55rem;
-    }
-
-    .info-value {
-        font-size: 0.98rem;
-        font-weight: 600;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   CTA
-   ════════════════════════════════════════════════════════════════ */
-
-    .final-cta {
-        padding-bottom: clamp(5rem, 10vw, 7rem);
-    }
-
-    .cta-card {
-        border: 1px solid var(--cc-border);
-        border-radius: calc(var(--cc-radius) + 4px);
-        padding: clamp(2.5rem, 5vw, 4rem);
-        background:
-            linear-gradient(
-                180deg,
-                rgba(91, 156, 246, 0.08),
-                rgba(91, 156, 246, 0.02)
-            ),
-            var(--cc-surface);
-        text-align: center;
-    }
-
-    .cta-card h2 {
-        font-family: var(--font-display);
-        font-size: clamp(2rem, 5vw, 3rem);
-        letter-spacing: -0.03em;
-        margin-bottom: 1rem;
-    }
-
-    .cta-card p {
-        color: var(--cc-muted);
-        line-height: 1.8;
-        max-width: 650px;
-        margin: 0 auto 2rem;
-    }
-
-    .cta-actions {
-        display: flex;
-        justify-content: center;
-        gap: 0.75rem;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-
-    .cta-actions img {
-        display: block;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   PRIVACY SUMMARY
-   ════════════════════════════════════════════════════════════════ */
-
-    .privacy-summary {
-        padding-bottom: clamp(4rem, 8vw, 6rem);
-    }
-
-    .privacy-card {
-        display: flex;
-        flex-direction: column;
-
-        border: 1px solid var(--cc-border);
-        border-radius: var(--cc-radius);
-
-        background:
-            linear-gradient(180deg, rgba(91, 156, 246, 0.06), transparent),
-            var(--cc-surface);
-
-        padding: clamp(1.5rem, 4vw, 2.5rem);
-    }
-
-    .privacy-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-
-        margin-bottom: 1.25rem;
-    }
-
-    .privacy-icon {
-        flex-shrink: 0;
-
-        display: grid;
-        place-items: center;
-
-        width: 48px;
-        height: 48px;
-
-        border-radius: 14px;
-
-        background: rgba(91, 156, 246, 0.12);
-
-        border: 1px solid rgba(91, 156, 246, 0.18);
-
-        font-size: 1.25rem;
-    }
-
-    .privacy-card h2 {
-        font-family: var(--font-display);
-
-        font-size: clamp(1.35rem, 3vw, 1.7rem);
-
-        letter-spacing: -0.025em;
-        line-height: 1.15;
-
+        letter-spacing: -0.015em;
+        margin-bottom: 0.6rem;
         color: var(--cc-text);
     }
-
-    .privacy-description {
-        max-width: 760px;
-
-        margin-bottom: 1.5rem;
-
+    .feature-body {
+        font-size: 0.95rem;
         color: var(--cc-muted);
-
-        line-height: 1.85;
+        line-height: 1.8;
     }
 
-    .privacy-list {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-
-        gap: 0.75rem 1.5rem;
-
-        list-style: none;
-
-        margin: 0 0 1.75rem;
-        padding: 0;
-
+    /* ── DISCLAIMER ── */
+    .disclaimer-card {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        background: rgba(251, 191, 36, 0.06);
+        border: 1px solid rgba(251, 191, 36, 0.2);
+        border-radius: var(--cc-radius);
+        padding: 1.25rem 1.5rem;
+    }
+    .disclaimer-icon {
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        color: var(--cc-amber);
+        margin-top: 0.1rem;
+    }
+    .disclaimer-card strong {
+        display: block;
+        font-size: 0.875rem;
+        color: var(--cc-text);
+        margin-bottom: 0.3rem;
+    }
+    .disclaimer-card p {
+        font-size: 0.85rem;
         color: var(--cc-muted);
-
         line-height: 1.7;
     }
 
-    .privacy-list li {
+    /* ── REVIEW ── */
+    .review-card {
+        background: var(--cc-bg);
+        border: 1px solid var(--cc-border);
+        border-radius: var(--cc-radius);
+        padding: 2rem;
+        max-width: 580px;
+    }
+    .review-stars {
+        color: #fbbf24;
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+    }
+    .review-quote p {
+        font-style: italic;
+        font-size: 1rem;
+        color: var(--cc-text);
+        line-height: 1.8;
+        margin-bottom: 1.25rem;
+    }
+    .review-meta {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        gap: 0.15rem;
+    }
+    .review-meta strong {
+        font-size: 0.875rem;
+        color: var(--cc-text);
+    }
+    .review-meta span {
+        font-size: 0.8rem;
+        color: var(--cc-muted);
+    }
 
-        gap: 0.5rem;
-
+    /* ── APP INFO ── */
+    .info-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+    @media (max-width: 700px) {
+        .info-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+    .info-full-name {
         font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--cc-text);
+        margin-bottom: 0.3rem;
     }
-
-    .privacy-list li::first-letter {
-        color: var(--cc-blue);
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   APP INFORMATION
-   ════════════════════════════════════════════════════════════════ */
-
-    .app-information {
-        padding-bottom: clamp(4rem, 8vw, 6rem);
+    .info-blurb {
+        font-size: 0.875rem;
+        color: var(--cc-muted);
+        margin-bottom: 0;
     }
 
     .info-grid {
         display: grid;
-
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-
-        gap: 1rem;
-    }
-
-    .info-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-
-        padding: 1.5rem;
-
-        border-radius: var(--cc-radius);
-
-        background: var(--cc-surface);
-
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
         border: 1px solid var(--cc-border);
-
-        transition:
-            transform 0.25s ease,
-            border-color 0.25s ease,
-            box-shadow 0.25s ease;
+        border-radius: var(--cc-radius);
+        overflow: hidden;
     }
-
-    .info-item:hover {
-        transform: translateY(-3px);
-
-        border-color: rgba(91, 156, 246, 0.35);
-
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    .info-cell {
+        padding: 0.9rem 1.1rem;
+        border-right: 1px solid var(--cc-border);
+        border-bottom: 1px solid var(--cc-border);
     }
-
-    .info-label {
-        color: var(--cc-muted);
-
+    .info-cell:nth-child(even) {
+        border-right: none;
+    }
+    .info-cell--wide {
+        grid-column: 1 / -1;
+        border-right: none;
+        border-bottom: none;
+    }
+    .info-cell dt {
         font-size: 0.7rem;
-        font-weight: 700;
-
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-    }
-
-    .info-value {
-        color: var(--cc-text);
-
-        font-size: 1rem;
         font-weight: 600;
-
-        line-height: 1.5;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--cc-muted);
+        margin-bottom: 0.3rem;
+    }
+    .info-cell dd {
+        font-size: 0.875rem;
+        color: var(--cc-text);
+    }
+    .info-stars {
+        color: #fbbf24;
     }
 
-    /* ════════════════════════════════════════════════════════════════
-   FINAL CTA
-   ════════════════════════════════════════════════════════════════ */
-
-    .download-cta {
-        padding-bottom: clamp(5rem, 10vw, 8rem);
+    .privacy-badge {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+    }
+    .privacy-badge--green {
+        background: rgba(52, 211, 153, 0.1);
+        color: var(--cc-green);
+        border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+    .privacy-badge--blue {
+        background: rgba(91, 156, 246, 0.1);
+        color: var(--cc-blue);
+        border: 1px solid rgba(91, 156, 246, 0.25);
     }
 
-    .cta-card {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
+    /* ── FINAL CTA ── */
+    .section-cta {
         text-align: center;
     }
-
-    .cta-card > img {
-        margin-bottom: 1.5rem;
-
-        border-radius: 18px;
-
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    .cta-inner {
+        max-width: 560px;
+        margin-inline: auto;
     }
-
-    .cta-card h2 {
-        color: var(--cc-text);
+    .cta-emoji {
+        display: block;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1;
     }
-
-    .cta-card strong {
-        color: var(--cc-text);
+    .cta-title {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+        margin-bottom: 0.75rem;
     }
-
-    .cta-actions a {
-        display: inline-flex;
-        align-items: center;
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   PILL GRID (Perfect For)
-   ════════════════════════════════════════════════════════════════ */
-
-    .pill-grid {
-        display: flex;
-
-        justify-content: center;
-        flex-wrap: wrap;
-
-        gap: 0.75rem;
-    }
-
-    .pill {
-        display: inline-flex;
-        align-items: center;
-
-        padding: 0.55rem 1rem;
-
-        border-radius: 999px;
-
-        background: var(--cc-surface);
-
-        border: 1px solid var(--cc-border);
-
+    .cta-sub {
         color: var(--cc-muted);
-
-        font-size: 0.9rem;
-        font-weight: 600;
-
-        transition:
-            border-color 0.2s ease,
-            color 0.2s ease,
-            transform 0.2s ease;
+        font-size: 1rem;
+        margin-bottom: 2rem;
     }
-
-    .pill:hover {
-        transform: translateY(-2px);
-
-        color: var(--cc-text);
-
-        border-color: rgba(91, 156, 246, 0.35);
-    }
-
-    /* ════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ════════════════════════════════════════════════════════════════ */
-
-    @media (max-width: 1000px) {
-        .info-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
-
-    @media (max-width: 700px) {
-        .privacy-header {
-            align-items: flex-start;
-        }
-
-        .privacy-list {
-            grid-template-columns: 1fr;
-        }
-
-        .info-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .privacy-card {
-            padding: 1.5rem;
-        }
-
-        .info-item {
-            padding: 1.25rem;
-        }
-
-        .cta-card {
-            padding-inline: 1.25rem;
-        }
-
-        .cta-actions {
-            flex-direction: column;
-
-            width: 100%;
-        }
-
-        .cta-actions > * {
-            width: 100%;
-
-            justify-content: center;
-        }
-
-        .cta-actions img {
-            max-width: 100%;
-        }
-    }
-
-    @media (max-width: 420px) {
-        .privacy-header {
-            flex-direction: column;
-        }
-
-        .pill {
-            width: 100%;
-
-            justify-content: center;
-        }
+    .cta-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 </style>
