@@ -18,6 +18,7 @@
 // Keeping these explicit makes every field self-documenting and
 // gives you autocomplete in VS Code / Cursor.
 
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 
 type StoredLocation = "on-device" | "external" | "none";
@@ -562,7 +563,7 @@ const contactNum = section++;
             <a href="/apps" class="back-link">← Back to Apps</a>
             <div class="app-ident">
                 <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
-                    <img src={iconUrl} alt={appName} width="64" height="64" />
+                    <Image src={iconUrl} alt={appName} width="64" height="64" loading="eager" />
                 </a>
                 <div>
                     <p class="app-ident-tagline">{appTagline}</p>
@@ -1048,6 +1049,7 @@ const contactNum = section++;
                             src="/appblack.svg"
                             alt={appName + " on the App Store"}
                             height="44"
+                            loading="lazy"
                         />
                     </a>
                     <a href={appPageUrl} class="btn btn-ghost">Learn more</a>

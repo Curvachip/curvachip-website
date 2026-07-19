@@ -3,12 +3,59 @@
 // Website-level Terms of Use for curvachip.com.
 // Not app-specific — covers the website itself.
 
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
 
-const lastUpdated  = "July 2026";
+import { Info } from "lucide-astro";
+import { TriangleAlert } from "lucide-astro";
+import { X } from "lucide-astro";
+import { Check } from "lucide-astro";
+
+const lastUpdated = "July 2026";
 const contactEmail = "developer@curvachip.com";
 const canonicalUrl = "https://curvachip.com/privacy/terms-of-use";
 const governingLaw = "the State of Colorado, United States"; // ← UPDATE
+
+const allowedActions = [
+  {
+    allowed:
+      "Browse this site to gather information pertaining to our business offerings",
+  },
+  {
+    allowed:
+      "Visit external websites linked from our website and related to our business offerings",
+  },
+  {
+    allowed:
+      "Contact our team to provide product feedback or carry out business enquiries",
+  },
+];
+
+const deniedActions = [
+  {
+    denied:
+      "Use automated tools to scrape, crawl, or mirror the site's content",
+  },
+  {
+    denied:
+      "Attempt to gain unauthorised access to any part of the site or its hosting infrastructure",
+  },
+  {
+    denied:
+      "Transmit malware, spam, or any content intended to disrupt the site or its visitors",
+  },
+  {
+    denied:
+      "Misrepresent your identity or affiliation when contacting Curvachip via the contact form",
+  },
+  {
+    denied:
+      "Send malicious business enquiries to solicit the gathering of confidential information",
+  },
+  {
+    denied:
+      "Use the site in any way that violates applicable local, national, or international law",
+  },
+];
 ---
 
 <Layout
@@ -17,20 +64,21 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
   activeNav="privacy"
   canonicalUrl={canonicalUrl}
 >
-
   <!-- ── HEADER ── -->
   <header class="doc-hero">
     <div class="hero-glow" aria-hidden="true"></div>
     <div class="container doc-hero-inner">
       <div>
-      <a href="/" class="back-link">← Back to Home</a> <div class="doc-badge">Legal</div>
+        <a href="/" class="back-link">← Back to Home</a> <div class="doc-badge">Legal</div>
       </div>
       <h1 class="doc-title">Terms of Use</h1>
-      <p class="doc-meta">Curvachip LLC · curvachip.com · Last updated: {lastUpdated}</p>
+      <p class="doc-meta">
+        Curvachip LLC · curvachip.com · Last updated: {lastUpdated}
+      </p>
       <p class="doc-intro">
-        These terms govern your use of the curvachip.com website and all apps published
-        by Curvachip LLC. They are written in plain English. If something is unclear,
-        email us and we will explain it.
+        These terms govern your use of the curvachip.com website and all apps
+        published by Curvachip LLC. They are written in plain English. If
+        something is unclear, email us and we will explain it.
       </p>
     </div>
   </header>
@@ -38,43 +86,48 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
   <!-- ── BODY ── -->
   <main>
     <div class="container doc-layout">
-
       <!-- TABLE OF CONTENTS -->
       <nav class="toc" aria-label="Table of contents">
         <p class="toc-title">On this page</p>
         <ol class="toc-list">
-          <li><a href="#acceptance"    class="toc-link">1. Acceptance</a></li>
-          <li><a href="#website-use"   class="toc-link">2. Website use</a></li>
-          <li><a href="#apps"          class="toc-link">3. Apps</a></li>
-          <li><a href="#ip"            class="toc-link">4. Intellectual property</a></li>
-          <li><a href="#ai"            class="toc-link">5. AI disclaimer</a></li>
-          <li><a href="#disclaimer"    class="toc-link">6. Disclaimer</a></li>
-          <li><a href="#liability"     class="toc-link">7. Limitation of liability</a></li>
-          <li><a href="#links"         class="toc-link">8. External links</a></li>
-          <li><a href="#termination"   class="toc-link">9. Termination</a></li>
-          <li><a href="#governing-law" class="toc-link">10. Governing law</a></li>
-          <li><a href="#changes"       class="toc-link">11. Changes</a></li>
-          <li><a href="#contact"       class="toc-link">12. Contact</a></li>
+          <li><a href="#acceptance" class="toc-link">1. Acceptance</a></li>
+          <li><a href="#website-use" class="toc-link">2. Website use</a></li>
+          <li><a href="#apps" class="toc-link">3. Apps</a></li>
+          <li><a href="#ip" class="toc-link">4. Intellectual property</a></li>
+          <li><a href="#ai" class="toc-link">5. AI disclaimer</a></li>
+          <li><a href="#disclaimer" class="toc-link">6. Disclaimer</a></li>
+          <li>
+            <a href="#liability" class="toc-link">7. Limitation of liability</a>
+          </li>
+          <li><a href="#links" class="toc-link">8. External links</a></li>
+          <li><a href="#termination" class="toc-link">9. Termination</a></li>
+          <li>
+            <a href="#governing-law" class="toc-link">10. Governing law</a>
+          </li>
+          <li><a href="#changes" class="toc-link">11. Changes</a></li>
+          <li><a href="#contact" class="toc-link">12. Contact</a></li>
         </ol>
       </nav>
 
       <!-- DOCUMENT -->
       <article class="doc-body">
-
         <!-- 1. ACCEPTANCE -->
         <section id="acceptance" class="doc-section">
           <h2 class="doc-h2">1. Acceptance of terms</h2>
           <p>
-            By accessing curvachip.com or downloading any application published by
-            Curvachip LLC ("Curvachip," "we," "us," or "our"), you agree to be bound
-            by these Terms of Use. If you do not agree, please do not use our website
-            or apps.
+            By accessing curvachip.com or downloading any application published
+            by Curvachip LLC ("Curvachip," "we," "us," or "our"), you agree to
+            be bound by these Terms of Use. If you do not agree, please do not
+            use our website or apps.
           </p>
           <p>
-            These terms apply to the curvachip.com website and to all apps available
-            on the Apple App Store under the Curvachip developer account. Where a
-            specific app has supplemental terms, those are published alongside that
-            app's privacy policy on the <a href="/apps" class="inline-link">Apps</a> page.
+            These terms apply to the curvachip.com website ("this website," "our
+            website," "this site," "the site") and to all apps available on the
+            Apple App Store under the Curvachip developer account. Where a
+            specific app has supplemental terms, those are published alongside
+            that app's privacy policy on the <a href="/apps" class="inline-link"
+              >Apps</a
+            > page.
           </p>
         </section>
 
@@ -82,21 +135,47 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="website-use" class="doc-section">
           <h2 class="doc-h2">2. Use of this website</h2>
           <p>
-            curvachip.com is an informational website. You may browse it freely. When
-            using this website, you agree not to:
+            This website is an informational website. You may browse it freely.
+            When browsing this site you agree to only use this site for the
+            following purposes:
           </p>
+
           <ul class="policy-list">
-            <li>Use automated tools to scrape, crawl, or mirror the site's content</li>
-            <li>Attempt to gain unauthorised access to any part of the site or its hosting infrastructure</li>
-            <li>Transmit malware, spam, or any content intended to disrupt the site or its visitors</li>
-            <li>Misrepresent your identity or affiliation when contacting Curvachip via the contact form</li>
-            <li>Use the site in any way that violates applicable local, national, or international law</li>
+            {
+              allowedActions.map((p) => (
+                <li>
+                  <span class="allowed-icon" aria-hidden="true">
+                    <Check />
+                  </span>
+                  {p.allowed}
+                </li>
+              ))
+            }
           </ul>
+
           <p>
-            The contact form on this website opens your local mail client and sends email
-            directly from your own account. Curvachip does not operate a form submission
-            server. By sending an email to Curvachip, you consent to us reading and
-            responding to it.
+            By browsing this site, you agree that you are strictly prohibited
+            from using this site for the following purposes:
+          </p>
+
+          <ul class="policy-list">
+            {
+              deniedActions.map((p) => (
+                <li>
+                  <span class="denied-icon" aria-hidden="true">
+                    <X />
+                  </span>
+                  {p.denied}
+                </li>
+              ))
+            }
+          </ul>
+
+          <p>
+            The contact form on this website opens your local mail client and
+            sends email directly from your own account. Curvachip does not
+            operate a form submission server. By sending an email to Curvachip,
+            you consent to us reading and responding to it.
           </p>
         </section>
 
@@ -104,17 +183,20 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="apps" class="doc-section">
           <h2 class="doc-h2">3. Apps</h2>
           <p>
-            All Curvachip apps are distributed through the Apple App Store and are
-            subject to Apple's own
-            <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
-               target="_blank" rel="noopener" class="inline-link"> Terms and Conditions </a>
-            in addition to these terms. Curvachip grants you a limited, non-exclusive,
-            non-transferable licence to download and use its apps on Apple devices that
-            you own or control, for personal non-commercial purposes.
+            All Curvachip apps are distributed through the Apple App Store and
+            are subject to Apple's own <a
+              href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+              target="_blank"
+              rel="noopener"
+              class="inline-link">End User License Agreement</a
+            > in addition to these terms. Curvachip grants you a limited, non-exclusive,
+            non-transferable licence to download and use its apps on Apple devices
+            that you own or control, for personal non-commercial purposes.
           </p>
           <p>
-            You may not sublicense, resell, reverse-engineer, or create derivative works
-            from any Curvachip app except as expressly permitted by applicable law.
+            You may not sublicense, resell, reverse-engineer, or create
+            derivative works from any Curvachip app except as expressly
+            permitted by applicable law.
           </p>
         </section>
 
@@ -122,21 +204,23 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="ip" class="doc-section">
           <h2 class="doc-h2">4. Intellectual property</h2>
           <p>
-            All content on curvachip.com and within Curvachip apps — including but not
-            limited to code, design, graphics, icons, copy, the Curvachip name, and the
-            Curvachip logo — is the property of Curvachip LLC and is protected by
-            applicable copyright, trademark, and intellectual property law.
+            All content on curvachip.com and within Curvachip apps — including
+            but not limited to code, design, graphics, icons, copy, the
+            Curvachip name, and the Curvachip logo — is the property of
+            Curvachip LLC and is protected by applicable copyright, trademark,
+            and intellectual property law.
           </p>
           <p>
-            Nothing in these terms transfers any intellectual property rights to you.
-            You may not reproduce, distribute, or modify any Curvachip content without
-            prior written permission.
+            Nothing in these terms transfers any intellectual property rights to
+            you. You may not reproduce, distribute, or modify any Curvachip
+            content without prior written permission.
           </p>
           <div class="callout callout--blue">
-            <span class="callout-icon" aria-hidden="true">◈</span>
+            <span class="callout-icon" aria-hidden="true"><Info /></span>
             <div>
-              Apple, the Apple logo, App Store, iPhone, iPad, and Mac are trademarks of
-              Apple Inc. Curvachip LLC is not affiliated with or endorsed by Apple Inc.
+              Apple, the Apple logo, App Store, iPhone, iPad, and Mac are
+              trademarks of Apple Inc. Curvachip LLC is not affiliated with or
+              endorsed by Apple Inc.
             </div>
           </div>
         </section>
@@ -145,18 +229,20 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="ai" class="doc-section">
           <h2 class="doc-h2">5. AI-powered features</h2>
           <p>
-            Some Curvachip apps use artificial intelligence to generate identifications,
-            descriptions, or other content. These outputs are provided for informational
-            and recreational purposes only.
+            Some Curvachip apps use artificial intelligence to generate
+            identifications, descriptions, or other content. These outputs are
+            provided for informational and recreational purposes only.
           </p>
           <div class="callout callout--amber">
-            <span class="callout-icon" aria-hidden="true">⚠</span>
+            <span class="callout-icon" aria-hidden="true"
+              ><TriangleAlert /></span
+            >
             <div>
-              <strong>AI outputs are not professional advice.</strong> Do not rely on
-              AI-generated content from any Curvachip app as the basis for medical, legal,
-              safety, dietary, or any other professional decision. In particular, do not
-              use plant or mushroom identification results to determine whether something
-              is safe to consume. Always verify with a qualified expert.
+              <strong>AI outputs are not professional advice.</strong> Do not rely
+              on AI-generated content from any Curvachip app as the basis for medical,
+              legal, safety, dietary, or any other professional decision. In particular,
+              do not use plant or mushroom identification results to determine whether
+              something is safe to consume. Always verify with a qualified expert.
             </div>
           </div>
           <p>
@@ -169,16 +255,17 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="disclaimer" class="doc-section">
           <h2 class="doc-h2">6. Disclaimer of warranties</h2>
           <p>
-            This website and all Curvachip apps are provided <strong>"as is"</strong> and
-            <strong>"as available"</strong> without warranties of any kind, express or
-            implied, including but not limited to implied warranties of merchantability,
+            This website and all Curvachip apps are provided <strong
+              >"as is"</strong
+            > and <strong>"as available"</strong> without warranties of any kind, express
+            or implied, including but not limited to implied warranties of merchantability,
             fitness for a particular purpose, and non-infringement.
           </p>
           <p>
-            Curvachip does not warrant that the website or apps will be error-free,
-            uninterrupted, or free of security vulnerabilities. Website content is
-            provided for general information only and may not always reflect the most
-            current state of our apps or policies.
+            Curvachip does not warrant that the website or apps will be
+            error-free, uninterrupted, or free of security vulnerabilities.
+            The website content is provided for general information only and may not
+            always reflect the most current state of our apps or policies.
           </p>
         </section>
 
@@ -186,16 +273,17 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="liability" class="doc-section">
           <h2 class="doc-h2">7. Limitation of liability</h2>
           <p>
-            To the maximum extent permitted by applicable law, Curvachip LLC and its
-            owner shall not be liable for any indirect, incidental, special, consequential,
-            or punitive damages arising from your use of this website or any Curvachip
-            app — including but not limited to loss of data, loss of revenue, or personal
-            injury — even if Curvachip has been advised of the possibility of such damages.
+            To the maximum extent permitted by applicable law, Curvachip LLC and
+            its owner shall not be liable for any indirect, incidental, special,
+            consequential, or punitive damages arising from your use of this
+            website or any Curvachip app — including but not limited to loss of
+            data, loss of revenue, or personal injury — even if Curvachip has
+            been advised of the possibility of such damages.
           </p>
           <p>
-            Curvachip's total liability for any claim arising from these terms shall not
-            exceed the greater of the amount you paid to Curvachip in the twelve months
-            preceding the claim or USD $10.
+            Curvachip's total liability for any claim arising from these terms
+            shall not exceed the greater of the amount you paid to Curvachip in
+            the twelve months preceding the claim or USD $10.
           </p>
         </section>
 
@@ -203,14 +291,15 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="links" class="doc-section">
           <h2 class="doc-h2">8. External links</h2>
           <p>
-            This website contains links to third-party sites including the Apple App Store,
-            GitHub, LinkedIn, Instagram, YouTube, TikTok, X, and Spotify. These links are
-            provided for convenience. Curvachip has no control over the content or privacy
-            practices of any linked site and accepts no responsibility for them.
+            This website contains links to third-party sites including the Apple
+            App Store, GitHub, LinkedIn, Instagram, YouTube, TikTok, X, and
+            Spotify. These links are provided for convenience. Curvachip has no
+            control over the content or privacy practices of any linked site and
+            accepts no responsibility for them.
           </p>
           <p>
-            The presence of a link does not constitute an endorsement of that site or its
-            content.
+            The presence of a link does not constitute an endorsement of that
+            site or its content.
           </p>
         </section>
 
@@ -218,13 +307,13 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="termination" class="doc-section">
           <h2 class="doc-h2">9. Termination</h2>
           <p>
-            Curvachip reserves the right to restrict access to this website at any time
-            and for any reason, including violation of these terms. You may stop using
-            the website or any Curvachip app at any time.
+            Curvachip reserves the right to restrict access to this website at
+            any time and for any reason, including violation of these terms. You
+            may stop using the website or any Curvachip app at any time.
           </p>
           <p>
-            Sections 4, 6, 7, and 10 of these terms survive any termination of your
-            use of the website or apps.
+            Sections 4, 6, 7, and 10 of these terms survive any termination of
+            your use of the website or apps.
           </p>
         </section>
 
@@ -232,15 +321,15 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="governing-law" class="doc-section">
           <h2 class="doc-h2">10. Governing law</h2>
           <p>
-            These terms are governed by and construed in accordance with the laws of {governingLaw}, 
-            without regard to conflict of law provisions. Any dispute
-            that cannot be resolved informally shall be submitted to the courts of
-            competent jurisdiction in {governingLaw}.
+            These terms are governed by and construed in accordance with the
+            laws of {governingLaw}, without regard to conflict of law
+            provisions. Any dispute that cannot be resolved informally shall be
+            submitted to the courts of competent jurisdiction in {governingLaw}.
           </p>
           <p>
-            If you are a consumer located in the European Union, mandatory consumer
-            protection laws of your country of residence may apply to you in addition
-            to these terms.
+            If you are a consumer located in the European Union, mandatory
+            consumer protection laws of your country of residence may apply to
+            you in addition to these terms.
           </p>
         </section>
 
@@ -248,14 +337,17 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
         <section id="changes" class="doc-section">
           <h2 class="doc-h2">11. Changes to these terms</h2>
           <p>
-            Curvachip may update these terms from time to time. Material changes will
-            be reflected in a revised "Last updated" date at the top of this page.
-            Continued use of the website or any Curvachip app after changes are published
-            constitutes your acceptance of the revised terms.
+            Curvachip may update these terms from time to time. Material changes
+            will be reflected in a revised "Last updated" date at the top of
+            this page. Continued use of the website or any Curvachip app after
+            changes are published constitutes your acceptance of the revised
+            terms.
           </p>
           <p>
-            The current version of these terms is always available at
-            <a href="https://curvachip.com/privacy/terms-of-use" class="inline-link"> curvachip.com/privacy/terms-of-use</a>.
+            The current version of these terms is always available at <a
+              href="/privacy/terms-of-use"
+              class="inline-link">curvachip.com/privacy/terms-of-use</a
+            >.
           </p>
         </section>
 
@@ -266,28 +358,33 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
           <div class="contact-block">
             <p class="contact-line"><strong>Curvachip LLC</strong></p>
             <p class="contact-line">
-              Email: <a href={`mailto:${contactEmail}`} class="inline-link">{contactEmail}</a>
+              Email: <a href={`mailto:${contactEmail}`} class="inline-link"
+                >{contactEmail}</a
+              >
             </p>
             <p class="contact-line">
-              Website: <a href="https://curvachip.com" class="inline-link">curvachip.com</a>
+              Website: <a href="https://curvachip.com" class="inline-link"
+                >curvachip.com</a
+              >
             </p>
           </div>
           <p>
-            We respond to all legal enquiries personally and aim to reply within 30 days.
+            We respond to all legal enquiries personally and aim to reply within
+            30 days.
           </p>
         </section>
 
         <!-- BOTTOM ACTIONS -->
         <div class="doc-app-links">
-          <a href="/apps"    class="btn btn-primary">View our apps</a>
+          <a href="/apps" class="btn btn-primary">View our apps</a>
           <a href="/contact" class="btn btn-ghost">Contact us</a>
-          <a href="/privacy/curvachip-website" class="btn btn-ghost">Privacy Policy →</a>
+          <a href="/privacy/curvachip-website" class="btn btn-ghost"
+            >Privacy Policy →</a
+          >
         </div>
-
       </article>
     </div>
   </main>
-
 </Layout>
 
 <style>
@@ -308,7 +405,10 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     );
     pointer-events: none;
   }
-  .doc-hero-inner { position: relative; max-width: 680px; }
+  .doc-hero-inner {
+    position: relative;
+    max-width: 680px;
+  }
   .back-link {
     display: inline-block;
     font-size: 0.8rem;
@@ -316,7 +416,9 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     margin-bottom: 1.75rem;
     transition: color 0.15s;
   }
-  .back-link:hover { color: var(--cc-blue); }
+  .back-link:hover {
+    color: var(--cc-blue);
+  }
   .doc-badge {
     display: inline-block;
     font-size: 0.72rem;
@@ -333,8 +435,17 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     letter-spacing: -0.025em;
     margin-bottom: 0.5rem;
   }
-  .doc-meta  { font-size: 0.8rem; color: var(--cc-muted); margin-bottom: 1.25rem; }
-  .doc-intro { font-size: 1rem; color: var(--cc-muted); line-height: 1.8; max-width: 580px; }
+  .doc-meta {
+    font-size: 0.8rem;
+    color: var(--cc-muted);
+    margin-bottom: 1.25rem;
+  }
+  .doc-intro {
+    font-size: 1rem;
+    color: var(--cc-muted);
+    line-height: 1.8;
+    max-width: 580px;
+  }
 
   /* ── DOC LAYOUT ── */
   .doc-layout {
@@ -344,10 +455,17 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     padding-block: clamp(2.5rem, 6vw, 5rem);
     align-items: start;
   }
-  @media (max-width: 800px) { .doc-layout { grid-template-columns: 1fr; } }
+  @media (max-width: 800px) {
+    .doc-layout {
+      grid-template-columns: 1fr;
+    }
+  }
 
   /* ── TOC ── */
-  .toc { position: sticky; top: 80px; }
+  .toc {
+    position: sticky;
+    top: 80px;
+  }
   @media (max-width: 800px) {
     .toc {
       position: static;
@@ -365,21 +483,41 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     color: var(--cc-muted);
     margin-bottom: 0.75rem;
   }
-  .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.15rem; }
-  @media (max-width: 800px) { .toc-list { flex-direction: row; flex-wrap: wrap; gap: 0.4rem; } }
+  .toc-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  @media (max-width: 800px) {
+    .toc-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+  }
   .toc-link {
     font-size: 0.82rem;
     color: var(--cc-muted);
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
     display: block;
-    transition: color 0.15s, background 0.15s;
+    transition:
+      color 0.15s,
+      background 0.15s;
   }
-  .toc-link:hover { color: var(--cc-text); background: rgba(0,0,0,0.04); }
+  .toc-link:hover {
+    color: var(--cc-text);
+    background: rgba(0, 0, 0, 0.04);
+  }
 
   /* ── DOC BODY ── */
-  .doc-body { min-width: 0; }
-  .doc-section { margin-bottom: 3rem; }
+  .doc-body {
+    min-width: 0;
+  }
+  .doc-section {
+    margin-bottom: 3rem;
+  }
   .doc-h2 {
     font-family: var(--font-display);
     font-size: 1.25rem;
@@ -394,7 +532,9 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     line-height: 1.8;
     margin-bottom: 0.85rem;
   }
-  .doc-section p:last-child { margin-bottom: 0; }
+  .doc-section p:last-child {
+    margin-bottom: 0;
+  }
 
   /* ── CALLOUTS ── */
   .callout {
@@ -405,13 +545,33 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     padding: 1rem 1.25rem;
     margin: 1.25rem 0;
   }
-  .callout-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
-  .callout div  { font-size: 0.875rem; color: var(--cc-muted); line-height: 1.65; }
-  .callout div strong { color: var(--cc-text); }
-  .callout--blue  { background: rgba(0,102,204,0.06);  border: 1px solid rgba(0,102,204,0.15); }
-  .callout--blue  .callout-icon { color: var(--cc-blue); }
-  .callout--amber { background: rgba(180,83,9,0.06);   border: 1px solid rgba(180,83,9,0.18); }
-  .callout--amber .callout-icon { color: var(--cc-amber); }
+  .callout-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .callout div {
+    font-size: 0.875rem;
+    color: var(--cc-muted);
+    line-height: 1.65;
+  }
+  .callout div strong {
+    color: var(--cc-text);
+  }
+  .callout--blue {
+    background: rgba(0, 102, 204, 0.06);
+    border: 1px solid rgba(0, 102, 204, 0.15);
+  }
+  .callout--blue .callout-icon {
+    color: var(--cc-blue);
+  }
+  .callout--amber {
+    background: rgba(180, 83, 9, 0.06);
+    border: 1px solid rgba(180, 83, 9, 0.18);
+  }
+  .callout--amber .callout-icon {
+    color: var(--cc-amber);
+  }
 
   /* ── POLICY LIST ── */
   .policy-list {
@@ -429,12 +589,21 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     color: var(--cc-muted);
     line-height: 1.65;
   }
-  .policy-list li::before {
-    content: "–";
-    color: var(--cc-blue);
+  .denied-icon {
+    display: inline-flex;
+    width: 1.1rem;
+    height: 1.1rem;
     flex-shrink: 0;
-    font-weight: 600;
     margin-top: 0.05rem;
+    color: brown;
+  }
+  .allowed-icon {
+    display: inline-flex;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.005rem;
+    color: var(--cc-green);
   }
 
   /* ── CONTACT BLOCK ── */
@@ -445,8 +614,14 @@ const governingLaw = "the State of Colorado, United States"; // ← UPDATE
     padding: 1.25rem 1.5rem;
     margin: 1.25rem 0;
   }
-  .contact-line { font-size: 0.9rem; color: var(--cc-muted); line-height: 1.8; }
-  .contact-line strong { color: var(--cc-text); }
+  .contact-line {
+    font-size: 0.9rem;
+    color: var(--cc-muted);
+    line-height: 1.8;
+  }
+  .contact-line strong {
+    color: var(--cc-text);
+  }
 
   /* ── BOTTOM ACTIONS ── */
   .doc-app-links {

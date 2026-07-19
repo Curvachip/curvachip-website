@@ -19,6 +19,14 @@
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
 
+import { Database } from "lucide-astro";
+import { MonitorCheck } from "lucide-astro";
+import { Megaphone } from "lucide-astro";
+import { CircleSlash2 } from "lucide-astro";
+import { MessageSquareLock } from 'lucide-astro';
+
+import { Image } from "astro:assets";
+
 // ── BLOG POSTS ─────────────────────────────────────────────────
 // Add new entries here as you publish more articles.
 const blogPosts = [
@@ -48,74 +56,74 @@ const blogPosts = [
 const appCards = [
     {
         name: "Shadow Task",
-        emoji: "🌑",
+        iconUrl: "/shadow-task.png",
         label: "Data Not Collected",
         color: "green",
-        href: "/apps/privacy-shadow-task",
+        href: "/privacy/shadow-task",
     },
     {
         name: "TipZap",
-        emoji: "⚡",
+        iconUrl: "/tipzap.png",
         label: "Data Not Collected",
         color: "green",
-        href: "/apps/privacy-tipzap",
-    },
-    {
-        name: "Grocery Wiz",
-        emoji: "🛒",
-        label: "Data Not Collected",
-        color: "green",
-        href: "/apps/privacy-grocery-wiz",
-    },
-    {
-        name: "Tally Snap",
-        emoji: "🔢",
-        label: "Data Not Collected",
-        color: "green",
-        href: "/apps/privacy-tally-snap",
+        href: "/privacy/tipzap",
     },
     {
         name: "StoneClip",
-        emoji: "🪨",
+        iconUrl: "/stoneclip.png",
         label: "Data Not Linked to You",
         color: "blue",
-        href: "/apps/privacy-stoneclip",
+        href: "/privacy/stoneclip",
     },
     {
         name: "BugClip",
-        emoji: "🐛",
+        iconUrl: "/bugclip.png",
         label: "Data Not Linked to You",
         color: "blue",
-        href: "/apps/privacy-bugclip",
+        href: "/privacy/bugclip",
     },
     {
         name: "PlantClip",
-        emoji: "🌿",
+        iconUrl: "/plantclip.png",
         label: "Data Not Linked to You",
         color: "blue",
-        href: "/apps/privacy-plantclip",
+        href: "/privacy/plantclip",
+    },
+    {
+        name: "Grocery Wiz",
+        iconUrl: "/grocery-wiz.png",
+        label: "Data Not Collected",
+        color: "green",
+        href: "/privacy/grocery-wiz",
+    },
+    {
+        name: "Tally Snap",
+        iconUrl: "/tally-snap.png",
+        label: "Data Not Collected",
+        color: "green",
+        href: "/privacy/tally-snap",
     },
 ];
 
 // ── PRINCIPLES ─────────────────────────────────────────────────
 const principles = [
     {
-        icon: "◎",
+        icon: Database,
         title: "Collect only what is necessary",
         body: "Every data point we process has a specific, stated reason. If a feature can be built without touching your data, it is built that way.",
     },
     {
-        icon: "◈",
+        icon: MonitorCheck,
         title: "Process on-device by default",
         body: "Four of our seven apps collect zero data. Everything happens on your device, governed by your control — not ours.",
     },
     {
-        icon: "◬",
+        icon: Megaphone,
         title: "Disclose before we collect",
         body: "When an app sends data externally — such as an AI identification request — we say so clearly on the App Store listing before you download.",
     },
     {
-        icon: "◇",
+        icon: CircleSlash2,
         title: "No advertising. Ever.",
         body: "Curvachip apps are not ad-supported. Your data is never sold, shared with advertisers, or used to build a profile of you.",
     },
@@ -243,7 +251,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
                     principles.map((p) => (
                         <div class="principle-card">
                             <span class="principle-icon" aria-hidden="true">
-                                {p.icon}
+                                <p.icon/>
                             </span>
                             <h3 class="principle-title">{p.title}</h3>
                             <p class="principle-body">{p.body}</p>
@@ -273,7 +281,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
                     appCards.map((app) => (
                         <a href={app.href} class="app-privacy-card">
                             <span class="app-card-emoji" aria-hidden="true">
-                                {app.emoji}
+                                <Image src={app.iconUrl} alt={app.name} width={38} height={38} />
                             </span>
                             <span class="app-card-name">{app.name}</span>
                             <span
@@ -444,7 +452,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
         aria-label="Privacy questions"
     >
         <div class="container priv-cta-inner">
-            <span class="priv-cta-icon" aria-hidden="true">◈</span>
+            <span class="priv-cta-icon" aria-hidden="true"><MessageSquareLock/></span>
             <h2 class="priv-cta-title">Have a privacy question?</h2>
             <p class="priv-cta-sub">
                 We read every email personally. If something on this page is
@@ -464,48 +472,8 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
         padding: clamp(4.5rem, 11vw, 8rem) 0 clamp(3.5rem, 8vw, 6rem);
         border-bottom: 1px solid var(--cc-border);
     }
-    .hero-glow {
-        position: absolute;
-        inset: 0;
-        background:
-            radial-gradient(
-                ellipse 70% 60% at 10% 50%,
-                rgba(91, 156, 246, 0.06) 0%,
-                transparent 65%
-            ),
-            radial-gradient(
-                ellipse 50% 60% at 90% 30%,
-                rgba(167, 139, 250, 0.04) 0%,
-                transparent 60%
-            ),
-            linear-gradient(rgba(91, 156, 246, 0.025) 1px, transparent 1px),
-            linear-gradient(
-                90deg,
-                rgba(91, 156, 246, 0.025) 1px,
-                transparent 1px
-            );
-        background-size:
-            auto,
-            auto,
-            44px 44px,
-            44px 44px;
-        pointer-events: none;
-    }
     .priv-hero-inner {
         position: relative;
-    }
-    .eyebrow {
-        display: inline-block;
-        font-size: 0.75rem;
-        font-weight: 500;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--cc-blue);
-        margin-bottom: 1.5rem;
-        padding: 0.3rem 0.8rem;
-        border: 1px solid rgba(91, 156, 246, 0.25);
-        border-radius: 99px;
-        background: rgba(91, 156, 246, 0.07);
     }
     .priv-hero-title {
         font-family: var(--font-display);

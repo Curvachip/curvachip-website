@@ -9,10 +9,11 @@
 
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
-import { ArrowRight } from 'lucide-astro';
-import { User } from 'lucide-astro';
-import { Lock } from 'lucide-astro';
-import { MessageSquare } from 'lucide-astro';
+import { ArrowRight } from "lucide-astro";
+import { User } from "lucide-astro";
+import { Lock } from "lucide-astro";
+import { MessageSquare } from "lucide-astro";
+import { Image } from "astro:assets";
 
 const title = "Software Development for Apple Platforms | Curvachip";
 const description =
@@ -25,7 +26,7 @@ const apps = [
     blurb:
       "A Pomodoro timer with identifiable tasks, progress tracking, and personal quote prompts — all stored entirely on-device.",
     href: "/apps/shadow-task",
-    iconUrl: "shadow-task.png",
+    iconUrl: "/shadow-task.png",
   },
   {
     name: "TipZap",
@@ -33,7 +34,7 @@ const apps = [
     blurb:
       "Split dinner costs, round totals, and calculate tips in seconds. The number pad is built right in.",
     href: "/apps/tipzap",
-    iconUrl: "tipzap.png",
+    iconUrl: "/tipzap.png",
   },
   {
     name: "StoneClip",
@@ -41,7 +42,7 @@ const apps = [
     blurb:
       "Point your camera at any rock and get an AI-powered identification with full geological context, instantly.",
     href: "/apps/stoneclip",
-    iconUrl: "stoneclip.png",
+    iconUrl: "/stoneclip.png",
   },
 ];
 
@@ -70,17 +71,16 @@ const values = [
   activeNav="home"
   canonicalUrl="https://curvachip.com/"
 >
-
   <!-- ── HERO ────────────────────────────────────────────────── -->
-   <Hero
-    eyebrow="Apple Platforms · Est. 2024"
-    title="Software built<br /><em>around&nbsp;you</em>"
+  <Hero
+    eyebrow="Curvachip LLC · Est. 2024"
+    title="Software built<br /><em>around you</em>"
     subtitle="Curvachip distributes privacy-first apps on the App Store — designed for 
     utility, built with care, and shaped by the people who use them."
   >
     <!-- Buttons go in the slot -->
     <div class="hero-cta">
-      <a href="/apps"  class="btn btn-primary">Explore Apps</a>
+      <a href="/apps" class="btn btn-primary">Explore Apps</a>
       <a href="/about" class="btn btn-ghost">Our Story</a>
     </div>
   </Hero>
@@ -133,7 +133,7 @@ const values = [
           apps.map((app) => (
             <a href={app.href} class="app-card">
               <span class="app-emoji" aria-hidden="true">
-                <img src={app.iconUrl} alt={app.name} width="45" height="45" />
+                <Image src={app.iconUrl} alt={app.name} width="45" height="45" loading="lazy"/>
               </span>
               <div>
                 <p class="app-tagline">{app.tagline}</p>
@@ -141,8 +141,7 @@ const values = [
                 <p class="app-blurb">{app.blurb}</p>
               </div>
               <span class="app-arrow" aria-hidden="true">
-                →
-                {/* <ArrowRight size={16} /> */}
+                →{/* <ArrowRight size={16} /> */}
               </span>
             </a>
           ))
@@ -175,8 +174,6 @@ const values = [
       </blockquote>
     </div>
   </section>
-
-
 </Layout>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -189,7 +186,7 @@ const values = [
 
 <style>
   /* ── HERO ── */
-  
+
   .hero-cta {
     display: flex;
     gap: 0.75rem;
@@ -199,7 +196,7 @@ const values = [
 
   /* ── SECTIONS ── */
   .section {
-    padding: clamp(4rem, 9vw, 7rem) 0;
+    padding: clamp(7rem, 12vw, 10rem) 0;
   }
   .section-alt {
     background: var(--cc-surface);

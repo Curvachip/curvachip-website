@@ -9,6 +9,7 @@
 
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
+import { Image } from "astro:assets";
 
 const title = "Creative Apps that Meet Your Needs | Curvachip";
 const description =
@@ -21,7 +22,7 @@ const apps = [
     {
         name: "Shadow Task",
         tagline: "Focus & Track",
-        iconUrl: "shadow-task.png",
+        iconUrl: "/shadow-task.png",
         description:
             "An exceptional Pomodoro timer focused on making work sessions meaningful. Track progress by task, add personal quotes to keep yourself inspired, and earn special rewards for pushing through.",
         features: [
@@ -46,7 +47,7 @@ const apps = [
     {
         name: "TipZap",
         tagline: "Tip Calculator",
-        iconUrl: "tipzap.png",
+        iconUrl: "/tipzap.png",
         description:
             "A beautifully focused tip calculator that handles dinner parties, group tabs, and late-night rounding with zero friction. The number pad is built in — no switching to another keyboard.",
         features: [
@@ -71,7 +72,7 @@ const apps = [
     {
         name: "StoneClip",
         tagline: "Rock Identifier",
-        iconUrl: "stoneclip.png",
+        iconUrl: "/stoneclip.png",
         description:
             "Point your camera at any rock and receive an AI-powered identification within seconds — complete with geological context and a chat interface so you can keep asking follow-up questions.",
         features: [
@@ -96,7 +97,7 @@ const apps = [
     {
         name: "BugClip",
         tagline: "Bug Identifier",
-        iconUrl: "bugclip.png",
+        iconUrl: "/bugclip.png",
         description:
             "The same fast, AI-powered identification experience as StoneClip — this time focused on insects and arthropods. Great for curious kids, hikers, or anyone who just found something alarming under the sink.",
         features: [
@@ -121,7 +122,7 @@ const apps = [
     {
         name: "PlantClip",
         tagline: "Plant Identifier",
-        iconUrl: "plantclip.png",
+        iconUrl: "/plantclip.png",
         description:
             "Identify plants, flowers, trees, and shrubs in seconds with AI. Great for hikers, gardeners, and anyone walking past an interesting hedge.",
         features: [
@@ -146,7 +147,7 @@ const apps = [
     {
         name: "Grocery Wiz",
         tagline: "Smart Grocery List",
-        iconUrl: "grocery-wiz.png",
+        iconUrl: "/grocery-wiz.png",
         description:
             "A smarter grocery list experience designed to save you time and reduce forgotten items. Organize by aisle, set quantities, and move through your shop efficiently.",
         features: [
@@ -171,7 +172,7 @@ const apps = [
     {
         name: "Tally Snap",
         tagline: "Click Counter",
-        iconUrl: "tally-snap.png",
+        iconUrl: "/tally-snap.png",
         description:
             "A simple, thoughtful tool to help you track what is important—without distractions. Count anything, from laps to inventory, with a single tap. Tally Snap is designed to be fast, private, and easy to use.",
         features: [
@@ -235,11 +236,12 @@ const review = {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <img
+                                    <Image
                                         src={app.iconUrl}
                                         alt={app.name}
                                         width="64"
                                         height="64"
+                                        loading={app.name === "Shadow Task" ? "eager" : "lazy"}
                                     />
                                 </a>
                                 <div class="app-row-meta">
@@ -275,10 +277,12 @@ const review = {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    <img
+                                    <Image
                                         src="/appblack.svg"
                                         alt={app.name + " on the App Store"}
+                                        width="135"
                                         height="44"
+                                        loading="lazy"
                                     />
                                 </a>
                                 <a href={app.pageHref} class="btn btn-ghost">

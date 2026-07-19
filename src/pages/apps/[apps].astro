@@ -12,6 +12,7 @@
 // automatically.
 // ═══════════════════════════════════════════════════════════════
 
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 
 // ── TYPES ──────────────────────────────────────────────────────
@@ -526,7 +527,7 @@ const privacyBadgeColor = privacy === "none" ? "green" : "blue";
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <img src={iconUrl} alt={name} width="96" height="96" />
+                        <Image src={iconUrl} alt={name} width="96" height="96" loading="eager" />
                     </a>
                 </div>
                 <div class="hero-meta">
@@ -719,7 +720,7 @@ const privacyBadgeColor = privacy === "none" ? "green" : "blue";
         <div class="container cta-inner">
             <!-- <span class="cta-emoji" aria-hidden="true">{iconUrl}</span> -->
             <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
-                <img src={iconUrl} alt={name} width="96" height="96" />
+                <Image src={iconUrl} alt={name} width="96" height="96" />
             </a>
             <h2 class="cta-title">Ready to try {name}?</h2>
             <p class="cta-sub">
@@ -727,7 +728,7 @@ const privacyBadgeColor = privacy === "none" ? "green" : "blue";
             </p>
             <div>
                 <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
-                    <img src="/appblack.svg" alt={name} height="55" />
+                    <img src="/appblack.svg" alt={name} height="55" loading="lazy"/>
                 </a>
             </div>
         </div>
