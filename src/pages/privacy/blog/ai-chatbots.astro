@@ -7,6 +7,7 @@
 // how Curvachip handles data differently.
 // ─────────────────────────────────────────────────────────────
 
+import { Database, Link, Search, Shield, TriangleAlert } from 'lucide-astro';
 import Layout from '../../../layouts/Layout.astro';
 
 const title = "What You Share with AI Chatbots Stays There | Curvachip";
@@ -17,27 +18,27 @@ const publishDate = "July 2026";
 
 const risks = [
     {
-        icon: "⚠",
+        icon: TriangleAlert,
         label: "Training data inclusion",
         body: "Many AI providers — especially free tiers — explicitly reserve the right to use your conversations to improve their models. That message you typed may become part of a training dataset.",
     },
     {
-        icon: "🔍",
+        icon: Search,
         label: "Human review",
         body: "For safety and quality purposes, a percentage of conversations are reviewed by human contractors. If you've typed your social security number or a confidential business strategy, a real person may have read it.",
     },
     {
-        icon: "💾",
+        icon: Database,
         label: "Server-side storage",
         body: "Your conversation history is stored on servers you don't control, governed by privacy policies that can change, and subject to legal requests such as subpoenas.",
     },
     {
-        icon: "🔗",
+        icon: Link,
         label: "Third-party data sharing",
         body: "Some providers share usage data with advertising, analytics, or business intelligence partners. The exact chain of data custody is often opaque.",
     },
     {
-        icon: "🛡",
+        icon: Shield,
         label: "Breach exposure",
         body: "Even providers with strong security practices can be breached. Data you shared six months ago could surface in a future incident.",
     },
@@ -78,7 +79,7 @@ const curvachipApproach = [
   title={title}
   description={description}
   activeNav="privacy"
-  canonicalUrl="https://curvachip.com/privacy"
+  canonicalUrl="https://curvachip.com/privacy/blog/ai-chatbots"
 >
 
         <!-- ── ARTICLE HERO ── -->
@@ -148,7 +149,7 @@ const curvachipApproach = [
                                             class="risk-icon"
                                             aria-hidden="true"
                                         >
-                                            {r.icon}
+                                            <r.icon size={18}/>
                                         </span>
                                         <div>
                                             <strong class="risk-label">
@@ -292,7 +293,7 @@ const curvachipApproach = [
                                 >See our apps</a
                             >
                             <a
-                                href="mailto:developer@curvachip.com"
+                                href="/contact"
                                 class="btn btn-ghost">Ask us a question</a
                             >
                         </div>
@@ -429,6 +430,7 @@ const curvachipApproach = [
         font-size: 1.1rem;
         flex-shrink: 0;
         margin-top: 0.1rem;
+        color: var(--cc-amber);
     }
     .risk-label {
         display: block;

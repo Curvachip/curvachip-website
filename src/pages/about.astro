@@ -9,29 +9,30 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import Image from 'astro/components/Image.astro';
+import { User, Lock, MessageSquareWarning, Plane } from "lucide-astro";
 
 const title = "About Curvachip LLC | Mission, Values & Leadership";
 const description =
-    "Meet the person behind Curvachip. Our mission: build apps centered around the user. Our values: privacy, clarity, and feedback. Our vision: bring people back to what matters beyond screens.";
+    "Meet the person behind Curvachip. Learn more about our company. Our mission: build apps centered around the user. Our values: privacy, clarity, and feedback. Our vision: bring people back to what matters beyond screens.";
 
 const values = [
     {
-        icon: "◎",
+        icon: User,
         label: "User first, always",
         body: "Every product decision asks the same question: does this make life better for the person holding the phone? If the answer isn't clearly yes, we go back to the drawing board.",
     },
     {
-        icon: "◈",
+        icon: Lock,
         label: "Privacy is not a feature",
         body: "Privacy is a baseline expectation. On-device processing, minimal data collection, and transparent disclosures are not selling points — they're requirements.",
     },
     {
-        icon: "◬",
+        icon: MessageSquareWarning,
         label: "Criticism is a gift",
         body: "Negative feedback is the most valuable input we receive. We read every review, log every bug report, and treat constructive criticism as a roadmap.",
     },
     {
-        icon: "◇",
+        icon: Plane,
         label: "Ship with intention",
         body: "No app ships without a clearly validated purpose. Ideas go through design, testing, and honest self-scrutiny before they reach the App Store.",
     },
@@ -143,7 +144,7 @@ const timeline = [
                     values.map((v) => (
                         <div class="value-card">
                             <span class="value-icon" aria-hidden="true">
-                                {v.icon}
+                                <v.icon size={20}/>
                             </span>
                             <h3 class="value-label">{v.label}</h3>
                             <p class="value-body">{v.body}</p>
@@ -198,7 +199,9 @@ const timeline = [
                     himself accountable to you.
                 </p>
                 <blockquote class="leadership-quote">
-                    "Software is designed to make our lives easier. We take this further by designing software that is not only useful, but also delightful."
+                    "Software is designed to make our lives easier. We take this 
+                    further by designing software that is not only useful, but 
+                    also delightful."
                     <footer>— Michael S., CEO</footer>
                 </blockquote>
                 <div class="leadership-links">

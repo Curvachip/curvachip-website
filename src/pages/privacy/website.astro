@@ -3,15 +3,40 @@
 // Website-level privacy policy for curvachip.com
 // Not an app policy — covers the website itself.
 
+import { Info, X } from 'lucide-astro';
 import Layout from '../../layouts/Layout.astro';
 
 const lastUpdated   = "July 2026";
 const contactEmail  = "developer@curvachip.com";
 const canonicalUrl  = "https://curvachip.com/privacy/website";
+
+const notCollected = [
+  {
+    data: "Your name, email address, or any other contact information"
+  },
+  {
+    data: "User accounts, passwords, or profile information"
+  },
+  {
+    data: "Cookies or other persistent tracking identifiers"
+  },
+  {
+    data: "Analytics about which pages you visit or how long you spend on them"
+  },
+  {
+    data: "Advertising identifiers or marketing profiles"
+  },
+  {
+    data: "Payment or financial information of any kind"
+  },
+  {
+    data: "Any identifiers used to recognise or track you across browsing sessions"
+  },
+]
 ---
 
 <Layout
-  title="Privacy Policy | Curvachip"
+  title="Website Privacy Policy | Curvachip"
   description="The privacy policy for curvachip.com. This website collects no personal data, uses no cookies, and has no tracking of any kind."
   activeNav="privacy"
   canonicalUrl={canonicalUrl}
@@ -28,8 +53,8 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
       <p class="doc-meta">Curvachip LLC · curvachip.com · Last updated: {lastUpdated}</p>
       <p class="doc-intro">
         This policy covers the curvachip.com website only — not the individual apps
-        distributed by Curvachip. Each app has its own privacy policy linked from the
-        <a href="/apps" class="inline-link"> Apps</a> page. We do not collect, store, 
+        distributed by Curvachip. Each app has its own privacy policy linked from 
+        the <a href="/apps" class="inline-link">Apps</a> page. We do not collect, store, 
         or process personal information through this website except as described below.
       </p>
     </div>
@@ -63,29 +88,39 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
           <h2 class="doc-h2">1. Overview</h2>
           <p>
             Curvachip LLC operates curvachip.com as a static informational website.
-            No server-side application runs behind this site. No database stores your
-            information. No analytics platform tracks your behaviour. We have deliberately
-            built this website to be as privacy-respecting as possible.
+            Limited technical information is processed by our hosting provider (Cloudflare) 
+            as required to deliver website content securely. Curvachip does not use this information 
+            for analytics or visitor tracking. We have deliberately built this website 
+            to be as privacy-respecting as possible.
           </p>
           <div class="callout callout--green">
             <span class="callout-icon" aria-hidden="true">✓</span>
             <div>
-              <strong>This website does not collect any data.</strong> You can browse every
+              <strong>This website guards your privacy.</strong> You can browse every
               page on curvachip.com without any information about you being recorded,
-              stored, or shared by Curvachip.
+              stored, or shared by Curvachip except as necessary to host this site.
             </div>
           </div>
         </section>
 
         <!-- 2. DATA WE DO NOT COLLECT -->
         <section id="no-data" class="doc-section">
-          <h2 class="doc-h2">2. Data we collect</h2>
+          <h2 class="doc-h2">2. Data we do not collect</h2>
           <p>
-            To be explicit, curvachip.com collects, stores, and processes
-            the following:
+            Curvachip does not intentionally collect, store, or process personal 
+            information when you browse this website. Specifically, we do not collect:
           </p>
           <ul class="policy-list">
-            <li>Your IP address or approximate location</li>
+            {
+              notCollected.map((p) => (
+                <li>
+                  <span class="denied-icon" aria-hidden="true">
+                    <X />
+                  </span>
+                  {p.data}
+                </li>
+              ))
+            }
           </ul>
           <p>
             There is no user account system on this website. There is nothing to sign
@@ -103,7 +138,7 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
             <a href={`mailto:${contactEmail}`} class="inline-link"> {contactEmail}</a>.
           </p>
           <div class="callout callout--blue">
-            <span class="callout-icon" aria-hidden="true">◈</span>
+            <span class="callout-icon" aria-hidden="true"><Info size={18}/></span>
             <div>
               <strong>No data passes through curvachip.com.</strong> The form does not
               submit to a server. Curvachip never sees your message until it arrives in
@@ -129,8 +164,7 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
           <p>
             We use no analytics platform (Google Analytics, Plausible, Fathom, or otherwise),
             no advertising pixels, no heatmap tools, no A/B testing frameworks, and no
-            social media tracking scripts of any kind. No third party receives a signal
-            when you load a page on this site.
+            social media tracking scripts of any kind.
           </p>
         </section>
 
@@ -138,21 +172,24 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
         <section id="third-party" class="doc-section">
           <h2 class="doc-h2">5. Third-party services</h2>
           <p>
-            This website loads fonts from Google Fonts. When your browser fetches a
-            font file, Google's servers receive a standard HTTP request that includes
-            your IP address. This is governed by
-            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" class="inline-link"> Google's Privacy Policy</a>.
+            All fonts, icons, stylesheets, and other website assets are served directly from 
+            curvachip.com. Your browser does not contact Google Fonts or any other 
+            external font or icon provider when loading this website.
           </p>
           <p>
-            No other third-party scripts, stylesheets, or resources are loaded by this
-            website. There are no embedded social media widgets, no YouTube iframes, and
-            no external comment systems.
+            This website does not load third-party analytics scripts, advertising scripts, 
+            embedded videos, social media widgets, or external comment systems.
           </p>
           <p>
-            Links from this website to external sites (App Store, GitHub, LinkedIn, etc.)
-            are governed by those sites' own privacy policies. Some links include referral 
-            or affiliate parameters that identify this website as the source of the referral. 
-            These parameters do not uniquely identify individual visitors.
+            This website contains links to third-party websites and services, including the 
+            Apple App Store, GitHub, LinkedIn, and other platforms. If you choose to visit 
+            those websites, your interaction with them is governed by their own privacy 
+            policies rather than this one.
+          </p>
+          <p>
+            Some App Store links include Apple's standard affiliate attribution parameters 
+            that identify curvachip.com as the referring website. These parameters are 
+            identical for all visitors and do not uniquely identify individual users.
           </p>
         </section>
 
@@ -160,16 +197,22 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
         <section id="hosting" class="doc-section">
           <h2 class="doc-h2">6. Hosting</h2>
           <p>
-            This website is hosted by Cloudflare. As part of hosting the website, Cloudflare 
-            may process technical information such as IP addresses and request metadata for security, 
-            performance, and content delivery purposes. This is standard practice for any web
-            hosting service. Curvachip does not access, analyze, or retain these server logs.
+            This website is hosted on Cloudflare Pages. To deliver website content securely
+            and efficiently, Cloudflare necessarily processes limited technical information 
+            associated with each request, including your IP address, HTTP headers, requested 
+            URL, and connection metadata.
+          </p>
+          <p>
+            Cloudflare uses this information to provide content delivery, caching, network 
+            security, and abuse prevention. Curvachip does not use this information for 
+            analytics, visitor profiling, or advertising, and does not intentionally 
+            retain or analyze request logs.
           </p>
           <p>
             <!-- ← UPDATE: insert your hosting provider name and link if you want to be explicit -->
             The hosting provider's own privacy policy governs any infrastructure-level
-            data handling. You can learn more by visiting 
-            <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="inline-link"> Cloudflare's Privacy Policy</a>.
+            data handling. You can learn more by 
+            visiting <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener" class="inline-link">Cloudflare's Privacy Policy</a>.
           </p>
         </section>
 
@@ -177,9 +220,9 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
         <section id="children" class="doc-section">
           <h2 class="doc-h2">7. Children</h2>
           <p>
-            This website is not directed at children under 13. We do not purposefully collect 
-            or retain data for these users. If it comes to our attention that we have collected
-            or retained such data, we will delete it immediately. If you have any concerns, contact us 
+            This website is not directed specifically at children under 13. Because we do not 
+            intentionally collect personal information from visitors, there is generally no 
+            personal information for us to remove. If you have any concerns, contact us 
             at <a href={`mailto:${contactEmail}`} class="inline-link">{contactEmail}</a>.
           </p>
         </section>
@@ -365,12 +408,20 @@ const canonicalUrl  = "https://curvachip.com/privacy/website";
     color: var(--cc-muted);
     line-height: 1.65;
   }
-  .policy-list li::before {
+  /* .policy-list li::before {
     content: "–";
     color: var(--cc-blue);
     flex-shrink: 0;
     font-weight: 600;
     margin-top: 0.05rem;
+  } */
+  .denied-icon {
+    display: inline-flex;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+    color: brown;
   }
 
   /* ── CONTACT BLOCK ── */

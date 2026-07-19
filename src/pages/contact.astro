@@ -15,6 +15,7 @@
 
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+import { Bug, Handshake, MessagesSquare, Monitor } from "lucide-astro";
 
 const title = "Contact the Developer | Curvachip";
 const description =
@@ -79,22 +80,22 @@ const socials = [
 
 const reasons = [
     {
-        icon: "🐞",
+        icon: Bug,
         label: "Bug reports",
         body: "Found something broken in one of our apps? Tell us exactly what happened and which device you're on.",
     },
     {
-        icon: "⭐",
+        icon: MessagesSquare,
         label: "App feedback",
         body: "A feature you'd love to see, a design detail that confused you, or just general praise — we read it all.",
     },
     {
-        icon: "💼",
+        icon: Handshake,
         label: "Business enquiries",
         body: "Partnerships, press, or collaboration opportunities — reach out and let's talk.",
     },
     {
-        icon: "🛠",
+        icon: Monitor,
         label: "Technical questions",
         body: "Questions about Swift, SwiftUI, or Apple development? We're happy to point you in the right direction.",
     },
@@ -250,7 +251,7 @@ const reasons = [
                                         class="reason-icon"
                                         aria-hidden="true"
                                     >
-                                        {r.icon}
+                                        <r.icon size={18}/>
                                     </span>
                                     <div>
                                         <strong class="reason-label">
@@ -503,6 +504,7 @@ const reasons = [
         font-size: 1.1rem;
         flex-shrink: 0;
         margin-top: 0.1rem;
+        color: var(--cc-green);
     }
     .reason-label {
         display: block;
@@ -519,9 +521,14 @@ const reasons = [
     /* Social rows */
     .socials-list {
         list-style: none;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 0.5rem;
+    }
+    @media (max-width: 480px) {
+        .socials-list {
+            grid-template-columns: 1fr;
+        }
     }
     .social-row {
         display: flex;

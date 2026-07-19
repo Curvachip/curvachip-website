@@ -9,6 +9,9 @@
 
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
+
+import { ChevronRight } from "lucide-astro";
+
 import { Image } from "astro:assets";
 
 const title = "Creative Apps that Meet Your Needs | Curvachip";
@@ -260,7 +263,7 @@ const review = {
                                             class="feature-dot"
                                             aria-hidden="true"
                                         >
-                                            ◈
+                                            <ChevronRight size={18}/>
                                         </span>
                                         <div>
                                             <strong class="feature-label">

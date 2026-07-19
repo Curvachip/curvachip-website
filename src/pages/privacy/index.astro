@@ -19,11 +19,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Hero from "../../components/Hero.astro";
 
-import { Database } from "lucide-astro";
-import { MonitorCheck } from "lucide-astro";
-import { Megaphone } from "lucide-astro";
-import { CircleSlash2 } from "lucide-astro";
-import { MessageSquareLock } from 'lucide-astro';
+import { Database, MonitorCheck, Megaphone, CircleSlash2, MessageSquareLock, Scroll, NotepadText, MonitorSmartphone, Bot } from "lucide-astro";
 
 import { Image } from "astro:assets";
 
@@ -32,7 +28,7 @@ import { Image } from "astro:assets";
 const blogPosts = [
     {
         slug: "/privacy/blog/ai-chatbots",
-        emoji: "🤖",
+        emoji: Bot,
         tag: "AI & Data",
         title: "What You Share with AI Chatbots Stays There",
         excerpt:
@@ -200,7 +196,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
             <!-- Featured post — full-width card -->
             <a href={featuredPost.slug} class="featured-post-card">
                 <div class="featured-post-emoji-wrap" aria-hidden="true">
-                    <span class="featured-post-emoji">{featuredPost.emoji}</span
+                    <span class="featured-post-emoji"><featuredPost.emoji size={65}/></span
                     >
                 </div>
                 <div class="featured-post-body">
@@ -344,7 +340,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
                     to.
                 </p>
                 <a
-                    href="/privacy-policy-curvachip"
+                    href="/privacy/website"
                     class="text-link website-policy-link"
                 >
                     Read the full website privacy policy →
@@ -393,8 +389,8 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
             </p>
 
             <div class="resources-grid">
-                <a href="/privacy-policy-curvachip" class="resource-card">
-                    <span class="resource-icon" aria-hidden="true">📄</span>
+                <a href="/privacy/website" class="resource-card">
+                    <span class="resource-icon" aria-hidden="true"><Scroll size={24}/></span>
                     <div>
                         <h3 class="resource-title">Website Privacy Policy</h3>
                         <p class="resource-desc">
@@ -405,8 +401,8 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
                     </div>
                 </a>
 
-                <a href="/terms-and-conditions-curvachip" class="resource-card">
-                    <span class="resource-icon" aria-hidden="true">📋</span>
+                <a href="/privacy/terms-of-use" class="resource-card">
+                    <span class="resource-icon" aria-hidden="true"><NotepadText size={24} /></span>
                     <div>
                         <h3 class="resource-title">Terms of Use</h3>
                         <p class="resource-desc">
@@ -418,7 +414,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
                 </a>
 
                 <a href="/apps" class="resource-card">
-                    <span class="resource-icon" aria-hidden="true">📱</span>
+                    <span class="resource-icon" aria-hidden="true"><MonitorSmartphone size={24}/></span>
                     <div>
                         <h3 class="resource-title">Individual App Policies</h3>
                         <p class="resource-desc">
@@ -430,7 +426,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
                 </a>
 
                 <a href="/privacy/blog/ai-chatbots" class="resource-card">
-                    <span class="resource-icon" aria-hidden="true">🤖</span>
+                    <span class="resource-icon" aria-hidden="true"><Bot size={24}/></span>
                     <div>
                         <h3 class="resource-title">AI Chatbot Data Risks</h3>
                         <p class="resource-desc">
@@ -629,6 +625,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
         align-items: center;
         justify-content: center;
         border-right: 1px solid var(--cc-border);
+        color: var(--cc-violet);
     }
     .featured-post-emoji {
         font-size: 3.5rem;
@@ -966,6 +963,7 @@ const otherPosts = blogPosts.filter((p) => !p.featured);
         line-height: 1;
         flex-shrink: 0;
         margin-top: 0.1rem;
+        color: var(--cc-violet);
     }
     .resource-title {
         font-family: var(--font-display);

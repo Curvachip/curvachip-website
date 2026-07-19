@@ -13,6 +13,7 @@ import { ArrowRight } from "lucide-astro";
 import { User } from "lucide-astro";
 import { Lock } from "lucide-astro";
 import { MessageSquare } from "lucide-astro";
+
 import { Image } from "astro:assets";
 
 const title = "Software Development for Apple Platforms | Curvachip";
@@ -50,17 +51,17 @@ const values = [
   {
     label: "User-Focused Design",
     body: "Every decision — layout, color, copy — is made with a single question in mind: does this make it easier for the user?",
-    icon: "◎",
+    icon: User,
   },
   {
     label: "Privacy by Default",
     body: "On-device processing wherever possible. No silent collection. What stays on your device stays on your device.",
-    icon: "◈",
+    icon: Lock,
   },
   {
     label: "Feedback-Driven",
     body: "Criticism is a gift. Every App Store review, every email, every bug report shapes the next update.",
-    icon: "◬",
+    icon: MessageSquare,
   },
 ];
 ---
@@ -109,7 +110,7 @@ const values = [
           values.map((v) => (
             <div class="value-card">
               <span class="value-icon" aria-hidden="true">
-                {v.icon}
+                <v.icon />
               </span>
               <h3 class="value-label">{v.label}</h3>
               <p class="value-body">{v.body}</p>
@@ -133,7 +134,13 @@ const values = [
           apps.map((app) => (
             <a href={app.href} class="app-card">
               <span class="app-emoji" aria-hidden="true">
-                <Image src={app.iconUrl} alt={app.name} width="45" height="45" loading="lazy"/>
+                <Image
+                  src={app.iconUrl}
+                  alt={app.name}
+                  width="45"
+                  height="45"
+                  loading="lazy"
+                />
               </span>
               <div>
                 <p class="app-tagline">{app.tagline}</p>
@@ -155,23 +162,32 @@ const values = [
 
   <!-- ── TESTIMONIAL ─────────────────────────────────────────── -->
   <section class="section">
-    <div class="container testimonial-wrap">
-      <blockquote class="testimonial">
-        <p class="testimonial-quote">
-          "We all enjoyed and appreciated Michael's preparation, his earnest
-          interest in listening, and his thoughtful dialogue … he is ready to
-          GO!"
-        </p>
-        <footer class="testimonial-footer">
-          <cite>
+    <div class="container">
+      <h2 class="section-title">Meet our CEO</h2>
+      <p class="section-sub">
+        Curvachip is led by Michael S. — developer, designer, and the person
+        behind every app we ship.
+      </p>
+      <div class="testimonial-wrap">
+        <blockquote class="testimonial">
+          <p class="testimonial-quote">
+            "We all enjoyed and appreciated Michael's preparation, his earnest
+            interest in listening, and his thoughtful dialogue … he is ready to
+            GO!"
+          </p>
+          <footer class="testimonial-footer">
             Cathy Hayes — <a
               href="https://www.hayesstudio.com/home"
               target="_blank"
               rel="noopener">Hayes Inc.</a
             >
-          </cite>
-        </footer>
-      </blockquote>
+          </footer>
+        </blockquote>
+      </div>
+
+      <div class="cta-row" style="text-align: left; margin-top: 4rem;">
+      <a href="/about" class="btn btn-primary">Meet the team →</a>
+    </div>
     </div>
   </section>
 </Layout>
