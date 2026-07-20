@@ -20,6 +20,7 @@
 
 import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
+import { Info, TriangleAlert, X } from "lucide-astro";
 
 type StoredLocation = "on-device" | "external" | "none";
 
@@ -58,6 +59,24 @@ interface AppPolicy {
     // ── Data table ──
     dataItems: DataItem[];
 }
+
+const notCollected = [
+    {
+        data: "Sell your data to any party",
+    },
+    {
+        data: "Use your data for advertising",
+    },
+    {
+        data: "Build a profile of you across apps or sessions",
+    },
+    {
+        data: "Share your data with anyone not listed in the table above",
+    },
+    {
+        data: "Retain data beyond the period necessary for the feature it supports",
+    },
+];
 
 // ── ROUTE DEFINITIONS ──────────────────────────────────────────
 export function getStaticPaths() {
@@ -563,7 +582,13 @@ const contactNum = section++;
             <a href="/apps" class="back-link">← Back to Apps</a>
             <div class="app-ident">
                 <a href={appStoreUrl} target="_blank" rel="noopener noreferrer">
-                    <Image src={iconUrl} alt={appName} width="64" height="64" loading="eager" />
+                    <Image
+                        src={iconUrl}
+                        alt={appName}
+                        width="64"
+                        height="64"
+                        loading="eager"
+                    />
                 </a>
                 <div>
                     <p class="app-ident-tagline">{appTagline}</p>
@@ -590,7 +615,9 @@ const contactNum = section++;
                 <p class="toc-title">On this page</p>
                 <ol class="toc-list">
                     <li>
-                        <a href="#overview" class="toc-link">{overviewNum}. Overview</a>
+                        <a href="#overview" class="toc-link"
+                            >{overviewNum}. Overview</a
+                        >
                     </li>
                     <li>
                         <a href="#data-collected" class="toc-link"
@@ -598,7 +625,8 @@ const contactNum = section++;
                         >
                     </li>
                     <li>
-                        <a href="#data-use" class="toc-link">{usageNum}. How we handle your data</a
+                        <a href="#data-use" class="toc-link"
+                            >{usageNum}. How we handle your data</a
                         >
                     </li>
                     {
@@ -634,16 +662,24 @@ const contactNum = section++;
                         >
                     </li>
                     <li>
-                        <a href="#rights" class="toc-link">{rightsNum}. Your rights</a>
+                        <a href="#rights" class="toc-link"
+                            >{rightsNum}. Your rights</a
+                        >
                     </li>
                     <li>
-                        <a href="#children" class="toc-link">{childrenNum}. Children</a>
+                        <a href="#children" class="toc-link"
+                            >{childrenNum}. Children</a
+                        >
                     </li>
                     <li>
-                        <a href="#changes" class="toc-link">{changesNum}. Changes</a>
+                        <a href="#changes" class="toc-link"
+                            >{changesNum}. Changes</a
+                        >
                     </li>
                     <li>
-                        <a href="#contact" class="toc-link">{contactNum}. Contact</a>
+                        <a href="#contact" class="toc-link"
+                            >{contactNum}. Contact</a
+                        >
                     </li>
                 </ol>
             </nav>
@@ -680,7 +716,7 @@ const contactNum = section++;
                         (aiProcessing || icloudSync || thirdParty) && (
                             <div class="callout callout--blue">
                                 <span class="callout-icon" aria-hidden="true">
-                                    ◈
+                                    <Info size={14}/>
                                 </span>
                                 <div>
                                     <strong>
@@ -775,18 +811,20 @@ const contactNum = section++;
                     </p>
 
                     <p>Specifically, we never:</p>
-                    <ul class="policy-list">
-                        <li>Sell your data to any party</li>
-                        <li>Use your data for advertising</li>
-                        <li>Build a profile of you across apps or sessions</li>
-                        <li>
-                            Share your data with anyone not listed in the table
-                            above
-                        </li>
-                        <li>
-                            Retain data beyond the period necessary for the
-                            feature it supports
-                        </li>
+                    <ul class="not-collected-list">
+                        {
+                            notCollected.map((p) => (
+                                <li>
+                                    <span
+                                        class="denied-icon"
+                                        aria-hidden="true"
+                                    >
+                                        <X />
+                                    </span>
+                                    {p.data}
+                                </li>
+                            ))
+                        }
                     </ul>
                 </section>
 
@@ -797,7 +835,7 @@ const contactNum = section++;
                             <h2 class="doc-h2">{aiNum}. AI processing</h2>
                             <div class="callout callout--amber">
                                 <span class="callout-icon" aria-hidden="true">
-                                    ⚠
+                                    <TriangleAlert size={14}/>
                                 </span>
                                 <div>
                                     <strong>
@@ -892,7 +930,9 @@ const contactNum = section++;
                 {
                     thirdParty && (
                         <section id="third-party" class="doc-section">
-                            <h2 class="doc-h2">{thirdPartyNum}. Third-party services</h2>
+                            <h2 class="doc-h2">
+                                {thirdPartyNum}. Third-party services
+                            </h2>
                             <p>
                                 {appName} uses the following third-party
                                 services. Each link goes to that service's own
@@ -1350,6 +1390,24 @@ const contactNum = section++;
     }
 
     /* ── POLICY LIST ── */
+    .not-collected-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    .not-collected-list li {
+        display: flex;
+        gap: 0.65rem;
+        align-items: flex-start;
+        font-size: 0.9rem;
+        color: var(--cc-muted);
+        line-height: 1.65;
+    }
+    .not-collected-list li strong {
+        color: var(--cc-text)
+    }
     .policy-list {
         list-style: none;
         display: flex;
@@ -1374,6 +1432,14 @@ const contactNum = section++;
     }
     .policy-list li strong {
         color: var(--cc-text);
+    }
+    .denied-icon {
+        display: inline-flex;
+        width: 1.1rem;
+        height: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 0.05rem;
+        color: brown;
     }
 
     /* ── INLINE LINK ── */
