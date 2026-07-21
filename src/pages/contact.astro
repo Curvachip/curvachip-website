@@ -24,9 +24,9 @@ const description =
 const socials = [
   {
     label:   "Email",
-    href:    "mailto:developer@curvachip.com",
+    href:    "mailto:support@curvachip.com",
     abbr:    `<svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>`,
-    display: "developer@curvachip.com",
+    display: "support@curvachip.com",
   },
   {
     label:   "GitHub",
@@ -128,8 +128,8 @@ const reasons = [
                         Fill out the form below and your default mail client
                         will open with everything pre-filled. Alternatively,
                         email <a
-                            href="mailto:developer@curvachip.com"
-                            class="inline-link">developer@curvachip.com</a
+                            href="mailto:support@curvachip.com"
+                            class="inline-link">support@curvachip.com</a
                         > directly.
                     </p>
 
@@ -185,8 +185,8 @@ const reasons = [
                                 <option value="Feature request"
                                     >Feature request</option
                                 >
-                                <option value="Business enquiry"
-                                    >Business enquiry</option
+                                <option value="Business inquiry"
+                                    >Business inquiry</option
                                 >
                                 <option value="Technical question"
                                     >Technical question</option
@@ -230,10 +230,10 @@ const reasons = [
                     <div class="direct-email-card">
                         <p class="direct-label">Direct email</p>
                         <a
-                            href="mailto:developer@curvachip.com"
+                            href="mailto:support@curvachip.com"
                             class="direct-address"
                         >
-                            developer@curvachip.com
+                            support@curvachip.com
                         </a>
                         <p class="direct-note">
                             Usually responds within 2 business days.
@@ -331,7 +331,7 @@ const reasons = [
                         document.getElementById(
                             "contact-subject",
                         ) as HTMLSelectElement
-                    )?.value || "Enquiry";
+                    )?.value || "Inquiry";
                 const message =
                     (
                         document.getElementById(
@@ -347,7 +347,7 @@ const reasons = [
                 }
 
                 const body = `From: ${name || "Not provided"}\nEmail: ${email}\n\n${message}`;
-                const mailto = `mailto:developer@curvachip.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                const mailto = `mailto:support@curvachip.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 window.location.href = mailto;
             });
         }

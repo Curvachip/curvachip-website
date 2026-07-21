@@ -7,7 +7,8 @@ import { Info, X } from 'lucide-astro';
 import Layout from '../../layouts/Layout.astro';
 
 const lastUpdated   = "July 2026";
-const contactEmail  = "developer@curvachip.com";
+const contactEmail  = "support@curvachip.com";
+const privacyEmail = "privacy@curvachip.com"
 const canonicalUrl  = "https://curvachip.com/privacy/website";
 
 const notCollected = [
@@ -134,8 +135,8 @@ const notCollected = [
           <p>
             The Contact page includes a message form. When you press the Send button,
             your device opens your default mail client with the form fields pre-filled.
-            The message is sent directly from your own email account to
-            <a href={`mailto:${contactEmail}`} class="inline-link"> {contactEmail}</a>.
+            The message is sent directly from your own email account
+            to <a href={`mailto:${contactEmail}`} class="inline-link">{contactEmail}</a>.
           </p>
           <div class="callout callout--blue">
             <span class="callout-icon" aria-hidden="true"><Info size={18}/></span>
@@ -223,7 +224,7 @@ const notCollected = [
             This website is not directed specifically at children under 13. Because we do not 
             intentionally collect personal information from visitors, there is generally no 
             personal information for us to remove. If you have any concerns, contact us 
-            at <a href={`mailto:${contactEmail}`} class="inline-link">{contactEmail}</a>.
+            at <a href={`mailto:${privacyEmail}`} class="inline-link">{privacyEmail}</a>.
           </p>
         </section>
 
@@ -248,7 +249,7 @@ const notCollected = [
           <div class="contact-block">
             <p class="contact-line"><strong>Curvachip LLC</strong></p>
             <p class="contact-line">
-              Email: <a href={`mailto:${contactEmail}`} class="inline-link">{contactEmail}</a>
+              Email: <a href={`mailto:${privacyEmail}`} class="inline-link">{privacyEmail}</a>
             </p>
             <p class="contact-line">
               Website: <a href="https://curvachip.com" class="inline-link">curvachip.com</a>
