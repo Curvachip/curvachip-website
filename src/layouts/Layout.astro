@@ -11,7 +11,7 @@ interface Props {
 	activeNav?: "home" | "apps" | "privacy" | "contact" | "about";
 	canonicalUrl?: string;
 	ogType?: string;
-	alternateMarkdown?: string;
+	// alternateMarkdown?: string;
 }
 
 const {
@@ -20,7 +20,7 @@ const {
 	activeNav = "",
 	canonicalUrl = Astro.url.href,
 	ogType = "website",
-	alternateMarkdown,
+	// alternateMarkdown,
 } = Astro.props;
 
 // Nav items defined once — add, remove, or reorder here only.
@@ -108,7 +108,7 @@ const socials = [
 		<link rel="canonical" href={canonicalUrl} />
 
 		<!-- AI Agent Markdown File Setup -->
-		<meta name="robots" content="index, follow" />
+		<!-- <meta name="robots" content="index, follow" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
  
 		<link rel="llms" href="/llms.txt" type="text/plain" />
@@ -124,7 +124,7 @@ const socials = [
   			"llms_index": "https://curvachip.com/llms.txt",
   			"llms_full": "https://curvachip.com/llms-full.txt"
 		})}
-		</script>
+		</script> -->
 
 		<!-- Favicon -->
 		<!-- ─────────────────────────────────────────────────────────
