@@ -22,13 +22,13 @@
 
 ## Privacy policies (per app)
 
-- [Shadow Task Privacy Policy](https://curvachip.com/apps/privacy-shadow-task): Data Not Collected.
-- [TipZap Privacy Policy](https://curvachip.com/apps/privacy-tipzap): Data Not Collected.
-- [StoneClip Privacy Policy](https://curvachip.com/apps/privacy-stoneclip): Data Not Linked to You.
-- [BugClip Privacy Policy](https://curvachip.com/apps/privacy-bugclip): Data Not Linked to You.
-- [PlantClip Privacy Policy](https://curvachip.com/apps/privacy-plantclip): Data Not Linked to You.
-- [Grocery Wiz Privacy Policy](https://curvachip.com/apps/privacy-grocery-wiz): Data Not Collected.
-- [Tally Snap Privacy Policy](https://curvachip.com/apps/privacy-tally-snap): Data Not Collected.
+- [Shadow Task Privacy Policy](https://curvachip.com/privacy/shadow-task): Data Not Collected.
+- [TipZap Privacy Policy](https://curvachip.com/privacy/tipzap): Data Not Collected.
+- [StoneClip Privacy Policy](https://curvachip.com/privacy/stoneclip): Data Not Linked to You.
+- [BugClip Privacy Policy](https://curvachip.com/privacy/bugclip): Data Not Linked to You.
+- [PlantClip Privacy Policy](https://curvachip.com/privacy/plantclip): Data Not Linked to You.
+- [Grocery Wiz Privacy Policy](https://curvachip.com/privacy/grocery-wiz): Data Not Collected.
+- [Tally Snap Privacy Policy](https://curvachip.com/privacy/tally-snap): Data Not Collected.
 
 ## Legal
 
@@ -43,9 +43,10 @@
 
 Each page on this site has a companion markdown file at the same path with `.md` appended:
 - https://curvachip.com/about.md
-- https://curvachip.com/apps.md
-- https://curvachip.com/privacy.md
+- https://curvachip.com/apps/index.md
+- https://curvachip.com/privacy/index.md
 - https://curvachip.com/contact.md
+- https://curvachip.com/index.md
 
 Or send `Accept: text/markdown` to any page URL — the HTML response includes a
 `<link rel="alternate" type="text/markdown">` header pointing to the markdown version.
