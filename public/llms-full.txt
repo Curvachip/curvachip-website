@@ -1,0 +1,210 @@
+# Curvachip LLC — Complete Site Content
+
+> This file contains the full text content of curvachip.com for AI agents and crawlers.
+> Source: https://curvachip.com | Updated: 2025
+> Index: https://curvachip.com/llms.txt
+
+---
+
+## Home — curvachip.com
+
+Curvachip distributes privacy-first apps on the App Store — designed for clarity, built with care, and shaped by the people who use them.
+
+**What we stand for**
+
+- **User-Focused Design** — Every decision is made with a single question in mind: does this make it easier for the user?
+- **Privacy by Default** — On-device processing wherever possible. No silent collection. What stays on your device stays on your device.
+- **Feedback-Driven** — Criticism is a gift. Every App Store review, every email, every bug report shapes the next update.
+
+**Testimonial**
+
+"We all enjoyed and appreciated Michael's preparation, his earnest interest in listening, and his thoughtful dialogue … he is ready to GO!" — Cathy Hayes, Hayes Inc.
+
+---
+
+## About — curvachip.com/about
+
+**Mission**
+
+Each app that Curvachip launches is built for a purpose. That purpose is discovered through the people we encounter every day — the frustrated dinner guest doing mental arithmetic, the hiker who can't identify a plant, the professional who can't stay focused. A great app idea is not founded on some revolutionary principle. It is founded on meeting a real need for a real group of people.
+
+**Vision**
+
+Technology is humanity's greatest friend and its greatest distraction. Through the apps Curvachip builds, the goal is to bring people back to the real world — to nature, to focused work, to shared meals. Software should be a tool that serves a moment, not a trap that consumes your attention.
+
+**Values**
+
+- User first, always
+- Privacy is not a feature — it is a baseline expectation
+- Criticism is a gift
+- Ship with intention
+
+**Leadership**
+
+Curvachip is led by Michael S., its founder, CEO, and sole developer. Michael handles product management, design, marketing, and deployment.
+
+**Timeline**
+
+- 2023 — Concept: the idea for Curvachip begins
+- 2024 — First launch: Curvachip LLC established, first apps on the App Store
+- 2025 — Expansion: the Clip family grows with StoneClip, BugClip, and PlantClip
+- 2026 — Continuing to develop, refine, and listen
+
+---
+
+## Apps — curvachip.com/apps
+
+### Shadow Task
+**Pomodoro Timer & Progress Tracker | iOS · iPadOS · macOS | Free + IAP**
+App Store: https://apps.apple.com/app/apple-store/id6737145799?pt=127392432&ct=website&mt=8
+
+Keep your focus sharp, your privacy protected, and your productivity soaring. Features: customizable timed tasks, Dynamic Island and Live Activity support, repeating sessions, visual progress tracking, motivational quotes, zero data collection.
+
+Privacy: Data Not Collected. Everything stays on your device.
+
+### TipZap
+**Tip Calculator | iOS · iPadOS | Free**
+App Store: https://apps.apple.com/app/apple-store/id6743986322?pt=127392432&ct=website&mt=8
+
+Split dinner costs, round totals, and calculate tips in seconds. Features: instant tip calculation, round up or down, split up to 30 ways, saved custom percentage, 8-country tipping guides, regional currencies.
+
+Privacy: Data Not Collected.
+
+### StoneClip
+**Rock, Gem & Crystal Identifier | iOS · iPadOS | Free + IAP**
+App Store: https://apps.apple.com/app/apple-store/id6744538893?pt=127392432&ct=website&mt=8
+
+AI-powered rock and crystal identification from a photo. Features: snap or select for instant ID, in-depth descriptions, follow-up questions, identification history, shareable results.
+
+Privacy: Data Not Linked to You. Only submitted images are processed externally.
+
+### BugClip
+**Insect & Spider Identifier | iOS · iPadOS | Free + IAP**
+App Store: hhttps://apps.apple.com/app/apple-store/id6745129568?pt=127392432&ct=website&mt=8
+
+AI-powered bug identification. Features: instant identification, clear friendly information, chat history, one free daily identification, global coverage.
+
+Privacy: Data Not Linked to You.
+
+### PlantClip
+**Plant & Flower Identifier | iOS · iPadOS | Free + IAP**
+App Store: https://apps.apple.com/app/apple-store/id6745438705?pt=127392432&ct=website&mt=8
+
+AI-powered plant identification for hikers, gardeners, and the curious. Features: instant plant ID, toxicity warnings, field journal feel, no region lock.
+
+Privacy: Data Not Linked to You.
+Disclaimer: Not a substitute for professional foraging advice. Never consume wild plants based solely on AI identification.
+
+### Grocery Wiz
+**Smart Grocery List | iOS · iPadOS | Free**
+App Store: https://apps.apple.com/app/apple-store/id6746955108?pt=127392432&ct=website&mt=8
+
+Intelligent shopping assistant. Features: smart tagging, priority marking, category sections, print-ready layouts, quick add and edit.
+
+Privacy: Data Not Collected.
+
+### Tally Snap
+**Click Counter | iOS · watchOS | Free**
+App Store: https://apps.apple.com/app/apple-store/id6746059766?pt=127392432&ct=website&mt=8
+
+Simple, thoughtful counter with haptic feedback and Apple Watch support. Features: instant counting, haptic feedback, rename and color tallies, Apple Watch support, no ads.
+
+Privacy: Data Not Collected.
+
+---
+
+## Privacy — curvachip.com/privacy
+
+**Privacy is not a feature. It is the foundation.**
+
+Privacy shapes every product decision at Curvachip before a single line of code is written.
+
+**Key facts:**
+- 4 apps collect zero data
+- 0 advertising SDKs used across all apps
+- 7 individual app privacy policies published
+- 0 cookies on curvachip.com
+
+**Four principles:**
+
+1. Collect only what is necessary — every data point has a specific, stated reason
+2. Process on-device by default — four of seven apps collect zero data
+3. Disclose before collecting — AI apps say so clearly on the App Store listing before download
+4. No advertising, ever — data is never sold, shared with advertisers, or used for profiling
+
+**App privacy labels (Apple App Store):**
+
+| App | Privacy Label |
+|---|---|
+| Shadow Task | Data Not Collected |
+| TipZap | Data Not Collected |
+| Grocery Wiz | Data Not Collected |
+| Tally Snap | Data Not Collected |
+| StoneClip | Data Not Linked to You |
+| BugClip | Data Not Linked to You |
+| PlantClip | Data Not Linked to You |
+
+**Website privacy:** curvachip.com sets no cookies, uses no analytics, runs no tracking scripts. The contact form opens the user's own mail client. The only external request is Google Fonts.
+
+---
+
+## Contact — curvachip.com/contact
+
+**Email:** developer@curvachip.com
+**Response time:** Usually within 2 business days.
+
+**Social links:**
+- GitHub: https://github.com/Curvachip
+- LinkedIn: https://www.linkedin.com/company/curvachip
+- X: https://x.com/curvachip
+- Instagram: https://www.instagram.com/curvachip/
+- YouTube: https://www.youtube.com/@curvachip
+- TikTok: https://www.tiktok.com/@curvachip
+- App Store: https://apps.apple.com/fi/developer/curvachip-llc/id1774903560
+
+---
+
+## Privacy Policy — curvachip.com/privacy/website
+
+curvachip.com is a static website. It collects no personal data. No cookies are set. No analytics platform is used. The contact form opens the user's local mail client — no data passes through Curvachip servers. The only external request is Google Fonts loading font files (governed by Google's privacy policy). Server access logs may be retained by the hosting provider; Curvachip does not access these.
+
+---
+
+## Terms of Use — curvachip.com/privacy/terms-of-use
+
+These terms govern use of curvachip.com and all Curvachip apps. Apps are distributed via the Apple App Store under a limited, non-exclusive, non-transferable licence for personal non-commercial use. AI-generated content from Curvachip apps is for informational purposes only and is not professional advice. All content is the intellectual property of Curvachip LLC. Apple is a trademark of Apple Inc.; Curvachip LLC is not affiliated with Apple.
+
+---
+
+## Blog: AI Chatbot Data Risks — curvachip.com/privacy/blog/ai-chatbots
+
+**What You Share with AI Chatbots Stays There**
+
+AI assistants are useful tools, but everything you type is transmitted to a server you don't control, governed by policies that may not prioritise your interests.
+
+**What AI companies collect:** message text, AI responses, session metadata, device type, timestamp, approximate location, attached files.
+
+**Key risks:**
+- Training data inclusion — free-tier conversations may become training data
+- Human review — a percentage of conversations are reviewed by contractors
+- Server-side storage — governed by changeable policies, subject to legal requests
+- Third-party data sharing — usage data may be shared with advertising or analytics partners
+- Breach exposure — data shared months ago could surface in future incidents
+
+**What you should never send to an AI chatbot:**
+- Passwords or PINs
+- Social security or national identity numbers
+- Bank account or credit card details
+- Medical records or diagnoses
+- Legal or attorney-client privileged documents
+- Confidential business plans or source code
+- Personal information about someone else without consent
+
+**How to use AI safely:**
+1. Read the privacy policy and opt out of training data usage in account settings
+2. Anonymise before pasting — replace real names and numbers with placeholders
+3. Use on-device AI where it matters
+4. Regularly delete your conversation history
+5. Treat AI as a colleague, not a vault
+
+**Curvachip's approach:** On-device by default. AI features disclosed clearly before download. Minimal collection. No advertising. Each app has its own privacy policy.

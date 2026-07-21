@@ -1,0 +1,56 @@
+# Curvachip LLC
+
+> Curvachip LLC is a single-developer software company building privacy-first apps for Apple platforms. All apps are distributed on the Apple App Store. The company is led by Michael S., its founder, CEO, and sole developer.
+
+## Website pages
+
+- [Home](https://curvachip.com/): Overview of the company, featured apps, values, and testimonial.
+- [Apps](https://curvachip.com/apps): All apps distributed by Curvachip — Shadow Task, TipZap, StoneClip, BugClip, PlantClip, Grocery Wiz, and Tally Snap — with descriptions, features, and App Store links.
+- [Privacy](https://curvachip.com/privacy): Overview of Curvachip's privacy practices, per-app privacy labels, and links to all legal documents.
+- [Contact](https://curvachip.com/contact): Developer contact information and a direct email link.
+- [About](https://curvachip.com/about): Company mission, vision, values, timeline, and leadership.
+
+## App detail pages
+
+- [Shadow Task](https://curvachip.com/apps/shadow-task): Pomodoro timer and focus tracker. Fully on-device. iOS, iPadOS, macOS.
+- [TipZap](https://curvachip.com/apps/tipzap): Tip calculator with bill splitting and tipping guides for 8 countries. Fully on-device. iOS, iPadOS.
+- [StoneClip](https://curvachip.com/apps/stoneclip): AI-powered rock, gem, and crystal identifier. iOS, iPadOS.
+- [BugClip](https://curvachip.com/apps/bugclip): AI-powered insect and spider identifier. iOS, iPadOS.
+- [PlantClip](https://curvachip.com/apps/plantclip): AI-powered plant, flower, and mushroom identifier. iOS, iPadOS.
+- [Grocery Wiz](https://curvachip.com/apps/grocery-wiz): Smart grocery list with tagging and category sections. Fully on-device. iOS, iPadOS.
+- [Tally Snap](https://curvachip.com/apps/tally-snap): Click counter with haptic feedback and Apple Watch support. Fully on-device. iOS, watchOS.
+
+## Privacy policies (per app)
+
+- [Shadow Task Privacy Policy](https://curvachip.com/apps/privacy-shadow-task): Data Not Collected.
+- [TipZap Privacy Policy](https://curvachip.com/apps/privacy-tipzap): Data Not Collected.
+- [StoneClip Privacy Policy](https://curvachip.com/apps/privacy-stoneclip): Data Not Linked to You.
+- [BugClip Privacy Policy](https://curvachip.com/apps/privacy-bugclip): Data Not Linked to You.
+- [PlantClip Privacy Policy](https://curvachip.com/apps/privacy-plantclip): Data Not Linked to You.
+- [Grocery Wiz Privacy Policy](https://curvachip.com/apps/privacy-grocery-wiz): Data Not Collected.
+- [Tally Snap Privacy Policy](https://curvachip.com/apps/privacy-tally-snap): Data Not Collected.
+
+## Legal
+
+- [Website Privacy Policy](https://curvachip.com/privacy/website): No cookies, no tracking, no analytics. Static site. Mailto form only.
+- [Terms of Use](https://curvachip.com/privacy/terms-of-use): Terms governing curvachip.com and all Curvachip apps.
+
+## Blog
+
+- [What You Share with AI Chatbots Stays There](https://curvachip.com/privacy/blog/ai-chatbots): Article on the data risks of cloud AI services and how to use them safely.
+
+## Markdown versions
+
+Each page on this site has a companion markdown file at the same path with `.md` appended:
+- https://curvachip.com/about.md
+- https://curvachip.com/apps.md
+- https://curvachip.com/privacy.md
+- https://curvachip.com/contact.md
+
+Or send `Accept: text/markdown` to any page URL — the HTML response includes a
+`<link rel="alternate" type="text/markdown">` header pointing to the markdown version.
+
+## Full site content
+
+A single file containing all site content in markdown:
+https://curvachip.com/llms-full.txt
