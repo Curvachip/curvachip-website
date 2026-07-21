@@ -1,2 +1,6 @@
+/*
+  Vary: Accept
+
 /
   Link: </.well-known/api-catalog>; rel="api-catalog"
+  Vary: Accept
