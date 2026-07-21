@@ -1,0 +1,26 @@
+export const siteUrl = "https://curvachip.com";
+
+export const sitemapPaths = [
+  "/",
+  "/about",
+  "/apps",
+  "/contact",
+  "/privacy",
+  "/privacy/blog/ai-chatbots",
+  "/privacy/terms-of-use",
+  "/privacy/website",
+  "/apps/shadow-task",
+  "/apps/tipzap",
+  "/apps/stoneclip",
+  "/apps/bugclip",
+  "/apps/plantclip",
+  "/apps/grocery-wiz",
+  "/apps/tally-snap",
+  "/privacy/shadow-task",
+  "/privacy/tipzap",
+  "/privacy/stoneclip",
+  "/privacy/bugclip",
+  "/privacy/plantclip",
+  "/privacy/grocery-wiz",
+  "/privacy/tally-snap",
+];
