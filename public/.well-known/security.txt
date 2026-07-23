@@ -1,0 +1,4 @@
+Contact: mailto:security@curvachip.com
+Expires: 2030-01-01T23:59:00Z
+Canonical: https://curvachip.com/.wellknown/security.txt
+Preferred-Languages: en
