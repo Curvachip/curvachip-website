@@ -4,3 +4,9 @@
 /
   Link: </.well-known/api-catalog>; rel="api-catalog"
   Vary: Accept
+
+https://:curvachip-website.pages.dev/*
+	X-Robots-Tag: noindex
+
+https://:version.:curvachip-website.pages.dev/*
+	X-Robots-Tag: noindex
