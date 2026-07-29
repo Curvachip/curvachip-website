@@ -1,4 +1,10 @@
 ---
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/outfit/400.css";
+import "@fontsource/outfit/600.css";
+
 interface Props {
 	title: string;
 	description: string;
@@ -85,11 +91,6 @@ const socials = [
 		<!-- Primary meta -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		<link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/inter-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/inter-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-		<link rel="preload" href="/fonts/outfit-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
 
 		<!-- Open Graph -->
 		<meta property="og:title" content={title} />
@@ -141,43 +142,7 @@ const socials = [
 		<meta name="theme-color" content="#5B9CF6" />
 
 		<!-- Fonts -->
-		<style is:global>
-			@font-face {
-				font-family: "Inter";
-				src: url("/fonts/inter-latin-400-normal.woff2") format("woff2");
-				font-weight: 400;
-				font-style: normal;
-				font-display: swap;
-			}
-			@font-face {
-				font-family: "Inter";
-				src: url("/fonts/inter-latin-500-normal.woff2") format("woff2");
-				font-weight: 500;
-				font-style: normal;
-				font-display: swap;
-			}
-			@font-face {
-				font-family: "Inter";
-				src: url("/fonts/inter-latin-600-normal.woff2") format("woff2");
-				font-weight: 600;
-				font-style: normal;
-				font-display: swap;
-			}
-			@font-face {
-				font-family: "Outfit";
-				src: url("/fonts/outfit-latin-400-normal.woff2") format("woff2");
-				font-weight: 400;
-				font-style: normal;
-				font-display: swap;
-			}
-			@font-face {
-				font-family: "Outfit";
-				src: url("/fonts/outfit-latin-600-normal.woff2") format("woff2");
-				font-weight: 600;
-				font-style: normal;
-				font-display: swap;
-			}
-		</style>
+		<!-- Self-hosted via @fontsource packages bundled with the site -->
 
 		<!-- Allow pages to inject extra <head> content (e.g. page-specific meta) -->
 		<slot name="head" />
