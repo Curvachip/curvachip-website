@@ -1,7 +1,7 @@
 export const siteUrl = "https://curvachip.com";
 
 export const sitemapPaths = [
-  "/",
+  "",
   "/about/",
   "/apps/",
   "/contact/",
