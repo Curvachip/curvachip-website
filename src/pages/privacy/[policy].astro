@@ -524,6 +524,84 @@ export function getStaticPaths() {
                 ],
             },
         },
+
+        // ────────────────────────────────────────────────────────────
+        // SHADOW TASK
+        // Fully on-device Pomodoro timer. No data leaves the device.
+        // ────────────────────────────────────────────────────────────
+        {
+            params: { policy: "iron-shark" },
+            props: {
+                appName: "Iron Shark",
+                appTagline: "For Those With a Plan",
+                iconUrl: "/iron-shark.png",
+
+                appStoreUrl:
+                    "https://apps.apple.com/app/apple-store/id6796180187",
+                appPageUrl: "/iron-shark",
+                canonicalUrl: "https://curvachip.com/privacy/iron-shark",
+
+                lastUpdated: "September 2026",
+                contactEmail: "privacy@curvachip.com",
+
+                aiProcessing: false,
+                icloudSync: true,
+                thirdParty: false,
+
+                aiProviderName: "Apple",
+                aiProviderPolicyUrl: "https://www.apple.com/legal/privacy",
+
+                dataItems: [
+                    {
+                        category: "Workout and exercise data",
+                        purpose:
+                            "Storing your workouts, exercises, sets, reps, and weight so you can track training history and progress",
+                        stored: "external",
+                        retained:
+                            "Until you delete the workout or session, or uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Exercise notes and custom instructions",
+                        purpose:
+                            "Storing your personal notes and instructions for exercises, including any AI-generated instructions you choose to keep",
+                        stored: "external",
+                        retained:
+                            "Until you delete the exercise or uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Profile and unit preferences",
+                        purpose:
+                            "Displaying weights and measurements in your preferred unit system (imperial or metric)",
+                        stored: "external",
+                        retained:
+                            "Until you change your preferences or uninstall the app",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category: "Live Activity workout progress",
+                        purpose:
+                            "Showing your current exercise, set count, and rest timer on the Lock Screen and Dynamic Island during an active workout",
+                        stored: "external",
+                        retained:
+                            "Automatically cleared when the workout session ends",
+                        sharedWith: "nobody",
+                    },
+                    {
+                        category:
+                            "AI-generated exercise names and instructions",
+                        purpose:
+                            "Suggesting official exercise names and step-by-step instructions based on the text you enter",
+                        stored: "on-device",
+                        retained:
+                            "Not viewed by Apple; the result is generated and stored on-device in your exercise data",
+                        sharedWith:
+                            "nobody",
+                    },
+                ],
+            },
+        },
     ];
 
     return policies;
@@ -716,7 +794,7 @@ const contactNum = section++;
                         (aiProcessing || icloudSync || thirdParty) && (
                             <div class="callout callout--blue">
                                 <span class="callout-icon" aria-hidden="true">
-                                    <Info size={14}/>
+                                    <Info size={14} />
                                 </span>
                                 <div>
                                     <strong>
@@ -835,7 +913,7 @@ const contactNum = section++;
                             <h2 class="doc-h2">{aiNum}. AI processing</h2>
                             <div class="callout callout--amber">
                                 <span class="callout-icon" aria-hidden="true">
-                                    <TriangleAlert size={14}/>
+                                    <TriangleAlert size={14} />
                                 </span>
                                 <div>
                                     <strong>
@@ -1406,7 +1484,7 @@ const contactNum = section++;
         line-height: 1.65;
     }
     .not-collected-list li strong {
-        color: var(--cc-text)
+        color: var(--cc-text);
     }
     .policy-list {
         list-style: none;
