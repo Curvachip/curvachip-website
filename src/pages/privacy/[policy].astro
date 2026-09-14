@@ -798,10 +798,13 @@ const contactNum = section++;
                                 </span>
                                 <div>
                                     <strong>
-                                        Some data leaves your device.
+                                        {icloudSync
+                                            ? "Some data is synced to your iCloud account."
+                                            : "Some data leaves your device."}
                                     </strong>{" "}
-                                    The sections below explain exactly what,
-                                    why, and where it goes.
+                                    {icloudSync
+                                        ? "Selected data is stored in your personal iCloud container via Apple’s CloudKit service so it can be synchronized across your devices. Curvachip does not access that cloud-stored data; Apple operates the underlying sync infrastructure."
+                                        : "The sections below explain exactly what, why, and where it goes."}
                                 </div>
                             </div>
                         )
@@ -976,10 +979,20 @@ const contactNum = section++;
                             <h2 class="doc-h2">{icloudNum}. iCloud sync</h2>
                             <p>
                                 {appName} uses Apple's CloudKit framework to
-                                sync your data across your devices via iCloud.
-                                This means your data is stored in your personal
-                                iCloud account — Curvachip cannot access it.
-                                Apple's iCloud is governed by{" "}
+                                store selected data in your personal iCloud
+                                container and synchronize it across your Apple
+                                devices signed in with the same Apple ID. In
+                                other words, the data is not limited to a single
+                                device: it is uploaded to iCloud so your app can
+                                keep the same records available across devices.
+                            </p>
+                            <p>
+                                Apple operates the CloudKit and iCloud service
+                                that stores and syncs this data. Curvachip does
+                                not access the cloud copy of your synced records,
+                                and the data is governed by Apple's privacy
+                                practices and iCloud terms as applicable to your
+                                account. See{" "}
                                 <a
                                     href="https://www.apple.com/legal/privacy/"
                                     target="_blank"
@@ -987,8 +1000,9 @@ const contactNum = section++;
                                     class="inline-link"
                                 >
                                     Apple's Privacy Policy
-                                </a>
-                                .
+                                </a>{" "}
+                                for details about how Apple handles data stored in
+                                iCloud.
                             </p>
                             <p>
                                 You can disable iCloud sync for {appName} at any
@@ -997,8 +1011,10 @@ const contactNum = section++;
                                     {" "}
                                     Settings → [Your Name] → iCloud
                                 </strong>{" "}
-                                on your device. Disabling sync does not delete
-                                data already stored locally on your device.
+                                on your device. Disabling sync stops new data from
+                                being uploaded or synchronized to iCloud, but it
+                                does not remove data already stored locally on the
+                                device.
                             </p>
                         </section>
                     )
